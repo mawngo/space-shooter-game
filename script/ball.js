@@ -13,7 +13,14 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed) {
         this.y += this.ySpeed;
     };
 
-
+    this.relocale = function (x,y) {
+        let maxDistance = this.radius + Math.sqrt(x*x+y*y);
+        let realDistance = sqrtOf2Sqr(this.x - x, this.y - y);
+        if (maxDistance > realDistance) {
+            this.x = (this.x - x) * (maxDistance / realDistance) + x;
+            this.y = (this.y - y) * (maxDistance / realDistance) + y;
+        }
+    };
     this.toEdge = function () {
         if (this.x <= this.radius) {
             this.x = this.radius;
@@ -35,6 +42,9 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed) {
             let ballMaxDistance = ball.radius + this.radius;
             let ballRealDistance = sqrtOf2Sqr(ball.x - this.x, ball.y - this.y);
             if (ballRealDistance !== 0) {
+                if (ballMaxDistance > ballRealDistance) {
+                    this.relocale(ball.x,ball.y);
+                }
                 if (ballMaxDistance >= ballRealDistance) {
                     let thisXSpeedAfter =
                         ((this.radius - ball.radius) * this.xSpeed
@@ -52,11 +62,7 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed) {
                     this.ySpeed = thisYSpeedAfter;
                     ball.xSpeed = ballXSpeedAfter;
                     ball.ySpeed = ballYSpeedAfter;
-                    while (ballMaxDistance >= ballRealDistance) {
-                        this.makeAMove();
-                        ball.makeAMove();
-                        ballRealDistance = sqrtOf2Sqr(ball.x - this.x, ball.y - this.y);
-                    }
+
                 }
 
             }
@@ -66,13 +72,12 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed) {
         let ballMaxDistance = this.radius + obj.radius;
         let ballRealDistance = sqrtOf2Sqr(this.x - obj.x, this.y - obj.y);
         if (ballRealDistance !== 0) {
+            if (ballRealDistance < ballMaxDistance) {
+                this.relocale(obj.x,obj.y);
+            }
             if (ballRealDistance <= ballMaxDistance) {
                 this.xSpeed *= -1;
                 this.ySpeed *= -1;
-                while (ballRealDistance <= ballMaxDistance) {
-                    this.makeAMove();
-                    ballRealDistance = sqrtOf2Sqr(this.x - obj.x, this.y - obj.y);
-                }
                 return true;
             }
         }
@@ -85,7 +90,7 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed) {
             if (balls[i].isExist) {
             }
             else {
-                balls.splice(i,1);
+                balls.splice(i, 1);
                 if (this.radius >= 10) {
                     for (let j = 0; j < n; j++) {
                         balls.push(new Ball(this.x, this.y, this.radius / 2, this.color));
@@ -94,9 +99,9 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed) {
                 }
             }
         }
-    }
+    };
     this.spawn = function (balls) {
-        balls.push(new Ball(this.x,this.y,undefined,this.color))
+        balls.push(new Ball(this.x, this.y, undefined, this.color))
     }
 
 };

@@ -58,9 +58,6 @@ function sqrtOf2Sqr(a, b) {
 
 }
 
-function dsdsd() {
-    
-}
 
 function canvasClean() {
     ctx.clearRect(0, 0, 1280, 720);
@@ -89,4 +86,16 @@ function drawSquareInBall(square, isSpin) {
     ctx.strokeStyle = square.color;
     ctx.stroke();
     ctx.restore();
+}
+
+function relocale2Balls(ball) {
+    let maxDistance = this.radius + ball.radius;
+    let realDistance = sqrtOf2Sqr(this.x - ball.x, this.y - ball.y);
+    if (maxDistance > realDistance) {
+        this.x = (this.x-ball.x)*(maxDistance/realDistance)+ball.x;
+        this.y = (this.y-ball.y)*(maxDistance/realDistance)+ball.y;
+        return true;
+    }
+    if (maxDistance === realDistance){return true}
+    return false;
 }
