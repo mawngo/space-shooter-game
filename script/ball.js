@@ -1,17 +1,31 @@
-let Ball = function (x, y, radius, color, xSpeed, ySpeed) {
+let Ball = function (x, y, radius, color, xSpeed, ySpeed,imgId) {
+    this.imgId = imgId || rockRadId(2);
+    this.isSpin = true;
     this.isExist = true;
-    this.x = x || 640;
-    this.y = y || 360;
+    this.x = x || canvas.width / 2;
+    this.y = y || canvas.height / 2;
     this.color = color || rainbow(Math.random());
-    this.radius = radius || radNum(80, 20);
-    this.xSpeed = xSpeed || radNum(10, 0);
-    this.ySpeed = ySpeed || radNum(10, 0);
+    this.radius = radius || radNum(50, 20);
+    this.xSpeed = xSpeed || radNum(5, 0);
+    this.ySpeed = ySpeed || radNum(5, 0);
+    this.angle = 0;
+    this.damage = this.radius/4;
 
 
+    this.increaseAngle = function (n) {
+        if (this.isSpin) {
+            this.angle = this.angle + n;
+            if (this.angle >= 360) {
+                this.angle = 0;
+            }
+        }
+    };
     this.makeAMove = function () {
         this.x += this.xSpeed;
         this.y += this.ySpeed;
+        this.increaseAngle(sqrtOf2Sqr(this.xSpeed, this.ySpeed) / 3);
     };
+
     this.relocale = function (x, y, distance) {
         let maxDistance = this.radius + distance;
         let realDistance = sqrtOf2Sqr(this.x - x, this.y - y);
@@ -24,15 +38,17 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed) {
         if (this.x <= this.radius) {
             this.x = this.radius;
             this.xSpeed *= -1;
+
         }
-        else if (this.x >= (1280 - this.radius)) {
-            this.x = 1280 - this.radius;
-            this.xSpeed *= -1
+        else if (this.x >= (canvas.width - this.radius)) {
+            this.x = canvas.width - this.radius;
+            this.xSpeed *= -1;
+
         } else if (this.y <= this.radius) {
             this.y = this.radius;
             this.ySpeed *= -1;
-        } else if (this.y >= (720 - this.radius)) {
-            this.y = 720 - this.radius;
+        } else if (this.y >= (canvas.height - this.radius)) {
+            this.y = canvas.height - this.radius;
             this.ySpeed *= -1;
         }
     };
@@ -68,6 +84,7 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed) {
         }
     };
     this.toObj = function (obj) {
+
         let ballMaxDistance = this.radius + obj.radius;
         let ballRealDistance = sqrtOf2Sqr(this.x - obj.x, this.y - obj.y);
         if (ballRealDistance !== 0) {
@@ -82,6 +99,16 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed) {
         }
 
     };
+    this.toArrOfObj = function (otherBall) {
+        for (let i = 0; i < otherBall.length; i++) {
+            let ballMaxDistance = otherBall[i].radius + this.radius;
+            let ballRealDistance = sqrtOf2Sqr(otherBall[i].x - this.x, otherBall[i].y - this.y);
+            if (ballMaxDistance >= ballRealDistance) {
+                return i;
+            }
+        }
+        return -1;
+    };
 
 
     this.remove = function (balls) {
@@ -94,22 +121,21 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed) {
             }
         }
     };
-    this.explore = function (balls, n) {
+    this.explore = function (balls, n = 1) {
         this.remove(balls);
-        if (this.radius/2 > 15) {
+        if (this.radius / 2 > 10) {
             for (let j = 0; j < n; j++) {
-                balls.push(new Ball(this.x, this.y, this.radius / 1.5, this.color));
+                balls.push(new Ball(this.x, this.y, this.radius / 1.5, this.color,undefined,undefined,this.imgId));
             }
 
         }
     };
-    this.spawn = function (balls, n) {
+    this.spawn = function (balls, n = 1) {
         for (let i = 0; i < n; i++) {
             balls.push(new Ball(this.x, this.y, undefined, this.color))
         }
     }
 
 };
-
 
 
