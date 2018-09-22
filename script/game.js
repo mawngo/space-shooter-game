@@ -1,12 +1,10 @@
 rockGenerator(3);
-ammoGenerator(2);
-itemsGenerator(2);
-
-
-
+ammoGenerator(3);
+itemsGenerator(4);
 
 
 let Game = function () {
+    this.score = 0;
     this.items = [];
     this.ship = new Ship(1200, 800, 5, 100, "white");
     this.spawner = new Ball(undefined, undefined, 80, undefined, 0, 0, "planet");
@@ -17,6 +15,7 @@ let Game = function () {
         for (let item of this.items) {
             item.toEdge();
             if (item.toObj(this.ship)) {
+                if (item.imgId ==="item4"){this.score +=100}
                 item.doFunc(this.ship);
                 item.remove(this.items);
             }
@@ -28,18 +27,27 @@ let Game = function () {
         for (let ammo of this.spammos) {
             if (ammo.toObj(this.ship) && ammo.imgId === "ammo1") {
                 this.ship.health -= ammo.damage;
+                console.log(this.ship.health);
+            }
+            if (ammo.imgId === "ammo3"){
+                this.balls =[];
+                this.ammos =[];
+                this.spammos =[];
             }
             ammo.makeAMove();
             drawImgInBall(ammo);
+
         }
     };
     this.spammostate2 = function () {
         for (let ammo of this.spammos) {
-            if (ammo.toObj(this.ship) && ammo.imgId === "ammo2") {
+            if (ammo.imgId === "ammo2") {
                 ammo.toEdge();
                 ammo.toObj(this.spawner);
-                this.ship.health += 10;
-                console.log(this.ship.health);
+                if (ammo.toObj(this.ship)) {
+                    this.ship.health += 8;
+                    console.log(this.ship.health);
+                }
             }
             ammo.makeAMove();
             drawImgInBall(ammo);
@@ -65,18 +73,24 @@ let Game = function () {
                         if (radNum(3, 0)) {
                         } else {
                             this.items.push(new Item(exball.x, exball.y));
-                            exball.remove(this.balls);
                         }
                         if (radNum(2, 0)) {
                         } else {
                             this.items.push(new Item(exball.x, exball.y, "item1"));
-                            exball.remove(this.balls);
                         }
-                        if (radNum(0, 0)) {
+                        if (radNum(10, 0)) {
                         } else {
                             this.items.push(new Item(exball.x, exball.y, "item2"));
-                            exball.remove(this.balls);
                         }
+                        if (radNum(10, 0)) {
+                        } else {
+                            this.items.push(new Item(exball.x, exball.y,"item3"));
+                        }
+                        if (radNum(2, 0)) {
+                        } else {
+                            this.items.push(new Item(exball.x, exball.y,"item4"));
+                        }
+                        exball.remove(this.balls);
                     }
                 } else {
                     ammo.toBall(this.balls);
@@ -104,18 +118,24 @@ let Game = function () {
                         if (radNum(3, 0)) {
                         } else {
                             this.items.push(new Item(ball.x, ball.y));
-                            ball.remove(this.balls);
                         }
                         if (radNum(2, 0)) {
                         } else {
                             this.items.push(new Item(ball.x, ball.y, "item1"));
-                            ball.remove(this.balls);
                         }
-                        if (radNum(0, 0)) {
+                        if (radNum(10, 0)) {
                         } else {
                             this.items.push(new Item(ball.x, ball.y, "item2"));
-                            ball.remove(this.balls);
                         }
+                        if (radNum(10, 0)) {
+                        } else {
+                            this.items.push(new Item(ball.x, ball.y,"item3"));
+                        }
+                        if (radNum(2, 0)) {
+                        } else {
+                            this.items.push(new Item(ball.x, ball.y,"item4"));
+                        }
+                        ball.remove(this.balls);
                     }
                 } else {
                     ball.toBall(this.ammos);
@@ -140,13 +160,33 @@ let Game = function () {
     };
     this.shipstate = function () {
         if (this.ship.health <= 0) {
-            alert("you lose!")
+            canvasClean();
+            drawBackGround();
+            this.displayscore(canvas.width/2,canvas.height/2,"You Lose!");
+            setTimeout(function () {
+                if (confirm("play again?")){
+                    window.location.reload();
+                }
+            },1000)
+
         }
         this.ship.toObj(this.spawner);
         this.ship.toEdge();
         this.ship.makeAMove();
-    }
+    };
 
+    this.displayscore = function (x,y,string ="") {
+        ctx.font="25px Verdana";
+        let gradient=ctx.createLinearGradient(0,0,canvas.width,0);
+        gradient.addColorStop("0","magenta");
+        gradient.addColorStop("0.5","blue");
+        gradient.addColorStop("1.0","red");
+        ctx.fillStyle=gradient;
+        ctx.fillText(string,x,y-30);
+        ctx.fillText("Health "+Math.floor(this.ship.health),x,y);
+        ctx.fillText("Items: "+this.ship.totalAmmo.length,x,y+30);
+        ctx.fillText("Score "+this.score,x,y+80);
+    }
 
 };
 let game = new Game();
@@ -164,20 +204,31 @@ function gameplay() {
     game.drawAmmo();
     game.drawBall();
     drawImgInBall(game.ship, true);
-
-    setTimeout(gameplay, 20);
+    game.displayscore(15,30);
+    if (game.ship.health>0){
+        setTimeout(gameplay, 20);}
 }
 
+
+let n =0;
+function harder() {
+    n++;
+    setTimeout(harder,60000)
+}
 function spawnBalls() {
-    game.spawner.spawn(game.balls);
+    game.spawner.spawn(game.balls,n);
     game.spawner.color = rainbow(Math.random());
-    setTimeout(spawnBalls, 20000);
+    setTimeout(spawnBalls, 18000);
 }
-
+function score(){
+    game.score += n;
+    setTimeout(score,1000);
+}
+score();
 gameplay();
+harder();
 spawnBalls();
 window.addEventListener("keydown", function (evt) {
-    console.log(evt.key);
     switch (evt.key) {
         case "ArrowRight":
             game.ship.moveRight();

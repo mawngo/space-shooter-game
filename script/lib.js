@@ -85,8 +85,8 @@ function drawSquareInBall(square) {
     ctx.restore();
 }
 
-function drawImgInBall(container, shadow = false) {
-    let img = document.getElementById(container.imgId);
+function drawImgInBall(container, shadow = false,imgId = container.imgId) {
+    let img = document.getElementById(imgId);
     ctx.beginPath();
     ctx.save();
     if (shadow) {

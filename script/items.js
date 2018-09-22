@@ -23,6 +23,9 @@ let Item = function (x, y, imgId, size = 25) {
             case "item2":
                 obj.totalAmmo.push(new Ammo(obj.x, obj.y, 1, 1, "ammo2", 30));
                 break;
+            case "item3":
+                obj.totalAmmo.push(new Ammo(obj.x, obj.y, 1, 1, "ammo3", 30));
+                break;
         }
     }
 };
