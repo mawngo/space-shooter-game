@@ -3,7 +3,7 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed) {
     this.x = x || 640;
     this.y = y || 360;
     this.color = color || rainbow(Math.random());
-    this.radius = radius || radNum(80, 30);
+    this.radius = radius || radNum(80, 20);
     this.xSpeed = xSpeed || radNum(10, 0);
     this.ySpeed = ySpeed || radNum(10, 0);
 
@@ -12,7 +12,7 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed) {
         this.x += this.xSpeed;
         this.y += this.ySpeed;
     };
-    this.relocale = function (x,y,distance) {
+    this.relocale = function (x, y, distance) {
         let maxDistance = this.radius + distance;
         let realDistance = sqrtOf2Sqr(this.x - x, this.y - y);
         if (maxDistance > realDistance) {
@@ -42,7 +42,7 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed) {
             let ballRealDistance = sqrtOf2Sqr(ball.x - this.x, ball.y - this.y);
             if (ballRealDistance !== 0) {
                 if (ballMaxDistance > ballRealDistance) {
-                    this.relocale(ball.x,ball.y,ball.radius);
+                    this.relocale(ball.x, ball.y, ball.radius);
                 }
                 if (ballMaxDistance >= ballRealDistance) {
                     let thisXSpeedAfter =
@@ -72,7 +72,7 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed) {
         let ballRealDistance = sqrtOf2Sqr(this.x - obj.x, this.y - obj.y);
         if (ballRealDistance !== 0) {
             if (ballRealDistance < ballMaxDistance) {
-                this.relocale(obj.x,obj.y,obj.radius);
+                this.relocale(obj.x, obj.y, obj.radius);
             }
             if (ballRealDistance <= ballMaxDistance) {
                 this.xSpeed *= -1;
@@ -83,24 +83,30 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed) {
 
     };
 
-    this.explore = function (n, balls) {
+
+    this.remove = function (balls) {
         this.isExist = false;
         for (let i = 0; i < balls.length; i++) {
             if (balls[i].isExist) {
             }
             else {
                 balls.splice(i, 1);
-                if (this.radius >= 10) {
-                    for (let j = 0; j < n; j++) {
-                        balls.push(new Ball(this.x, this.y, this.radius / 2, this.color));
-                    }
-
-                }
             }
         }
     };
-    this.spawn = function (balls) {
-        balls.push(new Ball(this.x, this.y, undefined, this.color))
+    this.explore = function (balls, n) {
+        this.remove(balls);
+        if (this.radius/2 > 15) {
+            for (let j = 0; j < n; j++) {
+                balls.push(new Ball(this.x, this.y, this.radius / 1.5, this.color));
+            }
+
+        }
+    };
+    this.spawn = function (balls, n) {
+        for (let i = 0; i < n; i++) {
+            balls.push(new Ball(this.x, this.y, undefined, this.color))
+        }
     }
 
 };
