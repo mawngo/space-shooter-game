@@ -13,12 +13,15 @@ let Item = function (x, y, imgId, size = 25) {
     this.doFunc = function (obj) {
         switch (this.imgId) {
             case "item0":
-                for (let i = 0; i < 8; i++) {
-                    obj.totalAmmo.push(Ammo(obj.x, obj.y, 1, 1, "ammo2", 30));
+                for (let i = 0; i < 10; i++) {
+                    obj.totalAmmo.push(new Ammo(obj.x, obj.y, 1, 1, "ammo1", 30));
                 }
                 break;
             case "item1":
-                obj.health +=20;
+                obj.health += 20;
+                break;
+            case "item2":
+                obj.totalAmmo.push(new Ammo(obj.x, obj.y, 1, 1, "ammo2", 30));
                 break;
         }
     }
