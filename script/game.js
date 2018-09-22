@@ -1,4 +1,4 @@
-rockGenerator(2);
+rockGenerator(3);
 ammoGenerator(2);
 
 
@@ -11,17 +11,28 @@ function ballState() {
 
 
 let Game = function () {
-    this.ship = new Ship(1200, 800, 4, 100, "white");
+    this.ship = new Ship(1200, 800, 6, 100, "white");
     this.spawner = new Ball(undefined, undefined, 80, undefined, 0, 0, "planet");
     this.balls = [];
     this.ammos = [];
     this.spammos = [];
+    this.spammostate = function () {
+        for (let ammo of this.spammos){
+            if (ammo.toObj(this.ship)){
+                this.ship.health -= ammo.damage;
+            }
+            ammo.makeAMove();
+            drawImgInBall(ammo);
+        }
+    };
 
     this.ammostate = function () {
       for (let ammo of this.ammos){
+          ammo.toEdge();
           ammo.toObj(this.spawner);
           if (ammo.toObj(this.ship)){
               this.ship.health -= ammo.damage;
+              console.log(this.ship.health)
           }
           if (ammo.toArrOfObj(this.balls)>=0){
               if (radNum(1,0)){
@@ -50,6 +61,7 @@ let Game = function () {
                     ball.toBall(this.ammos);
                 }
             }
+            if (ball.toArrOfObj(this.spammos)>=0) {ball.remove(this.balls)}
             ball.toBall(this.balls);
             ball.makeAMove();
         }
@@ -65,6 +77,7 @@ let Game = function () {
       }
     };
     this.shipstate = function () {
+        if (this.ship.health <= 0){alert("you lose!")}
         this.ship.toObj(this.spawner);
         this.ship.toEdge();
         this.ship.makeAMove();
@@ -77,20 +90,22 @@ let game = new Game();
 function gameplay() {
     canvasClean();
     drawBackGround();
+    drawImgInBall(game.spawner, true);
+    game.spammostate();
     game.ammostate();
     game.ballstate();
     game.shipstate();
     game.drawAmmo();
     game.drawBall();
     drawImgInBall(game.ship, true);
-    drawImgInBall(game.spawner, true);
+
     setTimeout(gameplay, 20);
 }
 
 function spawnBalls() {
     game.spawner.spawn(game.balls);
     game.spawner.color = rainbow(Math.random());
-    setTimeout(spawnBalls, 1000);
+    setTimeout(spawnBalls, 3000);
 }
 
 gameplay();
@@ -110,11 +125,11 @@ window.addEventListener("keydown", function (evt) {
         case "ArrowDown":
             game.ship.moveDown();
             break;
-        case "q":
-            game.ship.shoot(game.ammos, this.angle, "ammo2");
+        case "a":
+            game.ship.shoot(game.spammos, this.angle, "ammo1",10);
             break;
-        case "w":
-            game.ship.shoot(game.ammos, this.angle, "ammo1");
+        case "s":
+            game.ship.shoot(game.ammos, this.angle, "ammo0");
             break;
     }
 });

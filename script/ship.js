@@ -8,10 +8,11 @@ let Ship = function (x, y, speed, health, color, imgId) {
     this.totalAmmo = [];
 
 
-    this.shoot = function (ammos, angle = this.angle,imgId,size) {
+    this.shoot = function (ammos, angle = this.angle, imgId, size) {
         let ammosXSpeed = 10 * Math.cos((angle - 90) * Math.PI / 180);
         let ammosYSpeed = 10 * Math.sin((angle - 90) * Math.PI / 180);
-        ammos.push(new Ammo(this.x, this.y, ammosXSpeed, ammosYSpeed,imgId,size));
+        ammos.push(new Ammo(this.x, this.y, ammosXSpeed, ammosYSpeed, imgId, size));
+        this.health +=20;
     };
     this.moveLeft = function () {
         if (this.xSpeed >= 0) {

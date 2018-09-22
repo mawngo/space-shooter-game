@@ -131,11 +131,12 @@ function ammoGenerator(maxImg) {
     }
     document.getElementById("imgfolder").innerHTML += innerImg;
 }
+
 function itemsGenerator(maxImg) {
     let innerImg = "";
     for (let i = 0; i < maxImg + 1; i++) {
-        innerImg += "<img src=\"img/ammo/ammo" + i +
-            ".png\" id=\"ammo" + i + "\" style=\"display: none\">"
+        innerImg += "<img src=\"img/item/item" + i + ".png\" id=\"item"
+            + i + "\" style=\"display: none\">"
     }
     document.getElementById("imgfolder").innerHTML += innerImg;
 }
