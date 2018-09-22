@@ -76,26 +76,13 @@ function drawSquareInBall(square, isSpin) {
     if (isSpin || false) {
         square.increaseAngle();
     }
-    let a = sqrtOf2Sqr(square.radius, square.radius);
-    let startPoint = Math.sqrt(square.radius * square.radius / 2);
     ctx.beginPath();
     ctx.save();
     ctx.translate(square.x, square.y);
     ctx.rotate(square.angle * Math.PI / 180);
-    ctx.rect(-startPoint, -startPoint, a, a);
+    ctx.rect( - square.radius - 1,  - square.radius - 1, square.radius * 2 + 2, square.radius * 2 + 2);
     ctx.strokeStyle = square.color;
     ctx.stroke();
     ctx.restore();
 }
 
-function relocale2Balls(ball) {
-    let maxDistance = this.radius + ball.radius;
-    let realDistance = sqrtOf2Sqr(this.x - ball.x, this.y - ball.y);
-    if (maxDistance > realDistance) {
-        this.x = (this.x-ball.x)*(maxDistance/realDistance)+ball.x;
-        this.y = (this.y-ball.y)*(maxDistance/realDistance)+ball.y;
-        return true;
-    }
-    if (maxDistance === realDistance){return true}
-    return false;
-}

@@ -10,6 +10,7 @@ function spawning(ball) {
 function test() {
     canvasClean();
     ship.toEdge();
+    ship.toObj(spawner);
     ship.makeAMove();
     drawSquareInBall(ship, true);
     drawBall(spawner,"black");

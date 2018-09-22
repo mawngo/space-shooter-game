@@ -12,9 +12,8 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed) {
         this.x += this.xSpeed;
         this.y += this.ySpeed;
     };
-
-    this.relocale = function (x,y) {
-        let maxDistance = this.radius + Math.sqrt(x*x+y*y);
+    this.relocale = function (x,y,distance) {
+        let maxDistance = this.radius + distance;
         let realDistance = sqrtOf2Sqr(this.x - x, this.y - y);
         if (maxDistance > realDistance) {
             this.x = (this.x - x) * (maxDistance / realDistance) + x;
@@ -43,7 +42,7 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed) {
             let ballRealDistance = sqrtOf2Sqr(ball.x - this.x, ball.y - this.y);
             if (ballRealDistance !== 0) {
                 if (ballMaxDistance > ballRealDistance) {
-                    this.relocale(ball.x,ball.y);
+                    this.relocale(ball.x,ball.y,ball.radius);
                 }
                 if (ballMaxDistance >= ballRealDistance) {
                     let thisXSpeedAfter =
@@ -73,7 +72,7 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed) {
         let ballRealDistance = sqrtOf2Sqr(this.x - obj.x, this.y - obj.y);
         if (ballRealDistance !== 0) {
             if (ballRealDistance < ballMaxDistance) {
-                this.relocale(obj.x,obj.y);
+                this.relocale(obj.x,obj.y,obj.radius);
             }
             if (ballRealDistance <= ballMaxDistance) {
                 this.xSpeed *= -1;
