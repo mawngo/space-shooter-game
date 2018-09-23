@@ -1,4 +1,4 @@
-rockGenerator(10);
+rockGenerator(8);
 ammoGenerator(3);
 itemsGenerator(4);
 explosiveGenerator(5);
