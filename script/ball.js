@@ -1,15 +1,15 @@
-let Ball = function (x, y, radius, color, xSpeed, ySpeed,imgId) {
+let Ball = function (x, y, radius, color, xSpeed, ySpeed, imgId) {
     this.imgId = imgId || rockRadId(3);
     this.isSpin = true;
     this.isExist = true;
     this.x = x || canvas.width / 2;
     this.y = y || canvas.height / 2;
     this.color = color || rainbow(Math.random());
-    this.radius = radius || radNum(50, 20);
+    this.radius = radius || radNum(60, 60);
     this.xSpeed = xSpeed || radNum(5, 0);
     this.ySpeed = ySpeed || radNum(5, 0);
     this.angle = 0;
-    this.damage = this.radius/4;
+    this.damage = this.radius / 4;
 
 
     this.increaseAngle = function (n) {
@@ -125,7 +125,7 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed,imgId) {
         this.remove(balls);
         if (this.radius / 2 > 10) {
             for (let j = 0; j < n; j++) {
-                balls.push(new Ball(this.x, this.y, this.radius / 1.5, this.color,undefined,undefined,this.imgId));
+                balls.push(new Ball(this.x, this.y, this.radius / 1.5, this.color, undefined, undefined, this.imgId));
             }
 
         }
@@ -134,8 +134,36 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed,imgId) {
         for (let i = 0; i < n; i++) {
             balls.push(new Ball(this.x, this.y, undefined, this.color))
         }
-    }
+    };
+    this.makeExplosive = function (containerArr, time) {
+        if (radNum(1, 0)) {
+            containerArr.push(new Explosiveball(this.x, this.y, this.radius * 2, "explosive0", time));
+            containerArr.push(new Explosiveball(this.x, this.y, this.radius * 1.2, undefined, time));
+        }
+        else if (radNum(1,0)) {
+            containerArr.push(new Explosiveball(this.x, this.y, this.radius * 2, undefined, time));
+        }
+        else {
+            containerArr.push(new Explosiveball(this.x, this.y, this.radius * 3.5, "explosive4", time));
+            containerArr.push(new Explosiveball(this.x, this.y, this.radius * 1, undefined, time));
+        }
+    };
 
 };
 
+let Explosiveball = function (x, y, radius, imgId, time) {
+    this.super = Ball;
+    this.super.call(this, x, y, radius, "yellow", 0.2, 0.2);
+    this.imgId = imgId || explosiveRadId(4);
+    this.count = time * 50 || 30;
 
+    this.drawExplosive = function (containerArr) {
+        if (this.count > 0) {
+            drawImgInBall(this, false);
+            this.count -= 1;
+        }
+        else {
+            this.remove(containerArr);
+        }
+    }
+};

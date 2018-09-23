@@ -85,7 +85,7 @@ function drawSquareInBall(square) {
     ctx.restore();
 }
 
-function drawImgInBall(container, shadow = false,imgId = container.imgId) {
+function drawImgInBall(container, shadow = false, imgId = container.imgId) {
     let img = document.getElementById(imgId);
     ctx.beginPath();
     ctx.save();
@@ -123,6 +123,12 @@ function rockRadId(maxImg) {
     return id;
 }
 
+function explosiveRadId(maxImg) {
+    let id = "explosive";
+    id += (radNum(maxImg, 0) + "");
+    return id;
+}
+
 function ammoGenerator(maxImg) {
     let innerImg = "";
     for (let i = 0; i < maxImg + 1; i++) {
@@ -140,4 +146,14 @@ function itemsGenerator(maxImg) {
     }
     document.getElementById("imgfolder").innerHTML += innerImg;
 }
+
+function explosiveGenerator(maxImg) {
+    let innerImg = "";
+    for (let i = 0; i < maxImg + 1; i++) {
+        innerImg += "<img src=\"img/explosive/explosive" + i + ".png\" id=\"explosive"
+            + i + "\" style=\"display: none\">"
+    }
+    document.getElementById("imgfolder").innerHTML += innerImg;
+}
+
 
