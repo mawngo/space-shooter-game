@@ -1,4 +1,4 @@
-rockGenerator(3);
+rockGenerator(10);
 ammoGenerator(3);
 itemsGenerator(4);
 explosiveGenerator(5);
@@ -8,7 +8,7 @@ let Game = function () {
     this.score = 0;
     this.items = [];
     this.ship = new Ship(1200, 800, 5, 100, "white");
-    this.spawner = new Ball(undefined, undefined, 80, undefined, 0, 0, "planet");
+    this.spawner = new Ball(undefined, undefined, 100, undefined, 0, 0, "planet");
     this.balls = [];
     this.ammos = [];
     this.spammos = [];
@@ -32,7 +32,6 @@ let Game = function () {
         for (let ammo of this.spammos) {
             if (ammo.toObj(this.ship) && ammo.imgId === "ammo1") {
                 this.ship.health -= ammo.damage;
-                this.explosive.push(new Explosiveball(ammo.x, ammo.y, ammo.radius / 2, "explosive5", 0.3));
             }
             if (ammo.imgId === "ammo3") {
                 for (let ball of this.balls) {
@@ -87,7 +86,7 @@ let Game = function () {
                         } else {
                             this.items.push(new Item(exball.x, exball.y, "item2"));
                         }
-                        if (radNum(0, 0)) {
+                        if (radNum(20, 0)) {
                         } else {
                             this.items.push(new Item(exball.x, exball.y, "item3"));
                         }
@@ -134,7 +133,7 @@ let Game = function () {
                         } else {
                             this.items.push(new Item(ball.x, ball.y, "item2"));
                         }
-                        if (radNum(0, 0)) {
+                        if (radNum(20, 0)) {
                         } else {
                             this.items.push(new Item(ball.x, ball.y, "item3"));
                         }

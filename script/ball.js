@@ -1,5 +1,5 @@
 let Ball = function (x, y, radius, color, xSpeed, ySpeed, imgId) {
-    this.imgId = imgId || rockRadId(3);
+    this.imgId = imgId || rockRadId(10);
     this.isSpin = true;
     this.isExist = true;
     this.x = x || canvas.width / 2;
@@ -155,7 +155,7 @@ let Explosiveball = function (x, y, radius, imgId, time) {
     this.super = Ball;
     this.super.call(this, x, y, radius, "yellow", 0.2, 0.2);
     this.imgId = imgId || explosiveRadId(4);
-    this.count = time * 50 || 30;
+    this.count = time * 50 || 50;
 
     this.drawExplosive = function (containerArr) {
         if (this.count > 0) {
