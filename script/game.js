@@ -69,7 +69,7 @@ let Game = function () {
                         this.score+=5;
                     }
                     else {
-                        if (radNum(8, 0)) {
+                        if (radNum(5, 0)) {
                         } else {
                             this.items.push(new Item(exball.x, exball.y));
                         }
@@ -81,7 +81,7 @@ let Game = function () {
                         } else {
                             this.items.push(new Item(exball.x, exball.y, "item2"));
                         }
-                        if (radNum(25, 0)) {
+                        if (radNum(20, 0)) {
                         } else {
                             this.items.push(new Item(exball.x, exball.y, "item3"));
                         }
@@ -119,7 +119,7 @@ let Game = function () {
                         ball.explore(this.balls, 2);
                         this.score+=5;
                     } else {
-                        if (radNum(8, 0)) {
+                        if (radNum(5, 0)) {
                         } else {
                             this.items.push(new Item(ball.x, ball.y));
                         }
