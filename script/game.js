@@ -1,9 +1,3 @@
-rockGenerator(8);
-ammoGenerator(3);
-itemsGenerator(4);
-explosiveGenerator(5);
-
-
 let Game = function () {
     this.score = 0;
     this.items = [];
@@ -17,6 +11,7 @@ let Game = function () {
         for (let item of this.items) {
             item.toBall(this.items);
             item.toEdge();
+            item.toObj(this.spawner);
             if (item.toObj(this.ship)) {
                 if (item.imgId === "item4") {
                     this.score += 100
@@ -170,7 +165,6 @@ let Game = function () {
         if (this.ship.health <= 0) {
             canvasClean();
             drawBackGround();
-            this.displayscore(canvas.width / 2 - 50, canvas.height / 2, "You Lose!");
             setTimeout(function () {
                 if (confirm("play again?")) {
                     window.location.reload();
@@ -206,15 +200,25 @@ let Game = function () {
 
 };
 let game = new Game();
+let n = 0;
+rockGenerator(7);
+ammoGenerator(3);
+itemsGenerator(4);
+explosiveGenerator(5);
+
+score();
+gameplay();
+harder();
+spawnBalls();
 
 function gameplay() {
     canvasClean();
     drawBackGround();
-    drawImgInBall(game.spawner, true);
     game.combineState();
     game.drawExplosion();
     game.drawAmmo();
     game.drawBall();
+    drawImgInBall(game.spawner, true);
     drawImgInBall(game.ship, true);
     game.displayscore(15, 30);
     if (game.ship.health > 0) {
@@ -224,30 +228,19 @@ function gameplay() {
         drawImgInBall(game.ship, false, "explosive1")
     }
 }
-
-
-let n = 0;
-
 function harder() {
     n++;
     setTimeout(harder, 60000)
 }
-
 function spawnBalls() {
     game.spawner.spawn(game.balls, n);
     game.spawner.color = rainbow(Math.random());
     setTimeout(spawnBalls, 18000);
 }
-
 function score() {
     game.score += n;
     setTimeout(score, 1000);
 }
-
-score();
-gameplay();
-harder();
-spawnBalls();
 window.addEventListener("keydown", function (evt) {
     switch (evt.key) {
         case "ArrowRight":

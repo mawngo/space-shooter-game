@@ -1,5 +1,5 @@
 let Ball = function (x, y, radius, color, xSpeed, ySpeed, imgId) {
-    this.imgId = imgId || rockRadId(8);
+    this.imgId = imgId || rockRadId(7);
     this.isSpin = true;
     this.isExist = true;
     this.x = x || canvas.width / 2;

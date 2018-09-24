@@ -48,7 +48,7 @@ function rainbow(h) {
     return (c);
 }
 
-function radNum(max, min) {
+function radNum(max, min = 0) {
     max = max - min;
     return Math.round(Math.random() * max + min);
 }
@@ -63,26 +63,6 @@ function sqrtOf2Sqr(a, b) {
 
 function canvasClean() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-function drawBall(ball, stroke) {
-    ctx.beginPath();
-    ctx.arc(ball.x, ball.y, ball.radius, 0, 2 * Math.PI);
-    ctx.fillStyle = ball.color;
-    ctx.strokeStyle = stroke || ball.color;
-    ctx.fill();
-    ctx.stroke();
-}
-
-function drawSquareInBall(square) {
-    ctx.beginPath();
-    ctx.save();
-    ctx.translate(square.x, square.y);
-    ctx.rotate(square.angle * Math.PI / 180);
-    ctx.rect(-square.radius - 1, -square.radius - 1, square.radius * 2 + 2, square.radius * 2 + 2);
-    ctx.strokeStyle = square.color;
-    ctx.stroke();
-    ctx.restore();
 }
 
 function drawImgInBall(container, shadow = false, imgId = container.imgId) {
