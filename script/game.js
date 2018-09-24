@@ -1,7 +1,7 @@
 let Game = function () {
     this.score = 0;
     this.items = [];
-    this.ship = new Ship(1200, 800, 5, 100, "white");
+    this.ship = new Ship(200, 800, 5.5, 100, "white");
     this.spawner = new Ball(undefined, undefined, 100, undefined, 0, 0, "planet");
     this.balls = [];
     this.ammos = [];
@@ -14,7 +14,7 @@ let Game = function () {
             item.toObj(this.spawner);
             if (item.toObj(this.ship)) {
                 if (item.imgId === "item4") {
-                    this.score += 100
+                    this.score += 30;
                 }
                 item.doFunc(this.ship);
                 item.remove(this.items);
@@ -44,7 +44,6 @@ let Game = function () {
                 ammo.toObj(this.spawner);
                 if (ammo.toObj(this.ship)) {
                     this.ship.health += 8;
-                    console.log(this.ship.health);
                 }
             }
             ammo.makeAMove();
@@ -67,6 +66,7 @@ let Game = function () {
                         exball.explore(this.balls, 2);
                         exball.makeExplosive(this.explosive);
                         ammo.remove(this.ammos);
+                        this.score+=5;
                     }
                     else {
                         if (radNum(3, 0)) {
@@ -91,6 +91,7 @@ let Game = function () {
                         }
                         exball.remove(this.balls);
                         exball.makeExplosive(this.explosive, 0.3);
+                        this.score+=5;
                     }
                 } else {
                     ammo.toBall(this.balls);
@@ -115,12 +116,13 @@ let Game = function () {
                     ball.makeExplosive(this.explosive);
                     if (ball.radius / 2 > 10) {
                         ball.explore(this.balls, 2);
+                        this.score+=5;
                     } else {
-                        if (radNum(3, 0)) {
+                        if (radNum(4, 0)) {
                         } else {
                             this.items.push(new Item(ball.x, ball.y));
                         }
-                        if (radNum(2, 0)) {
+                        if (radNum(3, 0)) {
                         } else {
                             this.items.push(new Item(ball.x, ball.y, "item1"));
                         }
@@ -138,6 +140,7 @@ let Game = function () {
                         }
                         ball.remove(this.balls);
                         ball.makeExplosive(this.explosive, 0.3);
+                        this.score+=5;
                     }
                 } else {
                     ball.toBall(this.ammos);
@@ -146,6 +149,7 @@ let Game = function () {
             if (ball.toArrOfObj(this.spammos) >= 0) {
                 ball.remove(this.balls);
                 ball.makeExplosive(this.explosive);
+                this.score+=5;
             }
             ball.toBall(this.balls);
             ball.makeAMove();
@@ -220,7 +224,7 @@ function gameplay() {
     game.drawBall();
     drawImgInBall(game.spawner, true);
     drawImgInBall(game.ship, true);
-    game.displayscore(15, 30);
+    game.displayscore(15, 60,"stage: "+n);
     if (game.ship.health > 0) {
         setTimeout(gameplay, 20);
     }
@@ -230,16 +234,16 @@ function gameplay() {
 }
 function harder() {
     n++;
-    setTimeout(harder, 60000)
+    setTimeout(harder, 90000)
 }
 function spawnBalls() {
     game.spawner.spawn(game.balls, n);
     game.spawner.color = rainbow(Math.random());
-    setTimeout(spawnBalls, 18000);
+    setTimeout(spawnBalls, 15000);
 }
 function score() {
     game.score += n;
-    setTimeout(score, 1000);
+    setTimeout(score, 2000);
 }
 window.addEventListener("keydown", function (evt) {
     switch (evt.key) {
