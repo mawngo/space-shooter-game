@@ -2,7 +2,7 @@ let Ship = function (x, y, speed, health, color, imgId) {
     this.originType = Ball;
     this.originType.call(this, x, y, 20, color, 0.2, 0.2);
     this.imgId = imgId || "heroship";
-    this.speed = speed || 1;
+    this.speed = speed || 5;
     this.health = health || 100;
     this.isEnemy = false;
     this.totalAmmo = [];
