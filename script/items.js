@@ -13,7 +13,7 @@ let Item = function (x, y, imgId, size = 25) {
     this.doFunc = function (obj) {
         switch (this.imgId) {
             case "item0":
-                for (let i = 0; i < 2; i++) {
+                for (let i = 0; i < 3; i++) {
                     obj.totalAmmo.push(new Ammo(obj.x, obj.y, 1, 1, "ammo1", 30));
                 }
                 break;
