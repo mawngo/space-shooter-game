@@ -37,13 +37,13 @@ let Game = function () {
                 }
                 this.balls = [];
                 this.ammos = [];
-                this.spammos.pop();
+                this.spammos=[];
             }
             if (ammo.imgId === "ammo2") {
                 ammo.toEdge();
                 ammo.toObj(this.spawner);
                 if (ammo.toObj(this.ship)) {
-                    this.ship.health += 8;
+                    this.ship.health += 3;
                 }
             }
             ammo.makeAMove();
@@ -56,7 +56,7 @@ let Game = function () {
         for (let ammo of this.ammos) {
             ammo.toEdge();
             ammo.toObj(this.spawner);
-            if(ammo.toObj(this.ship)) {
+            if (ammo.toObj(this.ship)) {
                 this.ship.health -= ammo.damage;
             }
             if (ammo.toArrOfObj(this.balls) >= 0) {
@@ -66,10 +66,10 @@ let Game = function () {
                         exball.explore(this.balls, 2);
                         exball.makeExplosive(this.explosive);
                         ammo.remove(this.ammos);
-                        this.score+=5;
+                        this.score += 5;
                     }
                     else {
-                        if (radNum(5, 0)) {
+                        if (radNum(3, 0)) {
                         } else {
                             this.items.push(new Item(exball.x, exball.y));
                         }
@@ -77,7 +77,7 @@ let Game = function () {
                         } else {
                             this.items.push(new Item(exball.x, exball.y, "item1"));
                         }
-                        if (radNum(15, 0)) {
+                        if (radNum(18, 0)) {
                         } else {
                             this.items.push(new Item(exball.x, exball.y, "item2"));
                         }
@@ -91,7 +91,7 @@ let Game = function () {
                         }
                         exball.remove(this.balls);
                         exball.makeExplosive(this.explosive, 0.3);
-                        this.score+=5;
+                        this.score += 5;
                     }
                 } else {
                     ammo.toBall(this.balls);
@@ -108,7 +108,7 @@ let Game = function () {
             if (ball.toObj(this.ship)) {
                 ball.explore(this.balls, 2);
                 this.ship.health -= ball.damage;
-                this.score -=10;
+                this.score -= 10;
                 ball.makeExplosive(this.explosive);
             }
             if (ball.toArrOfObj(this.ammos) >= 0) {
@@ -117,9 +117,9 @@ let Game = function () {
                     ball.makeExplosive(this.explosive);
                     if (ball.radius / 2 > 10) {
                         ball.explore(this.balls, 2);
-                        this.score+=5;
+                        this.score += 5;
                     } else {
-                        if (radNum(5, 0)) {
+                        if (radNum(3, 0)) {
                         } else {
                             this.items.push(new Item(ball.x, ball.y));
                         }
@@ -127,7 +127,7 @@ let Game = function () {
                         } else {
                             this.items.push(new Item(ball.x, ball.y, "item1"));
                         }
-                        if (radNum(15, 0)) {
+                        if (radNum(18, 0)) {
                         } else {
                             this.items.push(new Item(ball.x, ball.y, "item2"));
                         }
@@ -141,16 +141,24 @@ let Game = function () {
                         }
                         ball.remove(this.balls);
                         ball.makeExplosive(this.explosive, 0.3);
-                        this.score+=5;
+                        this.score += 5;
                     }
                 } else {
                     ball.toBall(this.ammos);
                 }
             }
             if (ball.toArrOfObj(this.spammos) >= 0) {
-                ball.remove(this.balls);
+                if (radNum(1, 0)) {
+                    ball.remove(this.balls);
+                } else {
+                    if (ball.radius / 2 > 15) {
+                        ball.explore(this.balls, 2);
+                    } else {
+                        ball.remove(this.balls);
+                    }
+                }
                 ball.makeExplosive(this.explosive);
-                this.score+=5;
+                this.score += 5;
             }
             ball.toBall(this.balls);
             ball.makeAMove();
@@ -225,7 +233,7 @@ function gameplay() {
     game.drawBall();
     drawImgInBall(game.spawner, true);
     drawImgInBall(game.ship, true);
-    game.displayscore(15, 60,"stage: "+n);
+    game.displayscore(15, 60, "stage: " + n);
     if (game.ship.health > 0) {
         setTimeout(gameplay, 20);
     }
@@ -233,19 +241,23 @@ function gameplay() {
         drawImgInBall(game.ship, false, "explosive1")
     }
 }
+
 function harder() {
     n++;
     setTimeout(harder, 90000)
 }
+
 function spawnBalls() {
     game.spawner.spawn(game.balls, n);
     game.spawner.color = rainbow(Math.random());
     setTimeout(spawnBalls, 15000);
 }
+
 function score() {
-    game.score += n + Math.floor((game.balls.length+game.ammos.length)/10);
+    game.score += n + Math.floor((game.balls.length + game.ammos.length) / 10);
     setTimeout(score, 5000);
 }
+
 window.addEventListener("keydown", function (evt) {
     switch (evt.key) {
         case "ArrowRight":
