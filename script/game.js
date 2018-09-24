@@ -69,7 +69,7 @@ let Game = function () {
                         this.score += 5;
                     }
                     else {
-                        if (radNum(3, 0)) {
+                        if (radNum(4, 0)) {
                         } else {
                             this.items.push(new Item(exball.x, exball.y));
                         }
@@ -119,7 +119,7 @@ let Game = function () {
                         ball.explore(this.balls, 2);
                         this.score += 5;
                     } else {
-                        if (radNum(3, 0)) {
+                        if (radNum(4, 0)) {
                         } else {
                             this.items.push(new Item(ball.x, ball.y));
                         }
