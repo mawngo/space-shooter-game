@@ -37,7 +37,7 @@ let Game = function () {
                 }
                 this.balls = [];
                 this.ammos = [];
-                this.spammos=[];
+                this.spammos = [];
             }
             if (ammo.imgId === "ammo2") {
                 ammo.toEdge();
@@ -67,26 +67,20 @@ let Game = function () {
                         exball.makeExplosive(this.explosive);
                         ammo.remove(this.ammos);
                         this.score += 5;
-                    }
-                    else {
-                        if (radNum(4, 0)) {
-                        } else {
+                    } else {
+                        if (!radNum(4, 0)) {
                             this.items.push(new Item(exball.x, exball.y));
                         }
-                        if (radNum(5, 0)) {
-                        } else {
+                        if (!radNum(5, 0)) {
                             this.items.push(new Item(exball.x, exball.y, "item1"));
                         }
-                        if (radNum(18, 0)) {
-                        } else {
+                        if (!radNum(20, 0)) {
                             this.items.push(new Item(exball.x, exball.y, "item2"));
                         }
-                        if (radNum(20, 0)) {
-                        } else {
+                        if (!radNum(25, 0)) {
                             this.items.push(new Item(exball.x, exball.y, "item3"));
                         }
-                        if (radNum(3, 0)) {
-                        } else {
+                        if (!radNum(3, 0)) {
                             this.items.push(new Item(exball.x, exball.y, "item4"));
                         }
                         exball.remove(this.balls);
@@ -119,24 +113,19 @@ let Game = function () {
                         ball.explore(this.balls, 2);
                         this.score += 5;
                     } else {
-                        if (radNum(4, 0)) {
-                        } else {
+                        if (!radNum(4, 0)) {
                             this.items.push(new Item(ball.x, ball.y));
                         }
-                        if (radNum(5, 0)) {
-                        } else {
+                        if (!radNum(5, 0)) {
                             this.items.push(new Item(ball.x, ball.y, "item1"));
                         }
-                        if (radNum(18, 0)) {
-                        } else {
+                        if (!radNum(20, 0)) {
                             this.items.push(new Item(ball.x, ball.y, "item2"));
                         }
-                        if (radNum(25, 0)) {
-                        } else {
+                        if (!radNum(25, 0)) {
                             this.items.push(new Item(ball.x, ball.y, "item3"));
                         }
-                        if (radNum(3, 0)) {
-                        } else {
+                        if (!radNum(3, 0)) {
                             this.items.push(new Item(ball.x, ball.y, "item4"));
                         }
                         ball.remove(this.balls);
@@ -236,8 +225,7 @@ function gameplay() {
     game.displayscore(15, 60, "stage: " + n);
     if (game.ship.health > 0) {
         setTimeout(gameplay, 20);
-    }
-    else {
+    } else {
         drawImgInBall(game.ship, false, "explosive1")
     }
 }
