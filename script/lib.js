@@ -42,10 +42,9 @@ function rainbow(h) {
             b = q;
             break;
     }
-    let c = "#" + ("00" + (~~(r * 255)).toString(16)).slice(-2)
+    return ("#" + ("00" + (~~(r * 255)).toString(16)).slice(-2)
         + ("00" + (~~(g * 255)).toString(16)).slice(-2)
-        + ("00" + (~~(b * 255)).toString(16)).slice(-2);
-    return (c);
+        + ("00" + (~~(b * 255)).toString(16)).slice(-2));
 }
 
 function radNum(max, min = 0) {
@@ -58,7 +57,6 @@ function sqrtOf2Sqr(a, b) {
         (Math.abs(a) * Math.abs(a)) +
         (Math.abs(b) * Math.abs(b))
     );
-
 }
 
 function canvasClean() {
@@ -66,7 +64,7 @@ function canvasClean() {
 }
 
 function drawImgInBall(container, shadow = false, imgId = container.imgId) {
-    let img = document.getElementById(imgId);
+    const img = document.getElementById(imgId);
     ctx.beginPath();
     ctx.save();
     if (shadow) {

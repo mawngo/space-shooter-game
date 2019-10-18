@@ -29,8 +29,8 @@ class Ball {
     };
 
     relocate(x, y, distance) {
-        let maxDistance = this.radius + distance;
-        let realDistance = sqrtOf2Sqr(this.x - x, this.y - y);
+        const maxDistance = this.radius + distance;
+        const realDistance = sqrtOf2Sqr(this.x - x, this.y - y);
         if (maxDistance > realDistance) {
             this.x = (this.x - x) * (maxDistance / realDistance) + x;
             this.y = (this.y - y) * (maxDistance / realDistance) + y;
@@ -56,24 +56,24 @@ class Ball {
     };
 
     toBall(otherBall) {
-        for (let ball of otherBall) {
-            let ballMaxDistance = ball.radius + this.radius;
-            let ballRealDistance = sqrtOf2Sqr(ball.x - this.x, ball.y - this.y);
+        for (const ball of otherBall) {
+            const ballMaxDistance = ball.radius + this.radius;
+            const ballRealDistance = sqrtOf2Sqr(ball.x - this.x, ball.y - this.y);
             if (ballRealDistance !== 0) {
                 if (ballMaxDistance > ballRealDistance) {
                     this.relocate(ball.x, ball.y, ball.radius);
                 }
                 if (ballMaxDistance >= ballRealDistance) {
-                    let thisXSpeedAfter =
+                    const thisXSpeedAfter =
                         ((this.radius - ball.radius) * this.xSpeed
                             + 2 * ball.radius * ball.xSpeed) / ballMaxDistance;
-                    let thisYSpeedAfter =
+                    const thisYSpeedAfter =
                         ((this.radius - ball.radius) * this.ySpeed
                             + 2 * ball.radius * ball.ySpeed) / ballMaxDistance;
-                    let ballXSpeedAfter =
+                    const ballXSpeedAfter =
                         ((ball.radius - this.radius) * ball.xSpeed
                             + 2 * this.radius * this.xSpeed) / ballMaxDistance;
-                    let ballYSpeedAfter =
+                    const ballYSpeedAfter =
                         ((ball.radius - this.radius) * ball.ySpeed
                             + 2 * this.radius * this.ySpeed) / ballMaxDistance;
                     this.xSpeed = thisXSpeedAfter;
@@ -89,8 +89,8 @@ class Ball {
 
     toObj(obj) {
 
-        let ballMaxDistance = this.radius + obj.radius;
-        let ballRealDistance = sqrtOf2Sqr(this.x - obj.x, this.y - obj.y);
+        const ballMaxDistance = this.radius + obj.radius;
+        const ballRealDistance = sqrtOf2Sqr(this.x - obj.x, this.y - obj.y);
         if (ballRealDistance !== 0) {
             if (ballRealDistance < ballMaxDistance) {
                 this.relocate(obj.x, obj.y, obj.radius);
@@ -106,8 +106,8 @@ class Ball {
 
     toArrOfObj(otherBall) {
         for (let i = 0; i < otherBall.length; i++) {
-            let ballMaxDistance = otherBall[i].radius + this.radius;
-            let ballRealDistance = sqrtOf2Sqr(otherBall[i].x - this.x, otherBall[i].y - this.y);
+            const ballMaxDistance = otherBall[i].radius + this.radius;
+            const ballRealDistance = sqrtOf2Sqr(otherBall[i].x - this.x, otherBall[i].y - this.y);
             if (ballMaxDistance >= ballRealDistance) {
                 return i;
             }

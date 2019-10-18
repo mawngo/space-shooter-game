@@ -11,7 +11,7 @@ class Game {
     }
 
     itemState() {
-        for (let item of this.items) {
+        for (const item of this.items) {
             item.toBall(this.items);
             item.toObj(this.spawner);
             item.toEdge();
@@ -28,15 +28,15 @@ class Game {
     };
 
     specialAmmoState() {
-        for (let ammo of this.spammos) {
+        for (const ammo of this.spammos) {
             if (ammo.toObj(this.ship) && ammo.imgId === "ammo1") {
                 this.ship.health -= ammo.damage;
             }
             if (ammo.imgId === "ammo3") {
-                for (let ball of this.balls) {
+                for (const ball of this.balls) {
                     ball.makeExplosive(this.explosive)
                 }
-                for (let ammo of this.ammos) {
+                for (const ammo of this.ammos) {
                     this.explosive.push(new ExplosiveBall(ammo.x, ammo.y, ammo.radius / 2, "explosive5", 0.3));
                 }
                 this.balls = [];
@@ -57,22 +57,22 @@ class Game {
     };
 
     ammoState() {
-        for (let ammo of this.ammos) {
+        for (const ammo of this.ammos) {
             ammo.toEdge();
             ammo.toObj(this.spawner);
             if (ammo.toObj(this.ship)) {
                 this.ship.health -= ammo.damage;
             }
             if (ammo.toArrOfObj(this.balls) >= 0) {
-                let exball = this.balls[ammo.toArrOfObj(this.balls)];
+                const exBall = this.balls[ammo.toArrOfObj(this.balls)];
                 if (radNum(1, 0)) {
-                    if (exball.radius / 2 > 10) {
-                        exball.explore(this.balls, 2);
-                        exball.makeExplosive(this.explosive);
+                    if (exBall.radius / 2 > 10) {
+                        exBall.explore(this.balls, 2);
+                        exBall.makeExplosive(this.explosive);
                         ammo.remove(this.ammos);
                         this.score += 5;
                     } else {
-                        this.spawnItemFrom(exball);
+                        this.spawnItemFrom(exBall);
                     }
                 } else {
                     ammo.toBall(this.balls);
@@ -83,7 +83,7 @@ class Game {
     };
 
     ballState() {
-        for (let ball of this.balls) {
+        for (const ball of this.balls) {
             ball.toEdge();
             ball.toObj(this.spawner);
             if (ball.toObj(this.ship)) {
@@ -111,7 +111,7 @@ class Game {
                     ball.remove(this.balls);
                 } else {
                     if (ball.radius / 2 > 15)
-                        ball.explore(this.balls, 2)
+                        ball.explore(this.balls, 2);
                     else
                         ball.remove(this.balls);
                 }
@@ -145,13 +145,13 @@ class Game {
     }
 
     drawBall() {
-        for (let ball of this.balls) {
+        for (const ball of this.balls) {
             drawImgInBall(ball)
         }
     };
 
     drawAmmo() {
-        for (let ammo of this.ammos) {
+        for (const ammo of this.ammos) {
             drawImgInBall(ammo, true)
         }
     };
@@ -182,7 +182,7 @@ class Game {
     };
 
     drawExplosion() {
-        for (let e of this.explosive) {
+        for (const e of this.explosive) {
             e.drawExplosive(this.explosive);
         }
     };
@@ -196,7 +196,7 @@ class Game {
     }
 }
 
-let game = new Game();
+const game = new Game();
 let n = 0;
 rockGenerator(7);
 ammoGenerator(3);
@@ -257,7 +257,7 @@ window.addEventListener("keydown", evt => {
             break;
         case "a":
             if (game.ship.totalAmmo.length > 0) {
-                let ammo = game.ship.totalAmmo.pop();
+                const ammo = game.ship.totalAmmo.pop();
                 game.ship.shoot(game.spammos, this.angle, ammo.imgId, 10);
             }
             break;
