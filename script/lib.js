@@ -91,10 +91,10 @@ function drawBackGround() {
 function rockGenerator(maxImg) {
     let innerImg = "";
     for (let i = 0; i < maxImg + 1; i++) {
-        innerImg += "<img src=\"img/rock/rock" + i
+        innerImg += "<img alt=\"rock\" src=\"img/rock/rock" + i
             + ".png\" id=\"rock" + i + "\" style=\"display: none\">";
     }
-    document.getElementById("imgfolder").innerHTML += innerImg;
+    document.getElementById("img-dir").innerHTML += innerImg;
 }
 
 function rockRadId(maxImg) {
@@ -112,28 +112,28 @@ function explosiveRadId(maxImg) {
 function ammoGenerator(maxImg) {
     let innerImg = "";
     for (let i = 0; i < maxImg + 1; i++) {
-        innerImg += "<img src=\"img/ammo/ammo" + i +
+        innerImg += "<img alt=\"ammo\" src=\"img/ammo/ammo" + i +
             ".png\" id=\"ammo" + i + "\" style=\"display: none\">"
     }
-    document.getElementById("imgfolder").innerHTML += innerImg;
+    document.getElementById("img-dir").innerHTML += innerImg;
 }
 
 function itemsGenerator(maxImg) {
     let innerImg = "";
     for (let i = 0; i < maxImg + 1; i++) {
-        innerImg += "<img src=\"img/item/item" + i + ".png\" id=\"item"
+        innerImg += "<img alt=\"item\" src=\"img/item/item" + i + ".png\" id=\"item"
             + i + "\" style=\"display: none\">"
     }
-    document.getElementById("imgfolder").innerHTML += innerImg;
+    document.getElementById("img-dir").innerHTML += innerImg;
 }
 
 function explosiveGenerator(maxImg) {
     let innerImg = "";
     for (let i = 0; i < maxImg + 1; i++) {
-        innerImg += "<img src=\"img/explosive/explosive" + i + ".png\" id=\"explosive"
+        innerImg += "<img alt=\"explosive\" src=\"img/explosive/explosive" + i + ".png\" id=\"explosive"
             + i + "\" style=\"display: none\">"
     }
-    document.getElementById("imgfolder").innerHTML += innerImg;
+    document.getElementById("img-dir").innerHTML += innerImg;
 }
 
 

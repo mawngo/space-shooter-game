@@ -10,7 +10,7 @@ class Game {
         this.explosive = [];
     }
 
-    itemstate() {
+    itemState() {
         for (let item of this.items) {
             item.toBall(this.items);
             item.toObj(this.spawner);
@@ -27,7 +27,7 @@ class Game {
         }
     };
 
-    spammostate() {
+    specialAmmoState() {
         for (let ammo of this.spammos) {
             if (ammo.toObj(this.ship) && ammo.imgId === "ammo1") {
                 this.ship.health -= ammo.damage;
@@ -37,7 +37,7 @@ class Game {
                     ball.makeExplosive(this.explosive)
                 }
                 for (let ammo of this.ammos) {
-                    this.explosive.push(new Explosiveball(ammo.x, ammo.y, ammo.radius / 2, "explosive5", 0.3));
+                    this.explosive.push(new ExplosiveBall(ammo.x, ammo.y, ammo.radius / 2, "explosive5", 0.3));
                 }
                 this.balls = [];
                 this.ammos = [];
@@ -56,7 +56,7 @@ class Game {
         }
     };
 
-    ammostate() {
+    ammoState() {
         for (let ammo of this.ammos) {
             ammo.toEdge();
             ammo.toObj(this.spawner);
@@ -99,7 +99,7 @@ class Game {
         }
     };
 
-    ballstate() {
+    ballState() {
         for (let ball of this.balls) {
             ball.toEdge();
             ball.toObj(this.spawner);
@@ -170,7 +170,7 @@ class Game {
         }
     };
 
-    shipstate() {
+    shipState() {
         if (this.ship.health <= 0) {
             canvasClean();
             drawBackGround();
@@ -186,7 +186,7 @@ class Game {
         this.ship.makeAMove();
     };
 
-    displayscore(x, y, string = "") {
+    displayScore(x, y, string = "") {
         ctx.font = "25px Verdana";
         ctx.fillStyle = "white";
         ctx.fillText(string, x, y - 30);
@@ -202,11 +202,11 @@ class Game {
     };
 
     combineState() {
-        this.spammostate();
-        this.ammostate();
-        this.ballstate();
-        this.shipstate();
-        this.itemstate();
+        this.specialAmmoState();
+        this.ammoState();
+        this.ballState();
+        this.shipState();
+        this.itemState();
     }
 }
 
@@ -217,12 +217,12 @@ ammoGenerator(3);
 itemsGenerator(4);
 explosiveGenerator(5);
 
-score();
-gameplay();
-harder();
+setupScore();
+setupGamePlay();
+makeGameHarder();
 spawnBalls();
 
-function gameplay() {
+function setupGamePlay() {
     canvasClean();
     drawBackGround();
     game.combineState();
@@ -231,17 +231,17 @@ function gameplay() {
     game.drawBall();
     drawImgInBall(game.spawner, true);
     drawImgInBall(game.ship, true);
-    game.displayscore(15, 60, "stage: " + n);
+    game.displayScore(15, 60, "stage: " + n);
     if (game.ship.health > 0) {
-        setTimeout(gameplay, 20);
+        setTimeout(setupGamePlay, 20);
     } else {
         drawImgInBall(game.ship, false, "explosive1")
     }
 }
 
-function harder() {
+function makeGameHarder() {
     n++;
-    setTimeout(harder, 90000)
+    setTimeout(makeGameHarder, 90000)
 }
 
 function spawnBalls() {
@@ -250,9 +250,9 @@ function spawnBalls() {
     setTimeout(spawnBalls, 15000);
 }
 
-function score() {
+function setupScore() {
     game.score += n + Math.floor((game.balls.length + game.ammos.length) / 10);
-    setTimeout(score, 5000);
+    setTimeout(setupScore, 5000);
 }
 
 window.addEventListener("keydown", function (evt) {

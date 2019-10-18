@@ -28,7 +28,7 @@ class Ball {
         this.increaseAngle(sqrtOf2Sqr(this.xSpeed, this.ySpeed) / 3);
     };
 
-    relocale(x, y, distance) {
+    relocate(x, y, distance) {
         let maxDistance = this.radius + distance;
         let realDistance = sqrtOf2Sqr(this.x - x, this.y - y);
         if (maxDistance > realDistance) {
@@ -61,7 +61,7 @@ class Ball {
             let ballRealDistance = sqrtOf2Sqr(ball.x - this.x, ball.y - this.y);
             if (ballRealDistance !== 0) {
                 if (ballMaxDistance > ballRealDistance) {
-                    this.relocale(ball.x, ball.y, ball.radius);
+                    this.relocate(ball.x, ball.y, ball.radius);
                 }
                 if (ballMaxDistance >= ballRealDistance) {
                     let thisXSpeedAfter =
@@ -93,7 +93,7 @@ class Ball {
         let ballRealDistance = sqrtOf2Sqr(this.x - obj.x, this.y - obj.y);
         if (ballRealDistance !== 0) {
             if (ballRealDistance < ballMaxDistance) {
-                this.relocale(obj.x, obj.y, obj.radius);
+                this.relocate(obj.x, obj.y, obj.radius);
             }
             if (ballRealDistance <= ballMaxDistance) {
                 this.xSpeed *= -1;
@@ -143,19 +143,19 @@ class Ball {
 
     makeExplosive(containerArr, time) {
         if (radNum(1, 0)) {
-            containerArr.push(new Explosiveball(this.x, this.y, this.radius * 2, "explosive0", time));
-            containerArr.push(new Explosiveball(this.x, this.y, this.radius * 1.2, undefined, time));
+            containerArr.push(new ExplosiveBall(this.x, this.y, this.radius * 2, "explosive0", time));
+            containerArr.push(new ExplosiveBall(this.x, this.y, this.radius * 1.2, undefined, time));
         } else if (radNum(1, 0)) {
-            containerArr.push(new Explosiveball(this.x, this.y, this.radius * 2, undefined, time));
+            containerArr.push(new ExplosiveBall(this.x, this.y, this.radius * 2, undefined, time));
         } else {
-            containerArr.push(new Explosiveball(this.x, this.y, this.radius * 3.5, "explosive4", time));
-            containerArr.push(new Explosiveball(this.x, this.y, this.radius * 1, undefined, time));
+            containerArr.push(new ExplosiveBall(this.x, this.y, this.radius * 3.5, "explosive4", time));
+            containerArr.push(new ExplosiveBall(this.x, this.y, this.radius * 1, undefined, time));
         }
     };
 
 }
 
-class Explosiveball extends Ball {
+class ExplosiveBall extends Ball {
     constructor(x, y, radius, imgId, time) {
         super(x, y, radius, "yellow", 0.2, 0.2);
         this.imgId = imgId || explosiveRadId(4);
