@@ -118,8 +118,7 @@ class Ball {
     remove(balls) {
         this.isExist = false;
         for (let i = 0; i < balls.length; i++) {
-            if (balls[i].isExist) {
-            } else {
+            if (!balls[i].isExist) {
                 balls.splice(i, 1);
             }
         }

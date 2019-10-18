@@ -31,16 +31,3 @@ class Item extends Ball {
         }
     }
 }
-
-function ammoRemoval(ammos) {
-    let i = 0;
-    for (let ammo of ammos) {
-        if (ammo.x > canvas.width || ammo.y > canvas.height) {
-            ammos.splice(i, 1);
-        }
-        if (ammo.x < 0 || ammo.y < 0) {
-            ammos.splice(i, 1);
-        }
-        i++;
-    }
-}

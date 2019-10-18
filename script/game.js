@@ -72,24 +72,7 @@ class Game {
                         ammo.remove(this.ammos);
                         this.score += 5;
                     } else {
-                        if (!radNum(4, 0)) {
-                            this.items.push(new Item(exball.x, exball.y));
-                        }
-                        if (!radNum(5, 0)) {
-                            this.items.push(new Item(exball.x, exball.y, "item1"));
-                        }
-                        if (!radNum(20, 0)) {
-                            this.items.push(new Item(exball.x, exball.y, "item2"));
-                        }
-                        if (!radNum(25, 0)) {
-                            this.items.push(new Item(exball.x, exball.y, "item3"));
-                        }
-                        if (!radNum(3, 0)) {
-                            this.items.push(new Item(exball.x, exball.y, "item4"));
-                        }
-                        exball.remove(this.balls);
-                        exball.makeExplosive(this.explosive, 0.3);
-                        this.score += 5;
+                        this.spawnItemFrom(exball);
                     }
                 } else {
                     ammo.toBall(this.balls);
@@ -117,24 +100,7 @@ class Game {
                         ball.explore(this.balls, 2);
                         this.score += 5;
                     } else {
-                        if (!radNum(4, 0)) {
-                            this.items.push(new Item(ball.x, ball.y));
-                        }
-                        if (!radNum(5, 0)) {
-                            this.items.push(new Item(ball.x, ball.y, "item1"));
-                        }
-                        if (!radNum(20, 0)) {
-                            this.items.push(new Item(ball.x, ball.y, "item2"));
-                        }
-                        if (!radNum(25, 0)) {
-                            this.items.push(new Item(ball.x, ball.y, "item3"));
-                        }
-                        if (!radNum(3, 0)) {
-                            this.items.push(new Item(ball.x, ball.y, "item4"));
-                        }
-                        ball.remove(this.balls);
-                        ball.makeExplosive(this.explosive, 0.3);
-                        this.score += 5;
+                        this.spawnItemFrom(ball);
                     }
                 } else {
                     ball.toBall(this.ammos);
@@ -144,11 +110,10 @@ class Game {
                 if (radNum(1, 0)) {
                     ball.remove(this.balls);
                 } else {
-                    if (ball.radius / 2 > 15) {
-                        ball.explore(this.balls, 2);
-                    } else {
+                    if (ball.radius / 2 > 15)
+                        ball.explore(this.balls, 2)
+                    else
                         ball.remove(this.balls);
-                    }
                 }
                 ball.makeExplosive(this.explosive);
                 this.score += 5;
@@ -157,6 +122,27 @@ class Game {
             ball.makeAMove();
         }
     };
+
+    spawnItemFrom(ball) {
+        if (!radNum(4, 0)) {
+            this.items.push(new Item(ball.x, ball.y));
+        }
+        if (!radNum(5, 0)) {
+            this.items.push(new Item(ball.x, ball.y, "item1"));
+        }
+        if (!radNum(20, 0)) {
+            this.items.push(new Item(ball.x, ball.y, "item2"));
+        }
+        if (!radNum(25, 0)) {
+            this.items.push(new Item(ball.x, ball.y, "item3"));
+        }
+        if (!radNum(3, 0)) {
+            this.items.push(new Item(ball.x, ball.y, "item4"));
+        }
+        ball.remove(this.balls);
+        ball.makeExplosive(this.explosive, 0.3);
+        this.score += 5;
+    }
 
     drawBall() {
         for (let ball of this.balls) {
@@ -174,7 +160,7 @@ class Game {
         if (this.ship.health <= 0) {
             canvasClean();
             drawBackGround();
-            setTimeout(function () {
+            setTimeout(() => {
                 if (confirm("play again?")) {
                     window.location.reload();
                 }
@@ -255,7 +241,7 @@ function setupScore() {
     setTimeout(setupScore, 5000);
 }
 
-window.addEventListener("keydown", function (evt) {
+window.addEventListener("keydown", evt => {
     switch (evt.key) {
         case "ArrowRight":
             game.ship.moveRight();
