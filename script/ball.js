@@ -1,18 +1,19 @@
-let Ball = function (x, y, radius, color, xSpeed, ySpeed, imgId) {
-    this.imgId = imgId || rockRadId(7);
-    this.isSpin = true;
-    this.isExist = true;
-    this.x = x || canvas.width / 2;
-    this.y = y || canvas.height / 2;
-    this.color = color || rainbow(Math.random());
-    this.radius = radius || radNum(60, 60);
-    this.xSpeed = xSpeed || radNum(5, 0);
-    this.ySpeed = ySpeed || radNum(5, 0);
-    this.angle = 0;
-    this.damage = this.radius / 4;
+class Ball {
+    constructor(x, y, radius, color, xSpeed, ySpeed, imgId) {
+        this.imgId = imgId || rockRadId(7);
+        this.isSpin = true;
+        this.isExist = true;
+        this.x = x || canvas.width / 2;
+        this.y = y || canvas.height / 2;
+        this.color = color || rainbow(Math.random());
+        this.radius = radius || radNum(60, 60);
+        this.xSpeed = xSpeed || radNum(5, 0);
+        this.ySpeed = ySpeed || radNum(5, 0);
+        this.angle = 0;
+        this.damage = this.radius / 4;
+    }
 
-
-    this.increaseAngle = function (n) {
+    increaseAngle(n) {
         if (this.isSpin) {
             this.angle = this.angle + n;
             if (this.angle >= 360) {
@@ -20,13 +21,14 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed, imgId) {
             }
         }
     };
-    this.makeAMove = function () {
+
+    makeAMove() {
         this.x += this.xSpeed;
         this.y += this.ySpeed;
         this.increaseAngle(sqrtOf2Sqr(this.xSpeed, this.ySpeed) / 3);
     };
 
-    this.relocale = function (x, y, distance) {
+    relocale(x, y, distance) {
         let maxDistance = this.radius + distance;
         let realDistance = sqrtOf2Sqr(this.x - x, this.y - y);
         if (maxDistance > realDistance) {
@@ -34,13 +36,13 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed, imgId) {
             this.y = (this.y - y) * (maxDistance / realDistance) + y;
         }
     };
-    this.toEdge = function () {
+
+    toEdge() {
         if (this.x <= this.radius) {
             this.x = this.radius;
             this.xSpeed *= -1;
 
-        }
-        else if (this.x >= (canvas.width - this.radius)) {
+        } else if (this.x >= (canvas.width - this.radius)) {
             this.x = canvas.width - this.radius;
             this.xSpeed *= -1;
 
@@ -52,7 +54,8 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed, imgId) {
             this.ySpeed *= -1;
         }
     };
-    this.toBall = function (otherBall) {
+
+    toBall(otherBall) {
         for (let ball of otherBall) {
             let ballMaxDistance = ball.radius + this.radius;
             let ballRealDistance = sqrtOf2Sqr(ball.x - this.x, ball.y - this.y);
@@ -83,7 +86,8 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed, imgId) {
             }
         }
     };
-    this.toObj = function (obj) {
+
+    toObj(obj) {
 
         let ballMaxDistance = this.radius + obj.radius;
         let ballRealDistance = sqrtOf2Sqr(this.x - obj.x, this.y - obj.y);
@@ -99,7 +103,8 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed, imgId) {
         }
 
     };
-    this.toArrOfObj = function (otherBall) {
+
+    toArrOfObj(otherBall) {
         for (let i = 0; i < otherBall.length; i++) {
             let ballMaxDistance = otherBall[i].radius + this.radius;
             let ballRealDistance = sqrtOf2Sqr(otherBall[i].x - this.x, otherBall[i].y - this.y);
@@ -108,20 +113,19 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed, imgId) {
             }
         }
         return -1;
-    };
+    }
 
-
-    this.remove = function (balls) {
+    remove(balls) {
         this.isExist = false;
         for (let i = 0; i < balls.length; i++) {
             if (balls[i].isExist) {
-            }
-            else {
+            } else {
                 balls.splice(i, 1);
             }
         }
     };
-    this.explore = function (balls, n = 1) {
+
+    explore(balls, n = 1) {
         this.remove(balls);
         if (this.radius / 2 > 10) {
             for (let j = 0; j < n; j++) {
@@ -130,40 +134,41 @@ let Ball = function (x, y, radius, color, xSpeed, ySpeed, imgId) {
 
         }
     };
-    this.spawn = function (balls, n = 1) {
+
+    spawn(balls, n = 1) {
         for (let i = 0; i < n; i++) {
             balls.push(new Ball(this.x, this.y, undefined, this.color))
         }
     };
-    this.makeExplosive = function (containerArr, time) {
+
+    makeExplosive(containerArr, time) {
         if (radNum(1, 0)) {
             containerArr.push(new Explosiveball(this.x, this.y, this.radius * 2, "explosive0", time));
             containerArr.push(new Explosiveball(this.x, this.y, this.radius * 1.2, undefined, time));
-        }
-        else if (radNum(1,0)) {
+        } else if (radNum(1, 0)) {
             containerArr.push(new Explosiveball(this.x, this.y, this.radius * 2, undefined, time));
-        }
-        else {
+        } else {
             containerArr.push(new Explosiveball(this.x, this.y, this.radius * 3.5, "explosive4", time));
             containerArr.push(new Explosiveball(this.x, this.y, this.radius * 1, undefined, time));
         }
     };
 
-};
+}
 
-let Explosiveball = function (x, y, radius, imgId, time) {
-    this.super = Ball;
-    this.super.call(this, x, y, radius, "yellow", 0.2, 0.2);
-    this.imgId = imgId || explosiveRadId(4);
-    this.count = time * 50 || 50;
+class Explosiveball extends Ball {
+    constructor(x, y, radius, imgId, time) {
+        super(x, y, radius, "yellow", 0.2, 0.2);
+        this.imgId = imgId || explosiveRadId(4);
+        this.count = time * 50 || 50;
 
-    this.drawExplosive = function (containerArr) {
+    }
+
+    drawExplosive(containerArr) {
         if (this.count > 0) {
             drawImgInBall(this, false);
             this.count -= 1;
-        }
-        else {
+        } else {
             this.remove(containerArr);
         }
     }
-};
+}

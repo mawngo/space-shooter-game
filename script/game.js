@@ -1,13 +1,16 @@
-let Game = function () {
-    this.score = 0;
-    this.items = [];
-    this.ship = new Ship(200, 800, 5, 100, "white");
-    this.spawner = new Ball(undefined, undefined, 100, undefined, 0, 0, "planet");
-    this.balls = [];
-    this.ammos = [];
-    this.spammos = [];
-    this.explosive = [];
-    this.itemstate = function () {
+class Game {
+    constructor() {
+        this.score = 0;
+        this.items = [];
+        this.ship = new Ship(200, 800, 5, 100, "white");
+        this.spawner = new Ball(undefined, undefined, 100, undefined, 0, 0, "planet");
+        this.balls = [];
+        this.ammos = [];
+        this.spammos = [];
+        this.explosive = [];
+    }
+
+    itemstate() {
         for (let item of this.items) {
             item.toBall(this.items);
             item.toObj(this.spawner);
@@ -23,7 +26,8 @@ let Game = function () {
             drawImgInBall(item);
         }
     };
-    this.spammostate = function () {
+
+    spammostate() {
         for (let ammo of this.spammos) {
             if (ammo.toObj(this.ship) && ammo.imgId === "ammo1") {
                 this.ship.health -= ammo.damage;
@@ -52,7 +56,7 @@ let Game = function () {
         }
     };
 
-    this.ammostate = function () {
+    ammostate() {
         for (let ammo of this.ammos) {
             ammo.toEdge();
             ammo.toObj(this.spawner);
@@ -95,7 +99,7 @@ let Game = function () {
         }
     };
 
-    this.ballstate = function () {
+    ballstate() {
         for (let ball of this.balls) {
             ball.toEdge();
             ball.toObj(this.spawner);
@@ -153,17 +157,20 @@ let Game = function () {
             ball.makeAMove();
         }
     };
-    this.drawBall = function () {
+
+    drawBall() {
         for (let ball of this.balls) {
             drawImgInBall(ball)
         }
     };
-    this.drawAmmo = function () {
+
+    drawAmmo() {
         for (let ammo of this.ammos) {
             drawImgInBall(ammo, true)
         }
     };
-    this.shipstate = function () {
+
+    shipstate() {
         if (this.ship.health <= 0) {
             canvasClean();
             drawBackGround();
@@ -179,7 +186,7 @@ let Game = function () {
         this.ship.makeAMove();
     };
 
-    this.displayscore = function (x, y, string = "") {
+    displayscore(x, y, string = "") {
         ctx.font = "25px Verdana";
         ctx.fillStyle = "white";
         ctx.fillText(string, x, y - 30);
@@ -187,20 +194,22 @@ let Game = function () {
         ctx.fillText("Items: " + this.ship.totalAmmo.length, x, y + 30);
         ctx.fillText("Score " + this.score, x, y + 80);
     };
-    this.drawExplosion = function () {
+
+    drawExplosion() {
         for (let e of this.explosive) {
             e.drawExplosive(this.explosive);
         }
     };
-    this.combineState = function () {
+
+    combineState() {
         this.spammostate();
         this.ammostate();
         this.ballstate();
         this.shipstate();
         this.itemstate();
     }
+}
 
-};
 let game = new Game();
 let n = 0;
 rockGenerator(7);
@@ -271,4 +280,3 @@ window.addEventListener("keydown", function (evt) {
             break;
     }
 });
-

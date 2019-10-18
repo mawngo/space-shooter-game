@@ -1,16 +1,18 @@
-let Ammo = function (x, y, xSpeed, ySpeed, imgId, size = 25) {
-    this.super = Ball;
-    this.super.call(this, x, y, size, "green", xSpeed, ySpeed);
-    this.imgId = imgId || "ammo0";
-    this.damage = 10;
+class Ammo extends Ball {
+    constructor(x, y, xSpeed, ySpeed, imgId, size = 25) {
+        super(x, y, size, "green", xSpeed, ySpeed);
+        this.imgId = imgId || "ammo0";
+        this.damage = 10;
+    }
+}
 
-};
-let Item = function (x, y, imgId, size = 25) {
-    this.super = Ball;
-    this.super.call(this, x, y, size, "blue", 0.5, 0.5);
-    this.imgId = imgId || "item0";
+class Item extends Ball {
+    constructor(x, y, imgId, size = 25) {
+        super(x, y, size, "blue", 0.5, 0.5);
+        this.imgId = imgId || "item0";
+    }
 
-    this.doFunc = function (obj) {
+    doFunc(obj) {
         switch (this.imgId) {
             case "item0":
                 for (let i = 0; i < 3; i++) {
@@ -28,7 +30,7 @@ let Item = function (x, y, imgId, size = 25) {
                 break;
         }
     }
-};
+}
 
 function ammoRemoval(ammos) {
     let i = 0;
