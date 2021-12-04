@@ -56,7 +56,7 @@ export class Game {
                 }
                 this.balls = [];
                 this.ammos = [];
-                this.spammos = [];
+                this.spammos = this.spammos.filter(x => x !== ammo);
             }
             if (ammo.imgId === 'ammo2') {
                 ammo.toEdge();
@@ -67,7 +67,6 @@ export class Game {
             }
             ammo.makeAMove();
             drawImgInBall(ammo);
-
         }
     };
 
@@ -126,12 +125,12 @@ export class Game {
             if (ball.toArrOfObj(this.spammos) >= 0) {
                 if (radRate(config.ammo.destroyAsteroidRate)) {
                     ball.remove(this.balls);
-                } else {
-                    if (ball.canExploreToSmaller())
-                        ball.explore(this.balls);
-                    else
-                        ball.remove(this.balls);
+                } else if (ball.canExploreToSmaller())
+                    ball.explore(this.balls);
+                else {
+                    ball.remove(this.balls);
                 }
+                this.spawnItemFrom(ball, config.game.itemDropMultiplierUseSpecialAmmo);
                 ball.makeExplosive(this.explosive);
                 this.score += 5;
             }

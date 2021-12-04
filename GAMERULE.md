@@ -11,7 +11,7 @@ Command này cho phép Edge đọc file trên local host (App này dùng edge l�
 - Di chuyển bằng phím mũi tên
 - S để bắn đạn đểu:
     - Có thể bắn tùy thích
-    - Đạn đểu có 50% phá hủy thiên thạch :))
+    - Đạn đểu có 60% phá hủy thiên thạch :))
     - Nảy lại khi va chạm
     - Va chạm với đạn đểu sẽ mất máu và điểm
     - Tuân theo các định luật vật lý :))
