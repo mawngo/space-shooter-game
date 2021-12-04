@@ -1,7 +1,10 @@
-class Ship extends Ball {
+import { Ball } from './ball';
+import { Ammo } from './items';
+
+export class Ship extends Ball {
     constructor(x, y, speed, health, color, imgId) {
         super(x, y, 20, color, 0.2, 0.2);
-        this.imgId = imgId || "ship";
+        this.imgId = imgId || 'ship';
         this.speed = speed || 5;
         this.health = health || 100;
         this.totalAmmo = [];

@@ -1,9 +1,23 @@
-class Game {
+import { Ball, ExplosiveBall } from './object/ball';
+import {
+    ammoGenerator,
+    canvasClean,
+    drawBackGround,
+    drawImgInBall,
+    explosiveGenerator,
+    itemsGenerator, radNum, rainbow,
+    rockGenerator,
+} from './utils';
+import { Ship } from './object/ship';
+import { Item } from './object/items';
+import { ctx } from './init';
+
+export class Game {
     constructor() {
         this.score = 0;
         this.items = [];
-        this.ship = new Ship(200, 800, 5, 100, "white");
-        this.spawner = new Ball(undefined, undefined, 100, undefined, 0, 0, "planet");
+        this.ship = new Ship(200, 800, 5, 100, 'white');
+        this.spawner = new Ball(undefined, undefined, 100, undefined, 0, 0, 'planet');
         this.balls = [];
         this.ammos = [];
         this.spammos = [];
@@ -16,7 +30,7 @@ class Game {
             item.toObj(this.spawner);
             item.toEdge();
             if (item.toObj(this.ship)) {
-                if (item.imgId === "item4") {
+                if (item.imgId === 'item4') {
                     this.score += 30;
                 }
                 item.doFunc(this.ship);
@@ -29,21 +43,21 @@ class Game {
 
     specialAmmoState() {
         for (const ammo of this.spammos) {
-            if (ammo.toObj(this.ship) && ammo.imgId === "ammo1") {
+            if (ammo.toObj(this.ship) && ammo.imgId === 'ammo1') {
                 this.ship.health -= ammo.damage;
             }
-            if (ammo.imgId === "ammo3") {
+            if (ammo.imgId === 'ammo3') {
                 for (const ball of this.balls) {
-                    ball.makeExplosive(this.explosive)
+                    ball.makeExplosive(this.explosive);
                 }
                 for (const ammo of this.ammos) {
-                    this.explosive.push(new ExplosiveBall(ammo.x, ammo.y, ammo.radius / 2, "explosive5", 0.3));
+                    this.explosive.push(new ExplosiveBall(ammo.x, ammo.y, ammo.radius / 2, 'explosive5', 0.3));
                 }
                 this.balls = [];
                 this.ammos = [];
                 this.spammos = [];
             }
-            if (ammo.imgId === "ammo2") {
+            if (ammo.imgId === 'ammo2') {
                 ammo.toEdge();
                 ammo.toObj(this.spawner);
                 if (ammo.toObj(this.ship)) {
@@ -128,16 +142,16 @@ class Game {
             this.items.push(new Item(ball.x, ball.y));
         }
         if (!radNum(5, 0)) {
-            this.items.push(new Item(ball.x, ball.y, "item1"));
+            this.items.push(new Item(ball.x, ball.y, 'item1'));
         }
         if (!radNum(20, 0)) {
-            this.items.push(new Item(ball.x, ball.y, "item2"));
+            this.items.push(new Item(ball.x, ball.y, 'item2'));
         }
         if (!radNum(25, 0)) {
-            this.items.push(new Item(ball.x, ball.y, "item3"));
+            this.items.push(new Item(ball.x, ball.y, 'item3'));
         }
         if (!radNum(3, 0)) {
-            this.items.push(new Item(ball.x, ball.y, "item4"));
+            this.items.push(new Item(ball.x, ball.y, 'item4'));
         }
         ball.remove(this.balls);
         ball.makeExplosive(this.explosive, 0.3);
@@ -146,13 +160,13 @@ class Game {
 
     drawBall() {
         for (const ball of this.balls) {
-            drawImgInBall(ball)
+            drawImgInBall(ball);
         }
     };
 
     drawAmmo() {
         for (const ammo of this.ammos) {
-            drawImgInBall(ammo, true)
+            drawImgInBall(ammo, true);
         }
     };
 
@@ -161,10 +175,10 @@ class Game {
             canvasClean();
             drawBackGround();
             setTimeout(() => {
-                if (confirm("play again?")) {
+                if (confirm('play again?')) {
                     window.location.reload();
                 }
-            }, 1000)
+            }, 1000);
 
         }
         this.ship.toObj(this.spawner);
@@ -172,13 +186,13 @@ class Game {
         this.ship.makeAMove();
     };
 
-    displayScore(x, y, string = "") {
-        ctx.font = "25px Verdana";
-        ctx.fillStyle = "white";
+    displayScore(x, y, string = '') {
+        ctx.font = '25px Verdana';
+        ctx.fillStyle = 'white';
         ctx.fillText(string, x, y - 30);
-        ctx.fillText("Health " + Math.floor(this.ship.health), x, y);
-        ctx.fillText("Items: " + this.ship.totalAmmo.length, x, y + 30);
-        ctx.fillText("Score " + this.score, x, y + 80);
+        ctx.fillText('Health ' + Math.floor(this.ship.health), x, y);
+        ctx.fillText('Items: ' + this.ship.totalAmmo.length, x, y + 30);
+        ctx.fillText('Score ' + this.score, x, y + 80);
     };
 
     drawExplosion() {
@@ -217,17 +231,17 @@ function setupGamePlay() {
     game.drawBall();
     drawImgInBall(game.spawner, true);
     drawImgInBall(game.ship, true);
-    game.displayScore(15, 60, "stage: " + n);
+    game.displayScore(15, 60, 'stage: ' + n);
     if (game.ship.health > 0) {
         setTimeout(setupGamePlay, 20);
     } else {
-        drawImgInBall(game.ship, false, "explosive1")
+        drawImgInBall(game.ship, false, 'explosive1');
     }
 }
 
 function makeGameHarder() {
     n++;
-    setTimeout(makeGameHarder, 90000)
+    setTimeout(makeGameHarder, 90000);
 }
 
 function spawnBalls() {
@@ -241,28 +255,28 @@ function setupScore() {
     setTimeout(setupScore, 5000);
 }
 
-window.addEventListener("keydown", evt => {
+window.addEventListener('keydown', evt => {
     switch (evt.key) {
-        case "ArrowRight":
+        case 'ArrowRight':
             game.ship.moveRight();
             break;
-        case "ArrowLeft":
+        case 'ArrowLeft':
             game.ship.moveLeft();
             break;
-        case"ArrowUp":
+        case'ArrowUp':
             game.ship.moveUp();
             break;
-        case "ArrowDown":
+        case 'ArrowDown':
             game.ship.moveDown();
             break;
-        case "a":
+        case 'a':
             if (game.ship.totalAmmo.length > 0) {
                 const ammo = game.ship.totalAmmo.pop();
-                game.ship.shoot(game.spammos, this.angle, ammo.imgId, 10);
+                game.ship.shoot(game.spammos, game.ship.angle, ammo.imgId, 10);
             }
             break;
-        case "s":
-            game.ship.shoot(game.ammos, this.angle, "ammo0");
+        case 's':
+            game.ship.shoot(game.ammos, game.ship.angle, 'ammo0');
             break;
     }
 });

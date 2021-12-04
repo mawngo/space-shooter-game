@@ -1,4 +1,7 @@
-class Ball {
+import { canvas } from '../init';
+import { drawImgInBall, explosiveRadId, radNum, rainbow, rockRadId, sqrtOf2Sqr } from '../utils';
+
+export class Ball {
     constructor(x, y, radius, color, xSpeed, ySpeed, imgId) {
         this.imgId = imgId || rockRadId(7);
         this.isSpin = true;
@@ -154,7 +157,7 @@ class Ball {
 
 }
 
-class ExplosiveBall extends Ball {
+export class ExplosiveBall extends Ball {
     constructor(x, y, radius, imgId, time) {
         super(x, y, radius, "yellow", 0.2, 0.2);
         this.imgId = imgId || explosiveRadId(4);
