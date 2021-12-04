@@ -34,8 +34,13 @@ export const config = {
         size: 25,
     },
     items: {
+        ammos: {
+            ammo1: 'Blue',
+            ammo2: 'Red',
+            ammo3: 'Bomb',
+        },
         item0: {
-            name: 'Blue',
+            name: 'Blue Ammo',
             amount: 3,
             rate: 0.20,
         },
@@ -45,12 +50,12 @@ export const config = {
             rate: 0.20,
         },
         item2: {
-            name: 'Red',
+            name: 'Red Ammo',
             amount: 1,
             rate: 0.05,
         },
         item3: {
-            name: 'Bomb',
+            name: 'Antimatter Bomb',
             amount: 1,
             rate: 0.03,
         },

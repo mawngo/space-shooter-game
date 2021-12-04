@@ -199,8 +199,9 @@ export class Game {
         ctx.fillText('Items: ' + this.ship.totalAmmo.length, x, y + 30);
         ctx.fillText('Score ' + this.score, x, y + 110);
 
-        const ammo = this.ship.totalAmmo.length ? this.ship.totalAmmo[this.ship.totalAmmo.length - 1].imgId : 'None';
-        ctx.fillText('Ammo: ' + ammo, x, y + 60);
+        const ammo = this.ship.totalAmmo.length ? this.ship.totalAmmo[this.ship.totalAmmo.length - 1].imgId : '';
+        const text = config.items.ammos[ammo] || 'None';
+        ctx.fillText('Ammo: ' + text, x, y + 60);
     };
 
     drawExplosion() {
