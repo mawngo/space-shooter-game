@@ -4,3 +4,8 @@ export const background = document.getElementById('background');
 
 canvas.width = window.innerWidth - 10;
 canvas.height = window.innerHeight - 10;
+try {
+    Neutralino.init();
+} catch (e) {
+    console.log('Not running in desktop');
+}

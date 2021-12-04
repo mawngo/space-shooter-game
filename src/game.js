@@ -6,7 +6,7 @@ import {
     drawImgInBall,
     explosiveGenerator,
     itemsGenerator, radNum, rainbow,
-    rockGenerator,
+    rockGenerator, showConfirmBox,
 } from './utils';
 import { Ship } from './object/ship';
 import { Item } from './object/items';
@@ -174,12 +174,11 @@ export class Game {
         if (this.ship.health <= 0) {
             canvasClean();
             drawBackGround();
-            setTimeout(() => {
-                if (confirm('play again?')) {
+            setTimeout(async () => {
+                if (await showConfirmBox('You lose', 'Play again?')) {
                     window.location.reload();
                 }
             }, 1000);
-
         }
         this.ship.toObj(this.spawner);
         this.ship.toEdge();

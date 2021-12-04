@@ -1,7 +1,6 @@
 import { background, canvas, ctx } from './init';
 
 
-
 export function rainbow(h) {
     let r, g, b;
     let i = ~~(h * 6);
@@ -131,4 +130,12 @@ export function explosiveGenerator(maxImg) {
     document.getElementById('img-dir').innerHTML += innerImg;
 }
 
-
+export async function showConfirmBox(title, message) {
+    try {
+        const confirm = await window.Neutralino.os.showMessageBox(title, message, 'YES_NO');
+        return confirm === 'YES';
+    } catch (e) {
+        // not desktop app
+        return confirm(message);
+    }
+}
