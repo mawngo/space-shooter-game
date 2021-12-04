@@ -1,10 +1,12 @@
-# Game bắn thiên thạch
+# Luật chơi
 
-## Luật chơi
+Note: đối với người dùng window, bạn cần chạy câu lệnh sau trên PowerShell với quyền admin
+```shell
+CheckNetIsolation.exe LoopbackExempt -a -n="Microsoft.Win32WebViewHost_cw5n1h2txyewy"
+```
+Command này cho phép Edge đọc file trên local host (App này dùng edge làm backend trên window)
 
-Một game ngu học.
-
-### 1. Điều Khiển
+## 1. Điều Khiển
 
 - Di chuyển bằng phím mũi tên
 - S để bắn đạn đểu:
@@ -18,7 +20,7 @@ Một game ngu học.
     - Effect phụ thuộc vào loại đạn
     - Có 100% tỷ lệ bắn vỡ thiên thạch
 
-### 2. Item
+## 2. Item
 
 - Burger - Hồi máu
 - Tiền - cộng điểm điểm
@@ -26,32 +28,9 @@ Một game ngu học.
 - 3 viên đạn (đạn xanh) - đạn bắn ra 100% phá hủy thiên thạch, không nảy lại khi chạm tường
 - Vòng xoáy (đạn vòng tròn) - Xóa toàn bộ thiên thạch và đạn đang tồn tại
 
-### 3. Thiên thạch
+## 3. Thiên thạch
 
 - Sinh ra từ hành tinh trung tâm, số lượng tăng theo thời gian.
 - Va chạm với thiên thạch khiến nó bị phá hủy, và gây sát thương lên người chơi
 - Thiên thạch có thể vỡ thành nhiều thiên thạch con, Sát thương và điểm số phụ thuộc vào kích thước của thiên thạch
 - Thiên thạch nảy lại khi va chạm, và tuân theo định luật vật lý :D
-
-## Phát triển game này
-
-### Clone Project
-- clone project
-- chạy command sau để download các file bin và thư viện của neutralino.js
-```shell
-npm run bin
-```
-### Chạy project
-```shell
-npm start
-```
-Trên window Neutralino sử dụng EdgeChromium để làm browser. vì vậy bạn cần chạy command sau trên PowerShell (với quyền admin)
-```shell
-CheckNetIsolation.exe LoopbackExempt -a -n="Microsoft.Win32WebViewHost_cw5n1h2txyewy"
-```
-Câu lệnh trên cho phép neutralino (và các ứng dụng UWP) truy cập vào localhost trên Edge
-### Build project
-Câu lệnh sau sẽ đóng gói ứng dụng ra folder dist
-```shell
-npm run build
-```
