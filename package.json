@@ -1,0 +1,26 @@
+{
+  "name": "space-shooter-game",
+  "version": "1.0.0",
+  "description": "Simple game",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "neu run",
+    "build": "neu build",
+    "bin": "neu update"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lana-personal-projects/space-shooter-game.git"
+  },
+  "author": "Lana",
+  "license": "Mit",
+  "bugs": {
+    "url": "https://github.com/lana-personal-projects/space-shooter-game/issues"
+  },
+  "homepage": "https://github.com/lana-personal-projects/space-shooter-game#readme",
+  "devDependencies": {
+    "@neutralinojs/neu": "^7.1.0"
+  }
+}

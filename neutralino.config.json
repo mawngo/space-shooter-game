@@ -1,0 +1,38 @@
+{
+  "applicationId": "lana.space-shooter-game",
+  "defaultMode": "window",
+  "port": 0,
+  "url": "/resources/",
+  "enableServer": true,
+  "enableNativeAPI": true,
+  "logging": {
+    "enabled": true,
+    "writeToLogFile": true
+  },
+  "nativeBlockList": [],
+  "modes": {
+    "window": {
+      "title": "Space Shooter Game",
+      "width": 1600,
+      "height": 900,
+      "minWidth": 1280,
+      "minHeight": 720,
+      "fullScreen": false,
+      "alwaysOnTop": false,
+      "icon": "/resources/icons/appIcon.png",
+      "enableInspector": true,
+      "borderless": false,
+      "maximize": true,
+      "hidden": false,
+      "resizable": true,
+      "exitProcessOnClose": true
+    }
+  },
+  "cli": {
+    "binaryName": "space-shooter-game",
+    "resourcesPath": "/resources/",
+    "clientLibrary": "/resources/neutralino.js",
+    "binaryVersion": "3.0.0",
+    "clientVersion": "2.0.0"
+  }
+}
