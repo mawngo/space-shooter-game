@@ -25,11 +25,13 @@ export const config = {
         health: 100,
         speed: 5,
         spin: 0.3,
+        size: 20,
     },
     ammo: {
         damage: 8,
         destroyAsteroidRate: 0.6,
         speed: 10,
+        size: 25,
     },
     items: {
         item0: {

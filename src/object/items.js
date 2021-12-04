@@ -2,8 +2,8 @@ import { Ball } from './ball';
 import { config } from '../config';
 
 export class Ammo extends Ball {
-    constructor(x, y, xSpeed, ySpeed, imgId, size = 25) {
-        super(x, y, size, 'green', xSpeed, ySpeed);
+    constructor(x, y, xSpeed, ySpeed, imgId, size) {
+        super(x, y, size || config.ammo.size, 'green', xSpeed, ySpeed);
         this.imgId = imgId || 'ammo0';
         this.damage = config.ammo.damage;
     }

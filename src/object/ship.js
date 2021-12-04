@@ -4,7 +4,7 @@ import { config } from '../config';
 
 export class Ship extends Ball {
     constructor(x, y, speed, health, color, imgId) {
-        super(x, y, 20, color, 0.2, 0.2);
+        super(x, y, config.ship.size, color, 0.2, 0.2);
         this.color = color || 'white';
         this.imgId = imgId || 'ship';
         this.speed = speed || config.ship.speed;
@@ -15,10 +15,11 @@ export class Ship extends Ball {
 
 
     shoot(ammos, angle = this.angle, imgId, size) {
-        let ammosXSpeed = config.ammo.speed * Math.cos((angle - 90) * Math.PI / 180);
-        let ammosYSpeed = config.ammo.speed * Math.sin((angle - 90) * Math.PI / 180);
-        ammos.push(new Ammo(this.x, this.y, ammosXSpeed, ammosYSpeed, imgId, size));
-        this.health += 20;
+        const xSpeed = config.ammo.speed * Math.cos((angle - 90) * Math.PI / 180);
+        const ySpeed = config.ammo.speed * Math.sin((angle - 90) * Math.PI / 180);
+        const x = this.x + (this.radius + config.ammo.size + 1) * Math.cos((angle - 90) * Math.PI / 180);
+        const y = this.y + (this.radius + config.ammo.size + 1) * Math.sin((angle - 90) * Math.PI / 180);
+        ammos.push(new Ammo(x, y, xSpeed, ySpeed, imgId, size));
     };
 
     moveLeft() {
