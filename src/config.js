@@ -5,6 +5,8 @@ export const config = {
         timePerSurvivalScore: 5000,
         survivalAsteroidBonus: 0.2,
         survivalLevelBonus: 1,
+        itemDropMultiplierWhenExploreToChild: 0.2,
+        multiDrop: false,
     },
     asteroid: {
         spin: 0.3,

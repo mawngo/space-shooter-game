@@ -86,6 +86,7 @@ export class Game {
                         exBall.makeExplosive(this.explosive);
                         ammo.remove(this.ammos);
                         this.score += 5;
+                        this.spawnItemFrom(exBall, config.game.itemDropMultiplierWhenExploreToChild);
                     } else {
                         this.spawnItemFrom(exBall);
                     }
@@ -114,6 +115,7 @@ export class Game {
                     if (ball.canExploreToSmaller()) {
                         ball.explore(this.balls);
                         this.score += 5;
+                        this.spawnItemFrom(ball, config.game.itemDropMultiplierWhenExploreToChild);
                     } else {
                         this.spawnItemFrom(ball);
                     }
@@ -138,25 +140,29 @@ export class Game {
         }
     };
 
-    spawnItemFrom(ball) {
-        if (radRate(config.items.item0.rate)) {
-            this.items.push(new Item(ball.x, ball.y, 'item0'));
-        }
-        if (radRate(config.items.item1.rate)) {
-            this.items.push(new Item(ball.x, ball.y, 'item1'));
-        }
-        if (radRate(config.items.item2.rate)) {
-            this.items.push(new Item(ball.x, ball.y, 'item2'));
-        }
-        if (radRate(config.items.item3.rate)) {
-            this.items.push(new Item(ball.x, ball.y, 'item3'));
-        }
-        if (radRate(config.items.item4.rate)) {
-            this.items.push(new Item(ball.x, ball.y, 'item4'));
-        }
+    spawnItemFrom(ball, rateMultiplier = 1) {
         ball.remove(this.balls);
         ball.makeExplosive(this.explosive, 0.3);
         this.score += 5;
+        if (radRate(config.items.item0.rate * rateMultiplier)) {
+            this.items.push(new Item(ball.x, ball.y, 'item0'));
+            if (!config.game.multiDrop) return;
+        }
+        if (radRate(config.items.item1.rate * rateMultiplier)) {
+            this.items.push(new Item(ball.x, ball.y, 'item1'));
+            if (!config.game.multiDrop) return;
+        }
+        if (radRate(config.items.item2.rate * rateMultiplier)) {
+            this.items.push(new Item(ball.x, ball.y, 'item2'));
+            if (!config.game.multiDrop) return;
+        }
+        if (radRate(config.items.item3.rate * rateMultiplier)) {
+            this.items.push(new Item(ball.x, ball.y, 'item3'));
+            if (!config.game.multiDrop) return;
+        }
+        if (radRate(config.items.item4.rate * rateMultiplier)) {
+            this.items.push(new Item(ball.x, ball.y, 'item4'));
+        }
     }
 
     drawBall() {
