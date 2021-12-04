@@ -5,19 +5,20 @@ import {
     drawBackGround,
     drawImgInBall,
     explosiveGenerator,
-    itemsGenerator, radNum, rainbow,
+    itemsGenerator, radNum, radRate, rainbow,
     rockGenerator, showConfirmBox,
 } from './utils';
-import { Ship } from './object/ship';
+import { Ship, Spawner } from './object/ship';
 import { Item } from './object/items';
 import { ctx } from './init';
+import { config } from './config';
 
 export class Game {
     constructor() {
         this.score = 0;
         this.items = [];
-        this.ship = new Ship(200, 800, 5, 100, 'white');
-        this.spawner = new Ball(undefined, undefined, 100, undefined, 0, 0, 'planet');
+        this.ship = new Ship(200, 800);
+        this.spawner = new Spawner();
         this.balls = [];
         this.ammos = [];
         this.spammos = [];
@@ -31,7 +32,7 @@ export class Game {
             item.toEdge();
             if (item.toObj(this.ship)) {
                 if (item.imgId === 'item4') {
-                    this.score += 30;
+                    this.score += config.items.item4.score;
                 }
                 item.doFunc(this.ship);
                 item.remove(this.items);
@@ -79,9 +80,9 @@ export class Game {
             }
             if (ammo.toArrOfObj(this.balls) >= 0) {
                 const exBall = this.balls[ammo.toArrOfObj(this.balls)];
-                if (radNum(1, 0)) {
-                    if (exBall.radius / 2 > 10) {
-                        exBall.explore(this.balls, 2);
+                if (radRate(config.ammo.destroyAsteroidRate)) {
+                    if (exBall.canExploreToSmaller()) {
+                        exBall.explore(this.balls);
                         exBall.makeExplosive(this.explosive);
                         ammo.remove(this.ammos);
                         this.score += 5;
@@ -101,17 +102,17 @@ export class Game {
             ball.toEdge();
             ball.toObj(this.spawner);
             if (ball.toObj(this.ship)) {
-                ball.explore(this.balls, 2);
+                ball.explore(this.balls);
                 this.ship.health -= ball.damage;
                 this.score -= 10;
                 ball.makeExplosive(this.explosive);
             }
             if (ball.toArrOfObj(this.ammos) >= 0) {
-                if (radNum(1, 0)) {
+                if (radRate(config.ammo.destroyAsteroidRate)) {
                     this.ammos[ball.toArrOfObj(this.ammos)].remove(this.ammos);
                     ball.makeExplosive(this.explosive);
-                    if (ball.radius / 2 > 10) {
-                        ball.explore(this.balls, 2);
+                    if (ball.canExploreToSmaller()) {
+                        ball.explore(this.balls);
                         this.score += 5;
                     } else {
                         this.spawnItemFrom(ball);
@@ -121,11 +122,11 @@ export class Game {
                 }
             }
             if (ball.toArrOfObj(this.spammos) >= 0) {
-                if (radNum(1, 0)) {
+                if (radRate(config.ammo.destroyAsteroidRate)) {
                     ball.remove(this.balls);
                 } else {
-                    if (ball.radius / 2 > 15)
-                        ball.explore(this.balls, 2);
+                    if (ball.canExploreToSmaller())
+                        ball.explore(this.balls);
                     else
                         ball.remove(this.balls);
                 }
@@ -138,19 +139,19 @@ export class Game {
     };
 
     spawnItemFrom(ball) {
-        if (!radNum(4, 0)) {
-            this.items.push(new Item(ball.x, ball.y));
+        if (radRate(config.items.item0.rate)) {
+            this.items.push(new Item(ball.x, ball.y, 'item0'));
         }
-        if (!radNum(5, 0)) {
+        if (radRate(config.items.item1.rate)) {
             this.items.push(new Item(ball.x, ball.y, 'item1'));
         }
-        if (!radNum(20, 0)) {
+        if (radRate(config.items.item2.rate)) {
             this.items.push(new Item(ball.x, ball.y, 'item2'));
         }
-        if (!radNum(25, 0)) {
+        if (radRate(config.items.item3.rate)) {
             this.items.push(new Item(ball.x, ball.y, 'item3'));
         }
-        if (!radNum(3, 0)) {
+        if (radRate(config.items.item4.rate)) {
             this.items.push(new Item(ball.x, ball.y, 'item4'));
         }
         ball.remove(this.balls);
@@ -191,7 +192,10 @@ export class Game {
         ctx.fillText(string, x, y - 30);
         ctx.fillText('Health ' + Math.floor(this.ship.health), x, y);
         ctx.fillText('Items: ' + this.ship.totalAmmo.length, x, y + 30);
-        ctx.fillText('Score ' + this.score, x, y + 80);
+        ctx.fillText('Score ' + this.score, x, y + 110);
+
+        const ammo = this.ship.totalAmmo.length ? this.ship.totalAmmo[this.ship.totalAmmo.length - 1].imgId : 'None';
+        ctx.fillText('Ammo: ' + ammo, x, y + 60);
     };
 
     drawExplosion() {
@@ -240,18 +244,18 @@ function setupGamePlay() {
 
 function makeGameHarder() {
     n++;
-    setTimeout(makeGameHarder, 90000);
+    setTimeout(makeGameHarder, config.game.timePerLevel);
 }
 
 function spawnBalls() {
     game.spawner.spawn(game.balls, n);
     game.spawner.color = rainbow(Math.random());
-    setTimeout(spawnBalls, 15000);
+    setTimeout(spawnBalls, config.game.timePerSpawn);
 }
 
 function setupScore() {
-    game.score += n + Math.floor((game.balls.length + game.ammos.length) / 10);
-    setTimeout(setupScore, 5000);
+    game.score += n * config.game.survivalLevelBonus + Math.floor((game.balls.length + game.ammos.length) * config.game.survivalAsteroidBonus);
+    setTimeout(setupScore, config.game.timePerSurvivalScore);
 }
 
 window.addEventListener('keydown', evt => {

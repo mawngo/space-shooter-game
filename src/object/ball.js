@@ -1,34 +1,35 @@
 import { canvas } from '../init';
 import { drawImgInBall, explosiveRadId, radNum, rainbow, rockRadId, sqrtOf2Sqr } from '../utils';
+import { config } from '../config';
 
 export class Ball {
-    constructor(x, y, radius, color, xSpeed, ySpeed, imgId) {
+    constructor(x, y, radius, color, xSpeed, ySpeed, imgId, spinSpeed) {
         this.imgId = imgId || rockRadId(7);
-        this.isSpin = true;
+        this.spinSpeed = spinSpeed === 0 ? 0 : (spinSpeed || config.asteroid.spin);
         this.isExist = true;
         this.x = x || canvas.width / 2;
         this.y = y || canvas.height / 2;
         this.color = color || rainbow(Math.random());
-        this.radius = radius || radNum(60, 60);
-        this.xSpeed = xSpeed || radNum(5, 0);
-        this.ySpeed = ySpeed || radNum(5, 0);
+        this.radius = radius || radNum(config.asteroid.maxSize, config.asteroid.minSize);
+        this.xSpeed = xSpeed || radNum(config.asteroid.maxSpeed, config.asteroid.minSpeed);
+        this.ySpeed = ySpeed || radNum(config.asteroid.maxSpeed, config.asteroid.minSpeed);
         this.angle = 0;
-        this.damage = this.radius / 4;
+        this.damage = this.radius * config.asteroid.damagePerRadius;
     }
 
     increaseAngle(n) {
-        if (this.isSpin) {
-            this.angle = this.angle + n;
-            if (this.angle >= 360) {
-                this.angle = 0;
-            }
+        this.angle = this.angle + n;
+        if (this.angle >= 360) {
+            this.angle = 0;
         }
     };
 
     makeAMove() {
         this.x += this.xSpeed;
         this.y += this.ySpeed;
-        this.increaseAngle(sqrtOf2Sqr(this.xSpeed, this.ySpeed) / 3);
+        if (this.spinSpeed) {
+            this.increaseAngle(sqrtOf2Sqr(this.xSpeed, this.ySpeed) * this.spinSpeed);
+        }
     };
 
     relocate(x, y, distance) {
@@ -69,16 +70,16 @@ export class Ball {
                 if (ballMaxDistance >= ballRealDistance) {
                     const thisXSpeedAfter =
                         ((this.radius - ball.radius) * this.xSpeed
-                            + 2 * ball.radius * ball.xSpeed) / ballMaxDistance;
+                         + 2 * ball.radius * ball.xSpeed) / ballMaxDistance;
                     const thisYSpeedAfter =
                         ((this.radius - ball.radius) * this.ySpeed
-                            + 2 * ball.radius * ball.ySpeed) / ballMaxDistance;
+                         + 2 * ball.radius * ball.ySpeed) / ballMaxDistance;
                     const ballXSpeedAfter =
                         ((ball.radius - this.radius) * ball.xSpeed
-                            + 2 * this.radius * this.xSpeed) / ballMaxDistance;
+                         + 2 * this.radius * this.xSpeed) / ballMaxDistance;
                     const ballYSpeedAfter =
                         ((ball.radius - this.radius) * ball.ySpeed
-                            + 2 * this.radius * this.ySpeed) / ballMaxDistance;
+                         + 2 * this.radius * this.ySpeed) / ballMaxDistance;
                     this.xSpeed = thisXSpeedAfter;
                     this.ySpeed = thisYSpeedAfter;
                     ball.xSpeed = ballXSpeedAfter;
@@ -91,7 +92,6 @@ export class Ball {
     };
 
     toObj(obj) {
-
         const ballMaxDistance = this.radius + obj.radius;
         const ballRealDistance = sqrtOf2Sqr(this.x - obj.x, this.y - obj.y);
         if (ballRealDistance !== 0) {
@@ -127,30 +127,34 @@ export class Ball {
         }
     };
 
-    explore(balls, n = 1) {
+    explore(balls) {
         this.remove(balls);
-        if (this.radius / 2 > 10) {
-            for (let j = 0; j < n; j++) {
-                balls.push(new Ball(this.x, this.y, this.radius / 1.5, this.color, undefined, undefined, this.imgId));
+        const numberOfChild = radNum(config.asteroid.maxNumberOfChild, config.asteroid.minNumberOfChild);
+        if (numberOfChild && this.canExploreToSmaller()) {
+            for (let j = 0; j < numberOfChild; j++) {
+                balls.push(new Ball(this.x, this.y, this.radius * config.asteroid.childrenSizeRatio, this.color, undefined, undefined, this.imgId));
             }
-
         }
+    };
+
+    canExploreToSmaller() {
+        return this.radius > config.asteroid.minimalSizeCanSplit;
     };
 
     spawn(balls, n = 1) {
         for (let i = 0; i < n; i++) {
-            balls.push(new Ball(this.x, this.y, undefined, this.color))
+            balls.push(new Ball(this.x, this.y, undefined, this.color));
         }
     };
 
     makeExplosive(containerArr, time) {
         if (radNum(1, 0)) {
-            containerArr.push(new ExplosiveBall(this.x, this.y, this.radius * 2, "explosive0", time));
+            containerArr.push(new ExplosiveBall(this.x, this.y, this.radius * 2, 'explosive0', time));
             containerArr.push(new ExplosiveBall(this.x, this.y, this.radius * 1.2, undefined, time));
         } else if (radNum(1, 0)) {
             containerArr.push(new ExplosiveBall(this.x, this.y, this.radius * 2, undefined, time));
         } else {
-            containerArr.push(new ExplosiveBall(this.x, this.y, this.radius * 3.5, "explosive4", time));
+            containerArr.push(new ExplosiveBall(this.x, this.y, this.radius * 3.5, 'explosive4', time));
             containerArr.push(new ExplosiveBall(this.x, this.y, this.radius * 1, undefined, time));
         }
     };
@@ -159,10 +163,9 @@ export class Ball {
 
 export class ExplosiveBall extends Ball {
     constructor(x, y, radius, imgId, time) {
-        super(x, y, radius, "yellow", 0.2, 0.2);
+        super(x, y, radius, 'yellow', 0.2, 0.2);
         this.imgId = imgId || explosiveRadId(4);
         this.count = time * 50 || 50;
-
     }
 
     drawExplosive(containerArr) {

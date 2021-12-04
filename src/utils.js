@@ -44,8 +44,13 @@ export function rainbow(h) {
 }
 
 export function radNum(max, min = 0) {
+    if (max === min) return max;
     max = max - min;
     return Math.round(Math.random() * max + min);
+}
+
+export function radRate(rate) {
+    return Math.random() <= rate;
 }
 
 export function sqrtOf2Sqr(a, b) {
