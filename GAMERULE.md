@@ -1,36 +1,45 @@
-# Luật chơi
+# Game Rules
 
-Note: đối với người dùng window, bạn cần chạy câu lệnh sau trên PowerShell với quyền admin
+A stupid game. You may find it fun idk.
+
+## 1. Controls
+
+- Move using the arrow keys
+- Press S to shoot regular bullets:
+    - Can be fired freely
+    - Regular bullets have a 60% chance to destroy asteroids :))
+    - Bounces back upon collision
+    - Colliding with regular bullets will cause damage and loss of points
+    - Obeys the laws of physics :))
+- Press A to shoot special bullets collected:
+    - Limited quantity
+    - Effects depend on the type of bullet
+    - Has a 100% chance of destroying asteroids
+
+## 2. Items
+
+- Burger - Heals
+- Money - Adds points
+- 1 bullet (red bullet) - 100% destroys asteroids, bounces back when hitting walls, and heals upon hitting the player
+- 3 bullets (blue bullets) - Bullets shot 100% destroy asteroids, do not bounce back when hitting walls
+- Swirl (circular bullet) - Destroys all existing asteroids and bullets
+
+## 3. Asteroids
+
+- Spawn from the central planet, quantity increases over time.
+- Collision with asteroids destroys them and causes damage to the player
+- Asteroids can break into smaller asteroids, damage and points depend on the size of the asteroid
+- Asteroids bounce back upon collision and follow the laws of physics :D
+
+## Note
+
+Note: For Windows users, if you're installing this game, you need to run the following command on PowerShell with admin
+privileges:
+
 ```shell
 CheckNetIsolation.exe LoopbackExempt -a -n="Microsoft.Win32WebViewHost_cw5n1h2txyewy"
 ```
-Command này cho phép Edge đọc file trên local host (App này dùng edge làm backend trên window)
 
-## 1. Điều Khiển
+This command allows Edge to read files on the local host (This app uses Edge as the backend on Windows).
 
-- Di chuyển bằng phím mũi tên
-- S để bắn đạn đểu:
-    - Có thể bắn tùy thích
-    - Đạn đểu có 60% phá hủy thiên thạch :))
-    - Nảy lại khi va chạm
-    - Va chạm với đạn đểu sẽ mất máu và điểm
-    - Tuân theo các định luật vật lý :))
-- A để bắn đạn xịn vừa nhặt được:
-    - Số lượng có hạn
-    - Effect phụ thuộc vào loại đạn
-    - Có 100% tỷ lệ bắn vỡ thiên thạch
-
-## 2. Item
-
-- Burger - Hồi máu
-- Tiền - cộng điểm điểm
-- 1 viên đạn (đạn đỏ) - 100 % phá hủy thiên thạch, nảy lại khi chạm tường, và hồi máu khi va chạm với người chơi
-- 3 viên đạn (đạn xanh) - đạn bắn ra 100% phá hủy thiên thạch, không nảy lại khi chạm tường
-- Vòng xoáy (đạn vòng tròn) - Xóa toàn bộ thiên thạch và đạn đang tồn tại
-
-## 3. Thiên thạch
-
-- Sinh ra từ hành tinh trung tâm, số lượng tăng theo thời gian.
-- Va chạm với thiên thạch khiến nó bị phá hủy, và gây sát thương lên người chơi
-- Thiên thạch có thể vỡ thành nhiều thiên thạch con, Sát thương và điểm số phụ thuộc vào kích thước của thiên thạch
-- Thiên thạch nảy lại khi va chạm, và tuân theo định luật vật lý :D
+_Or just use the web version to avoid headache._

@@ -1,5 +1,7 @@
 # Game bắn thiên thạch
 
+[English version here](GAMERULE.md)
+
 ## Luật chơi
 
 Một game ngu học.
@@ -36,22 +38,33 @@ Một game ngu học.
 ## Phát triển game này
 
 ### Clone Project
+
 - clone project
 - chạy command sau để download các file bin và thư viện của neutralino.js
+
 ```shell
 npm run bin
 ```
+
 ### Chạy project
+
 ```shell
 npm start
 ```
-Trên window Neutralino sử dụng EdgeChromium để làm browser. vì vậy bạn cần chạy command sau trên PowerShell (với quyền admin)
+
+Trên window Neutralino sử dụng EdgeChromium để làm browser. vì vậy bạn cần chạy command sau trên PowerShell (với quyền
+admin)
+
 ```shell
 CheckNetIsolation.exe LoopbackExempt -a -n="Microsoft.Win32WebViewHost_cw5n1h2txyewy"
 ```
+
 Câu lệnh trên cho phép neutralino (và các ứng dụng UWP) truy cập vào localhost trên Edge
+
 ### Build project
-Câu lệnh sau sẽ đóng gói ứng dụng ra folder dist
+
+Câu lệnh sau sẽ đóng gói ứng dụng ra folder dist.
+
 ```shell
 npm run build
 ```
