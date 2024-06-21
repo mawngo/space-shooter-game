@@ -1,7 +1,7 @@
 {
   "name": "space-shooter-game",
-  "version": "1.0.0",
-  "description": "Simple game",
+  "version": "1.1.0",
+  "description": "Simple space shooter game",
   "private": true,
   "main": "index.js",
   "scripts": {
@@ -16,19 +16,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lana-personal-projects/space-shooter-game.git"
+    "url": "git+https://github.com/mawngo/space-shooter-game.git"
   },
-  "author": "Lana",
+  "author": "mawngo",
   "license": "Mit",
   "bugs": {
-    "url": "https://github.com/lana-personal-projects/space-shooter-game/issues"
+    "url": "https://github.com/mawngo/space-shooter-game/issues"
   },
-  "homepage": "https://github.com/lana-personal-projects/space-shooter-game#readme",
+  "homepage": "https://github.com/mawngo/space-shooter-game#readme",
   "devDependencies": {
-    "@neutralinojs/neu": "^7.1.0",
+    "@neutralinojs/neu": "^11.2.0",
     "npm-run-all": "^4.1.5",
     "webpack": "^5.58.1",
-    "webpack-cli": "^4.9.0",
+    "webpack-cli": "^5.1.4",
     "webpack-merge": "^5.8.0"
+  },
+  "volta": {
+    "node": "18.20.3"
   }
 }
