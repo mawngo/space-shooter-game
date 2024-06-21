@@ -1,14 +1,14 @@
 {
-  "name": "space-shooter-game",
+  "name": "asteroids",
   "version": "1.1.0",
   "description": "Simple space shooter game",
   "private": true,
   "main": "index.js",
   "scripts": {
     "start": "npm-run-all --parallel serve watch",
-    "build": "webpack --progress && neu build",
-    "build:dev": "webpack --mode=development --progress && neu build",
-    "build:webpack": "webpack --mode=development",
+    "build": "webpack --progress && neu build --release",
+    "build:dev": "webpack --mode=development --progress && neu build --release",
+    "build:webpack": "webpack --progress",
     "bin": "neu update",
     "serve": "neu run",
     "watch": "webpack --watch --progress -c webpack.dev.js",

@@ -1,5 +1,5 @@
 {
-  "applicationId": "lana.space-shooter-game",
+  "applicationId": "mawngo.asteroids",
   "defaultMode": "window",
   "port": 0,
   "url": "/resources/",
@@ -29,9 +29,8 @@
     }
   },
   "cli": {
-    "binaryName": "space-shooter-game",
+    "binaryName": "asteroids",
     "resourcesPath": "/resources/",
-    "clientLibrary": "/resources/neutralino.js",
     "binaryVersion": "3.0.0",
     "clientVersion": "2.0.0"
   }
