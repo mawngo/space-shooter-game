@@ -23,28 +23,28 @@ export class Ship extends Ball {
     };
 
     moveLeft() {
-        if (this.xSpeed >= 0) {
+        if (this.xSpeed >= -this.speed) {
             this.xSpeed = -1 * this.speed;
             this.ySpeed = 0;
         }
     };
 
     moveRight() {
-        if (this.xSpeed <= 0) {
+        if (this.xSpeed <= this.speed) {
             this.xSpeed = this.speed;
             this.ySpeed = 0;
         }
     };
 
     moveUp() {
-        if (this.ySpeed >= 0) {
+        if (this.ySpeed >= -this.speed) {
             this.ySpeed = -1 * this.speed;
             this.xSpeed = 0;
         }
     };
 
     moveDown() {
-        if (this.ySpeed <= 0) {
+        if (this.ySpeed <= this.speed) {
             this.ySpeed = this.speed;
             this.xSpeed = 0;
         }
