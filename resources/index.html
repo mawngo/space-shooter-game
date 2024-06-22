@@ -2,27 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ball</title>
-    <style>
-        canvas {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-        }
-    </style>
+    <title>Asteroids Game</title>
+    <link rel="stylesheet" href="mvp.css">
 </head>
 <body>
-<div id="img-dir">
-    <img alt="universe" src="img/universe.jpg" style="display: none" id="background">
-    <img alt="ship" src="img/ship.png" id="ship" style="display: none">
-    <img alt="planet" src="img/planet.png" id="planet" style="display: none">
-</div>
-<canvas id="screen" style="border: 2px solid black;"></canvas>
+<header>
+    <nav style="justify-content: center">
+        <ul>
+            <li>Home</li>
+            <li><a href="guide.html">Guide</a></li>
+            <li><a href="https://github.com/mawngo/space-shooter-game" target="_blank">GitHub &nearr;</a></li>
+        </ul>
+    </nav>
+    <h1 style="display: flex; justify-content: center; align-items: center; font-size: 4rem">Aster<img
+      alt="Asteroids Game" src="img/planet.png" style="height: 3.5rem; padding-top: 1rem">ids</h1>
+    <p>A space shooter game.</p>
+    <br>
+    <p>
+        <a href="game.html"><b>Play the Game</b></a>
+        <a href="guide.html"><i>Read the Guide &nearr;</i></a>
+    </p>
+    <br>
+    <br>
+    <br>
+    <img alt="Asteroids Game" src="icons/appIcon.png" height="70">
+    <h3 id="high"></h3>
+</header>
 <script src="__neutralino_globals.js"></script>
 <script src="neu.js"></script>
-<script src="game.js"></script>
+<script>
+    if (window.Neu) {
+        window.Neu.events.on("windowClose", () => {
+            window.Neu.app.exit();
+        });
+    }
+    const highScore = Number(localStorage.getItem("highScore") || "0");
+    const highLevel = Number(localStorage.getItem("highLevel") || "0");
+    if (highLevel && highScore) {
+        document.getElementById("high").innerHTML = `High Score: ${highScore} (Level ${highLevel})`
+    }
+</script>
 </body>
 </html>

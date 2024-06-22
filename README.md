@@ -1,6 +1,6 @@
 # Game bắn thiên thạch
 
-[English version here](GAMERULE.md)
+[Play the Game](https://mawngo.github.io/space-shooter-game/) | [Read the Guide](https://mawngo.github.io/space-shooter-game/guide.html)
 
 ## Luật chơi
 

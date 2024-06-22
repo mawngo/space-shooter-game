@@ -193,6 +193,8 @@ export class Game {
             setTimeout(async () => {
                 if (await showConfirmBox("You lose", "Play again?")) {
                     window.location.reload();
+                } else {
+                    window.location.href = "index.html";
                 }
             }, 1000);
         }
