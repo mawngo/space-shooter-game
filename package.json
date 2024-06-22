@@ -1,6 +1,6 @@
 {
   "name" : "asteroids",
-  "version" : "2.2.1",
+  "version" : "2.3.0",
   "description" : "Simple space shooter game",
   "private" : true,
   "main" : "index.js",
@@ -24,7 +24,7 @@
   "bugs" : {
     "url" : "https://github.com/mawngo/space-shooter-game/issues"
   },
-  "homepage" : "https://github.com/mawngo/space-shooter-game#readme",
+  "homepage" : "https://mawngo.github.io/space-shooter-game/index.html",
   "devDependencies" : {
     "@neutralinojs/lib" : "^5.2.0",
     "@neutralinojs/neu" : "^11.2.0",
