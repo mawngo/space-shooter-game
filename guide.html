@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Asteroids Game</title>
+    <link rel="stylesheet" href="mvp.css">
+</head>
+<body>
+<header style="padding-bottom: 0">
+    <nav style="justify-content: center">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li>Guide</li>
+            <li><a href="https://github.com/mawngo/space-shooter-game" target="_blank">GitHub &nearr;</a></li>
+        </ul>
+    </nav>
+    <h1 style="font-size: 3.5rem">Game Rules</h1>
+</header>
+<main>
+    <article>
+        <h2 id="1-controls">1. Controls</h2>
+        <ul>
+            <li>Move using the arrow keys</li>
+            <li>Press S to shoot regular bullets:
+                <ul>
+                    <li>Can be fired freely</li>
+                    <li>Regular bullets have a 60% chance to destroy asteroids :))</li>
+                    <li>Bounces back upon collision</li>
+                    <li>Colliding with regular bullets will cause damage and loss of points</li>
+                    <li>Obeys the laws of physics :))</li>
+                </ul>
+            </li>
+            <li>Press A to shoot special bullets collected:
+                <ul>
+                    <li>Limited quantity</li>
+                    <li>Effects depend on the type of bullet</li>
+                    <li>Has a 100% chance of destroying asteroids</li>
+                </ul>
+            </li>
+        </ul>
+        <h2 id="2-items">2. Items</h2>
+        <ul>
+            <li>Burger - Heals</li>
+            <li>Money - Adds points</li>
+            <li>1 bullet (red bullet) - 100% destroys asteroids, bounces back when hitting walls, and heals upon hitting
+                the
+                player
+            </li>
+            <li>3 bullets (blue bullets) - Bullets shot 100% destroy asteroids, do not bounce back when hitting walls
+            </li>
+            <li>Swirl (circular bullet) - Destroys all existing asteroids and bullets</li>
+        </ul>
+        <h2 id="3-asteroids">3. Asteroids</h2>
+        <ul>
+            <li>Spawn from the central planet, quantity increases over time.</li>
+            <li>Collision with asteroids destroys them and causes damage to the player</li>
+            <li>Asteroids can break into smaller asteroids, damage and points depend on the size of the asteroid</li>
+            <li>Asteroids bounce back upon collision and follow the laws of physics :D</li>
+        </ul>
+    </article>
+</main>
+<script src="__neutralino_globals.js"></script>
+<script src="neu.js"></script>
+<script>
+    if (window.Neu) {
+        window.Neu.events.on("windowClose", () => {
+            window.Neu.app.exit();
+        });
+    }
+</script>
+</body>
+</html>
