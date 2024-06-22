@@ -18,6 +18,7 @@ import { Item } from "./object/items";
 
 export class Game {
     constructor() {
+        this.level = 0;
         this.score = 0;
         this.items = [];
         this.ship = new Ship(200, 800);
@@ -179,6 +180,14 @@ export class Game {
 
     shipState() {
         if (this.ship.health <= 0) {
+            const highScore = Number(localStorage.getItem("highScore") || "0");
+            const highLevel = Number(localStorage.getItem("highLevel") || "0");
+            if (highScore < this.score) {
+                localStorage.setItem("highScore", this.score);
+            }
+            if (highLevel < this.level) {
+                localStorage.setItem("highLevel", this.level);
+            }
             canvasClean();
             drawBackGround();
             setTimeout(async () => {
@@ -192,17 +201,17 @@ export class Game {
         this.ship.makeAMove();
     };
 
-    displayScore(x, y, string = "") {
+    displayScore(x, y) {
         ctx.font = "25px Verdana";
         ctx.fillStyle = "white";
-        ctx.fillText(string, x, y - 30);
-        ctx.fillText("Health " + Math.floor(this.ship.health), x, y);
-        ctx.fillText("Items: " + this.ship.totalAmmo.length, x, y + 30);
-        ctx.fillText("Score " + this.score, x, y + 110);
+        ctx.fillText("Stage   " + game.level, x, y - 30);
+        ctx.fillText("Health  " + Math.floor(this.ship.health), x, y);
+        ctx.fillText("Items   " + this.ship.totalAmmo.length, x, y + 30);
+        ctx.fillText("Score   " + this.score, x, y + 110);
 
         const ammo = this.ship.totalAmmo.length ? this.ship.totalAmmo[this.ship.totalAmmo.length - 1].imgId : "";
         const text = config.items.ammos[ammo] || "None";
-        ctx.fillText("Ammo: " + text, x, y + 60);
+        ctx.fillText("Ammo  " + text, x, y + 60);
     };
 
     drawExplosion() {
@@ -222,7 +231,6 @@ export class Game {
 
 const game = new Game();
 let loops = [];
-let n = 0;
 rockGenerator(7);
 ammoGenerator(3);
 itemsGenerator(4);
@@ -251,7 +259,7 @@ function setupGamePlay() {
     game.drawBall();
     drawImgInBall(game.spawner, true);
     drawImgInBall(game.ship, true);
-    game.displayScore(15, 60, "stage: " + n);
+    game.displayScore(15, 60);
     if (game.ship.health > 0) {
         loops.push(setTimeout(setupGamePlay, 20));
     } else {
@@ -260,18 +268,18 @@ function setupGamePlay() {
 }
 
 function makeGameHarder() {
-    n++;
+    game.level++;
     loops.push(setTimeout(makeGameHarder, config.game.timePerLevel));
 }
 
 function spawnBalls() {
-    game.spawner.spawn(game.balls, n);
+    game.spawner.spawn(game.balls, game.level);
     game.spawner.color = rainbow(Math.random());
     loops.push(setTimeout(spawnBalls, config.game.timePerSpawn));
 }
 
 function setupScore() {
-    game.score += n * config.game.survivalLevelBonus + Math.floor((game.balls.length + game.ammos.length) * config.game.survivalAsteroidBonus);
+    game.score += game.level * config.game.survivalLevelBonus + Math.floor((game.balls.length + game.ammos.length) * config.game.survivalAsteroidBonus);
     loops.push(setTimeout(setupScore, config.game.timePerSurvivalScore));
 }
 
