@@ -1,43 +1,44 @@
 {
-  "applicationId" : "mawngo.asteroids",
-  "defaultMode" : "window",
-  "version" : "2.2.1",
-  "resourcesURL" : "https://github.com/mawngo/space-shooter-game/raw/master/releases/resources.neu",
-  "port" : 0,
-  "url" : "/resources/",
-  "enableServer" : true,
-  "enableNativeAPI" : true,
-  "logging" : {
-    "enabled" : true,
-    "writeToLogFile" : false
-  },
-  "nativeAllowList" : [
-    "window.*",
-    "events.*",
-    "app.*"
-  ],
-  "modes" : {
-    "window" : {
-      "title" : "Asteroids",
-      "width" : 1600,
-      "height" : 900,
-      "minWidth" : 1280,
-      "minHeight" : 720,
-      "fullScreen" : false,
-      "alwaysOnTop" : false,
-      "icon" : "/resources/icons/appIcon.png",
-      "enableInspector" : false,
-      "borderless" : false,
-      "maximize" : false,
-      "hidden" : false,
-      "resizable" : true,
-      "exitProcessOnClose" : false,
-      "center" : true
+    "applicationId" : "mawngo.asteroids",
+    "defaultMode" : "window",
+    "version" : "2.2.1",
+    "resourcesURL" : "https://github.com/mawngo/space-shooter-game/raw/master/releases/resources.neu",
+    "port" : 0,
+    "url" : "/resources/",
+    "enableServer" : true,
+    "enableNativeAPI" : true,
+    "logging" : {
+        "enabled" : true,
+        "writeToLogFile" : false
+    },
+    "nativeAllowList" : [
+        "window.*",
+        "events.*",
+        "app.*",
+        "os.showMessageBox"
+    ],
+    "modes" : {
+        "window" : {
+            "title" : "Asteroids",
+            "width" : 1600,
+            "height" : 900,
+            "minWidth" : 1280,
+            "minHeight" : 720,
+            "fullScreen" : false,
+            "alwaysOnTop" : false,
+            "icon" : "/resources/icons/appIcon.png",
+            "enableInspector" : false,
+            "borderless" : false,
+            "maximize" : false,
+            "hidden" : false,
+            "resizable" : true,
+            "exitProcessOnClose" : false,
+            "center" : true
+        }
+    },
+    "cli" : {
+        "binaryName" : "asteroids",
+        "resourcesPath" : "/resources/",
+        "binaryVersion" : "5.2.0"
     }
-  },
-  "cli" : {
-    "binaryName" : "asteroids",
-    "resourcesPath" : "/resources/",
-    "binaryVersion" : "5.2.0"
-  }
 }

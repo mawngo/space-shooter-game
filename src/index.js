@@ -2,6 +2,8 @@ import { ExplosiveBall } from "./object/ball";
 import {
     ammoGenerator,
     canvasClean,
+    config,
+    ctx,
     drawBackGround,
     drawImgInBall,
     explosiveGenerator,
@@ -10,11 +12,9 @@ import {
     rainbow,
     rockGenerator,
     showConfirmBox
-} from "./utils";
+} from "./context";
 import { Ship, Spawner } from "./object/ship";
 import { Item } from "./object/items";
-import { ctx } from "./init";
-import { config } from "./config";
 
 export class Game {
     constructor() {

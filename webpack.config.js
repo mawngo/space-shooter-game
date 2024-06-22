@@ -1,18 +1,21 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-    entry: './src/game.js',
-    mode: 'production',
-    target: 'web',
+    entry: {
+        game: "./src/index.js",
+        neu: "./src/neu.js"
+    },
+    mode: "production",
+    target: "web",
     resolve: {
-        mainFields: ['main', 'module'],
-        extensions: ['.tsx', '.ts', '.js', '.json'],
+        mainFields: ["main", "module"],
+        extensions: [".tsx", ".ts", ".js", ".json"]
     },
     output: {
-        path: path.resolve(__dirname, 'resources'),
-        filename: 'game.js',
+        path: path.resolve(__dirname, "resources"),
+        filename: "[name].js"
     },
     experiments: {
-        topLevelAwait: true,
-    },
+        topLevelAwait: true
+    }
 };

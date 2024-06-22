@@ -1,5 +1,14 @@
-import { background, canvas, ctx } from "./init";
+import { loadConfig } from "./config";
 
+export const canvas = document.getElementById("screen");
+export const ctx = canvas.getContext("2d");
+export const config = window.gameConfig || loadConfig();
+
+const background = document.getElementById("background");
+const imgDir = document.getElementById("img-dir");
+
+canvas.width = window.innerWidth - 10;
+canvas.height = window.innerHeight - 10;
 
 export function rainbow(h) {
     let r, g, b;
@@ -93,7 +102,7 @@ export function rockGenerator(maxImg) {
         innerImg += "<img alt=\"rock\" src=\"img/rock/rock" + i
                     + ".png\" id=\"rock" + i + "\" style=\"display: none\">";
     }
-    document.getElementById("img-dir").innerHTML += innerImg;
+    imgDir.innerHTML += innerImg;
 }
 
 export function rockRadId(maxImg) {
@@ -114,7 +123,7 @@ export function ammoGenerator(maxImg) {
         innerImg += "<img alt=\"ammo\" src=\"img/ammo/ammo" + i +
                     ".png\" id=\"ammo" + i + "\" style=\"display: none\">";
     }
-    document.getElementById("img-dir").innerHTML += innerImg;
+    imgDir.innerHTML += innerImg;
 }
 
 export function itemsGenerator(maxImg) {
@@ -123,7 +132,7 @@ export function itemsGenerator(maxImg) {
         innerImg += "<img alt=\"object\" src=\"img/item/item" + i + ".png\" id=\"item"
                     + i + "\" style=\"display: none\">";
     }
-    document.getElementById("img-dir").innerHTML += innerImg;
+    imgDir.innerHTML += innerImg;
 }
 
 export function explosiveGenerator(maxImg) {
@@ -132,15 +141,13 @@ export function explosiveGenerator(maxImg) {
         innerImg += "<img alt=\"explosive\" src=\"img/explosive/explosive" + i + ".png\" id=\"explosive"
                     + i + "\" style=\"display: none\">";
     }
-    document.getElementById("img-dir").innerHTML += innerImg;
+    imgDir.innerHTML += innerImg;
 }
 
 export async function showConfirmBox(title, message) {
-    try {
-        const confirm = await window.Neutralino.os.showMessageBox(title, message, "YES_NO");
+    if (window.Neu) {
+        const confirm = await window.Neu.os.showMessageBox(title, message, "YES_NO");
         return confirm === "YES";
-    } catch (e) {
-        // not desktop app
-        return confirm(message);
     }
+    return confirm(message);
 }

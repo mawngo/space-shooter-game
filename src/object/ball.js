@@ -1,6 +1,4 @@
-import { canvas } from "../init";
-import { drawImgInBall, explosiveRadId, radNum, rainbow, rockRadId, sqrtOf2Sqr } from "../utils";
-import { config } from "../config";
+import { canvas, config, drawImgInBall, explosiveRadId, radNum, rainbow, rockRadId, sqrtOf2Sqr } from "../context";
 
 export class Ball {
     constructor(x, y, radius, color, xSpeed, ySpeed, imgId, spinSpeed) {

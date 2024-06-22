@@ -1,5 +1,5 @@
 import { Ball } from "./ball";
-import { config } from "../config";
+import { config } from "../context";
 
 export class Ammo extends Ball {
     constructor(x, y, xSpeed, ySpeed, imgId, size) {

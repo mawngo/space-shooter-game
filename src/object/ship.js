@@ -1,6 +1,6 @@
 import { Ball } from "./ball";
 import { Ammo } from "./items";
-import { config } from "../config";
+import { config } from "../context";
 
 export class Ship extends Ball {
     constructor(x, y, speed, health, color, imgId) {
