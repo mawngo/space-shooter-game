@@ -1,17 +1,20 @@
-import { Ball, ExplosiveBall } from './object/ball';
+import { ExplosiveBall } from "./object/ball";
 import {
     ammoGenerator,
     canvasClean,
     drawBackGround,
     drawImgInBall,
     explosiveGenerator,
-    itemsGenerator, radNum, radRate, rainbow,
-    rockGenerator, showConfirmBox,
-} from './utils';
-import { Ship, Spawner } from './object/ship';
-import { Item } from './object/items';
-import { ctx } from './init';
-import { config } from './config';
+    itemsGenerator,
+    radRate,
+    rainbow,
+    rockGenerator,
+    showConfirmBox
+} from "./utils";
+import { Ship, Spawner } from "./object/ship";
+import { Item } from "./object/items";
+import { ctx } from "./init";
+import { config } from "./config";
 
 export class Game {
     constructor() {
@@ -31,7 +34,7 @@ export class Game {
             item.toObj(this.spawner);
             item.toEdge();
             if (item.toObj(this.ship)) {
-                if (item.imgId === 'item4') {
+                if (item.imgId === "item4") {
                     this.score += config.items.item4.score;
                 }
                 item.doFunc(this.ship);
@@ -44,21 +47,21 @@ export class Game {
 
     specialAmmoState() {
         for (const ammo of this.spammos) {
-            if (ammo.toObj(this.ship) && ammo.imgId === 'ammo1') {
+            if (ammo.toObj(this.ship) && ammo.imgId === "ammo1") {
                 this.ship.health -= ammo.damage;
             }
-            if (ammo.imgId === 'ammo3') {
+            if (ammo.imgId === "ammo3") {
                 for (const ball of this.balls) {
                     ball.makeExplosive(this.explosive);
                 }
                 for (const ammo of this.ammos) {
-                    this.explosive.push(new ExplosiveBall(ammo.x, ammo.y, ammo.radius / 2, 'explosive5', 0.3));
+                    this.explosive.push(new ExplosiveBall(ammo.x, ammo.y, ammo.radius / 2, "explosive5", 0.3));
                 }
                 this.balls = [];
                 this.ammos = [];
                 this.spammos = this.spammos.filter(x => x !== ammo);
             }
-            if (ammo.imgId === 'ammo2') {
+            if (ammo.imgId === "ammo2") {
                 ammo.toEdge();
                 ammo.toObj(this.spawner);
                 if (ammo.toObj(this.ship)) {
@@ -125,9 +128,7 @@ export class Game {
             if (ball.toArrOfObj(this.spammos) >= 0) {
                 if (radRate(config.ammo.destroyAsteroidRate)) {
                     ball.remove(this.balls);
-                } else if (ball.canExploreToSmaller())
-                    ball.explore(this.balls);
-                else {
+                } else if (ball.canExploreToSmaller()) ball.explore(this.balls); else {
                     ball.remove(this.balls);
                 }
                 this.spawnItemFrom(ball, config.game.itemDropMultiplierUseSpecialAmmo);
@@ -144,23 +145,23 @@ export class Game {
         ball.makeExplosive(this.explosive, 0.3);
         this.score += 5;
         if (radRate(config.items.item0.rate * rateMultiplier)) {
-            this.items.push(new Item(ball.x, ball.y, 'item0'));
+            this.items.push(new Item(ball.x, ball.y, "item0"));
             if (!config.game.multiDrop) return;
         }
         if (radRate(config.items.item1.rate * rateMultiplier)) {
-            this.items.push(new Item(ball.x, ball.y, 'item1'));
+            this.items.push(new Item(ball.x, ball.y, "item1"));
             if (!config.game.multiDrop) return;
         }
         if (radRate(config.items.item2.rate * rateMultiplier)) {
-            this.items.push(new Item(ball.x, ball.y, 'item2'));
+            this.items.push(new Item(ball.x, ball.y, "item2"));
             if (!config.game.multiDrop) return;
         }
         if (radRate(config.items.item3.rate * rateMultiplier)) {
-            this.items.push(new Item(ball.x, ball.y, 'item3'));
+            this.items.push(new Item(ball.x, ball.y, "item3"));
             if (!config.game.multiDrop) return;
         }
         if (radRate(config.items.item4.rate * rateMultiplier)) {
-            this.items.push(new Item(ball.x, ball.y, 'item4'));
+            this.items.push(new Item(ball.x, ball.y, "item4"));
         }
     }
 
@@ -181,7 +182,7 @@ export class Game {
             canvasClean();
             drawBackGround();
             setTimeout(async () => {
-                if (await showConfirmBox('You lose', 'Play again?')) {
+                if (await showConfirmBox("You lose", "Play again?")) {
                     window.location.reload();
                 }
             }, 1000);
@@ -191,17 +192,17 @@ export class Game {
         this.ship.makeAMove();
     };
 
-    displayScore(x, y, string = '') {
-        ctx.font = '25px Verdana';
-        ctx.fillStyle = 'white';
+    displayScore(x, y, string = "") {
+        ctx.font = "25px Verdana";
+        ctx.fillStyle = "white";
         ctx.fillText(string, x, y - 30);
-        ctx.fillText('Health ' + Math.floor(this.ship.health), x, y);
-        ctx.fillText('Items: ' + this.ship.totalAmmo.length, x, y + 30);
-        ctx.fillText('Score ' + this.score, x, y + 110);
+        ctx.fillText("Health " + Math.floor(this.ship.health), x, y);
+        ctx.fillText("Items: " + this.ship.totalAmmo.length, x, y + 30);
+        ctx.fillText("Score " + this.score, x, y + 110);
 
-        const ammo = this.ship.totalAmmo.length ? this.ship.totalAmmo[this.ship.totalAmmo.length - 1].imgId : '';
-        const text = config.items.ammos[ammo] || 'None';
-        ctx.fillText('Ammo: ' + text, x, y + 60);
+        const ammo = this.ship.totalAmmo.length ? this.ship.totalAmmo[this.ship.totalAmmo.length - 1].imgId : "";
+        const text = config.items.ammos[ammo] || "None";
+        ctx.fillText("Ammo: " + text, x, y + 60);
     };
 
     drawExplosion() {
@@ -220,6 +221,7 @@ export class Game {
 }
 
 const game = new Game();
+let loops = [];
 let n = 0;
 rockGenerator(7);
 ammoGenerator(3);
@@ -240,52 +242,52 @@ function setupGamePlay() {
     game.drawBall();
     drawImgInBall(game.spawner, true);
     drawImgInBall(game.ship, true);
-    game.displayScore(15, 60, 'stage: ' + n);
+    game.displayScore(15, 60, "stage: " + n);
     if (game.ship.health > 0) {
-        setTimeout(setupGamePlay, 20);
+        loops.push(setTimeout(setupGamePlay, 20));
     } else {
-        drawImgInBall(game.ship, false, 'explosive1');
+        drawImgInBall(game.ship, false, "explosive1");
     }
 }
 
 function makeGameHarder() {
     n++;
-    setTimeout(makeGameHarder, config.game.timePerLevel);
+    loops.push(setTimeout(makeGameHarder, config.game.timePerLevel));
 }
 
 function spawnBalls() {
     game.spawner.spawn(game.balls, n);
     game.spawner.color = rainbow(Math.random());
-    setTimeout(spawnBalls, config.game.timePerSpawn);
+    loops.push(setTimeout(spawnBalls, config.game.timePerSpawn));
 }
 
 function setupScore() {
     game.score += n * config.game.survivalLevelBonus + Math.floor((game.balls.length + game.ammos.length) * config.game.survivalAsteroidBonus);
-    setTimeout(setupScore, config.game.timePerSurvivalScore);
+    loops.push(setTimeout(setupScore, config.game.timePerSurvivalScore));
 }
 
-window.addEventListener('keydown', evt => {
+window.addEventListener("keydown", evt => {
     switch (evt.key) {
-        case 'ArrowRight':
+        case "ArrowRight":
             game.ship.moveRight();
             break;
-        case 'ArrowLeft':
+        case "ArrowLeft":
             game.ship.moveLeft();
             break;
-        case'ArrowUp':
+        case"ArrowUp":
             game.ship.moveUp();
             break;
-        case 'ArrowDown':
+        case "ArrowDown":
             game.ship.moveDown();
             break;
-        case 'a':
+        case "a":
             if (game.ship.totalAmmo.length > 0) {
                 const ammo = game.ship.totalAmmo.pop();
                 game.ship.shoot(game.spammos, game.ship.angle, ammo.imgId, 10);
             }
             break;
-        case 's':
-            game.ship.shoot(game.ammos, game.ship.angle, 'ammo0');
+        case "s":
+            game.ship.shoot(game.ammos, game.ship.angle, "ammo0");
             break;
     }
 });

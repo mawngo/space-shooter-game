@@ -7,7 +7,7 @@ export const config = {
         survivalLevelBonus: 1,
         itemDropMultiplierWhenExploreToChild: 0.2,
         itemDropMultiplierUseSpecialAmmo: 0.05,
-        multiDrop: false,
+        multiDrop: false
     },
     asteroid: {
         spin: 0.3,
@@ -19,50 +19,50 @@ export const config = {
         minSize: 60,
         maxSize: 80,
         minSpeed: 0,
-        maxSpeed: 5,
+        maxSpeed: 5
     },
     ship: {
         health: 100,
         speed: 5,
         spin: 0.3,
-        size: 20,
+        size: 20
     },
     ammo: {
         damage: 8,
         destroyAsteroidRate: 0.6,
         speed: 10,
-        size: 25,
+        size: 25
     },
     items: {
         ammos: {
-            ammo1: 'Blue',
-            ammo2: 'Red',
-            ammo3: 'Bomb',
+            ammo1: "Blue",
+            ammo2: "Red",
+            ammo3: "Bomb"
         },
         item0: {
-            name: 'Blue Ammo',
+            name: "Blue Ammo",
             amount: 3,
-            rate: 0.20,
+            rate: 0.20
         },
         item1: {
-            name: 'Burger',
+            name: "Burger",
             heal: 20,
-            rate: 0.20,
+            rate: 0.20
         },
         item2: {
-            name: 'Red Ammo',
+            name: "Red Ammo",
             amount: 1,
-            rate: 0.05,
+            rate: 0.05
         },
         item3: {
-            name: 'Antimatter Bomb',
+            name: "Antimatter Bomb",
             amount: 1,
-            rate: 0.03,
+            rate: 0.03
         },
         item4: {
-            name: 'Gold',
+            name: "Gold",
             rate: 0.3,
-            score: 30,
-        },
-    },
+            score: 30
+        }
+    }
 };

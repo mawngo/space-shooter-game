@@ -1,12 +1,12 @@
-import { Ball } from './ball';
-import { Ammo } from './items';
-import { config } from '../config';
+import { Ball } from "./ball";
+import { Ammo } from "./items";
+import { config } from "../config";
 
 export class Ship extends Ball {
     constructor(x, y, speed, health, color, imgId) {
         super(x, y, config.ship.size, color, 0.2, 0.2);
-        this.color = color || 'white';
-        this.imgId = imgId || 'ship';
+        this.color = color || "white";
+        this.imgId = imgId || "ship";
         this.speed = speed || config.ship.speed;
         this.health = health || config.ship.health;
         this.spinSpeed = config.ship.spin;
@@ -54,6 +54,6 @@ export class Ship extends Ball {
 
 export class Spawner extends Ball {
     constructor() {
-        super(undefined, undefined, 100, undefined, 0, 0, 'planet');
+        super(undefined, undefined, 100, undefined, 0, 0, "planet");
     }
 }

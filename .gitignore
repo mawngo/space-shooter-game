@@ -4,3 +4,4 @@ dist/
 *.log
 **/neutralino.js
 bin/
+.tmp/

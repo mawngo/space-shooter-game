@@ -1,6 +1,6 @@
-import { canvas } from '../init';
-import { drawImgInBall, explosiveRadId, radNum, rainbow, rockRadId, sqrtOf2Sqr } from '../utils';
-import { config } from '../config';
+import { canvas } from "../init";
+import { drawImgInBall, explosiveRadId, radNum, rainbow, rockRadId, sqrtOf2Sqr } from "../utils";
+import { config } from "../config";
 
 export class Ball {
     constructor(x, y, radius, color, xSpeed, ySpeed, imgId, spinSpeed) {
@@ -69,17 +69,17 @@ export class Ball {
                 }
                 if (ballMaxDistance >= ballRealDistance) {
                     const thisXSpeedAfter =
-                        ((this.radius - ball.radius) * this.xSpeed
-                         + 2 * ball.radius * ball.xSpeed) / ballMaxDistance;
+                      ((this.radius - ball.radius) * this.xSpeed
+                       + 2 * ball.radius * ball.xSpeed) / ballMaxDistance;
                     const thisYSpeedAfter =
-                        ((this.radius - ball.radius) * this.ySpeed
-                         + 2 * ball.radius * ball.ySpeed) / ballMaxDistance;
+                      ((this.radius - ball.radius) * this.ySpeed
+                       + 2 * ball.radius * ball.ySpeed) / ballMaxDistance;
                     const ballXSpeedAfter =
-                        ((ball.radius - this.radius) * ball.xSpeed
-                         + 2 * this.radius * this.xSpeed) / ballMaxDistance;
+                      ((ball.radius - this.radius) * ball.xSpeed
+                       + 2 * this.radius * this.xSpeed) / ballMaxDistance;
                     const ballYSpeedAfter =
-                        ((ball.radius - this.radius) * ball.ySpeed
-                         + 2 * this.radius * this.ySpeed) / ballMaxDistance;
+                      ((ball.radius - this.radius) * ball.ySpeed
+                       + 2 * this.radius * this.ySpeed) / ballMaxDistance;
                     this.xSpeed = thisXSpeedAfter;
                     this.ySpeed = thisYSpeedAfter;
                     ball.xSpeed = ballXSpeedAfter;
@@ -149,12 +149,12 @@ export class Ball {
 
     makeExplosive(containerArr, time) {
         if (radNum(1, 0)) {
-            containerArr.push(new ExplosiveBall(this.x, this.y, this.radius * 2, 'explosive0', time));
+            containerArr.push(new ExplosiveBall(this.x, this.y, this.radius * 2, "explosive0", time));
             containerArr.push(new ExplosiveBall(this.x, this.y, this.radius * 1.2, undefined, time));
         } else if (radNum(1, 0)) {
             containerArr.push(new ExplosiveBall(this.x, this.y, this.radius * 2, undefined, time));
         } else {
-            containerArr.push(new ExplosiveBall(this.x, this.y, this.radius * 3.5, 'explosive4', time));
+            containerArr.push(new ExplosiveBall(this.x, this.y, this.radius * 3.5, "explosive4", time));
             containerArr.push(new ExplosiveBall(this.x, this.y, this.radius * 1, undefined, time));
         }
     };
@@ -163,7 +163,7 @@ export class Ball {
 
 export class ExplosiveBall extends Ball {
     constructor(x, y, radius, imgId, time) {
-        super(x, y, radius, 'yellow', 0.2, 0.2);
+        super(x, y, radius, "yellow", 0.2, 0.2);
         this.imgId = imgId || explosiveRadId(4);
         this.count = time * 50 || 50;
     }

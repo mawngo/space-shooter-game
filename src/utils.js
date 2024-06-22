@@ -1,4 +1,4 @@
-import { background, canvas, ctx } from './init';
+import { background, canvas, ctx } from "./init";
 
 
 export function rainbow(h) {
@@ -38,9 +38,9 @@ export function rainbow(h) {
             b = q;
             break;
     }
-    return ('#' + ('00' + (~~(r * 255)).toString(16)).slice(-2)
-            + ('00' + (~~(g * 255)).toString(16)).slice(-2)
-            + ('00' + (~~(b * 255)).toString(16)).slice(-2));
+    return ("#" + ("00" + (~~(r * 255)).toString(16)).slice(-2)
+            + ("00" + (~~(g * 255)).toString(16)).slice(-2)
+            + ("00" + (~~(b * 255)).toString(16)).slice(-2));
 }
 
 export function radNum(max, min = 0) {
@@ -55,8 +55,8 @@ export function radRate(rate) {
 
 export function sqrtOf2Sqr(a, b) {
     return Math.sqrt(
-        (Math.abs(a) * Math.abs(a)) +
-        (Math.abs(b) * Math.abs(b)),
+      (Math.abs(a) * Math.abs(a)) +
+      (Math.abs(b) * Math.abs(b))
     );
 }
 
@@ -88,57 +88,57 @@ export function drawBackGround() {
 
 //img id only
 export function rockGenerator(maxImg) {
-    let innerImg = '';
+    let innerImg = "";
     for (let i = 0; i < maxImg + 1; i++) {
-        innerImg += '<img alt="rock" src="img/rock/rock' + i
-                    + '.png" id="rock' + i + '" style="display: none">';
+        innerImg += "<img alt=\"rock\" src=\"img/rock/rock" + i
+                    + ".png\" id=\"rock" + i + "\" style=\"display: none\">";
     }
-    document.getElementById('img-dir').innerHTML += innerImg;
+    document.getElementById("img-dir").innerHTML += innerImg;
 }
 
 export function rockRadId(maxImg) {
-    let id = 'rock';
-    id += (radNum(maxImg, 0) + '');
+    let id = "rock";
+    id += (radNum(maxImg, 0) + "");
     return id;
 }
 
 export function explosiveRadId(maxImg) {
-    let id = 'explosive';
-    id += (radNum(maxImg, 0) + '');
+    let id = "explosive";
+    id += (radNum(maxImg, 0) + "");
     return id;
 }
 
 export function ammoGenerator(maxImg) {
-    let innerImg = '';
+    let innerImg = "";
     for (let i = 0; i < maxImg + 1; i++) {
-        innerImg += '<img alt="ammo" src="img/ammo/ammo' + i +
-                    '.png" id="ammo' + i + '" style="display: none">';
+        innerImg += "<img alt=\"ammo\" src=\"img/ammo/ammo" + i +
+                    ".png\" id=\"ammo" + i + "\" style=\"display: none\">";
     }
-    document.getElementById('img-dir').innerHTML += innerImg;
+    document.getElementById("img-dir").innerHTML += innerImg;
 }
 
 export function itemsGenerator(maxImg) {
-    let innerImg = '';
+    let innerImg = "";
     for (let i = 0; i < maxImg + 1; i++) {
-        innerImg += '<img alt="object" src="img/item/item' + i + '.png" id="item'
-                    + i + '" style="display: none">';
+        innerImg += "<img alt=\"object\" src=\"img/item/item" + i + ".png\" id=\"item"
+                    + i + "\" style=\"display: none\">";
     }
-    document.getElementById('img-dir').innerHTML += innerImg;
+    document.getElementById("img-dir").innerHTML += innerImg;
 }
 
 export function explosiveGenerator(maxImg) {
-    let innerImg = '';
+    let innerImg = "";
     for (let i = 0; i < maxImg + 1; i++) {
-        innerImg += '<img alt="explosive" src="img/explosive/explosive' + i + '.png" id="explosive'
-                    + i + '" style="display: none">';
+        innerImg += "<img alt=\"explosive\" src=\"img/explosive/explosive" + i + ".png\" id=\"explosive"
+                    + i + "\" style=\"display: none\">";
     }
-    document.getElementById('img-dir').innerHTML += innerImg;
+    document.getElementById("img-dir").innerHTML += innerImg;
 }
 
 export async function showConfirmBox(title, message) {
     try {
-        const confirm = await window.Neutralino.os.showMessageBox(title, message, 'YES_NO');
-        return confirm === 'YES';
+        const confirm = await window.Neutralino.os.showMessageBox(title, message, "YES_NO");
+        return confirm === "YES";
     } catch (e) {
         // not desktop app
         return confirm(message);
