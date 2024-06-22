@@ -227,11 +227,20 @@ rockGenerator(7);
 ammoGenerator(3);
 itemsGenerator(4);
 explosiveGenerator(5);
+registerCloseHandler();
 
 setupScore();
 setupGamePlay();
 makeGameHarder();
 spawnBalls();
+
+function registerCloseHandler() {
+    if (!window.Neu) return;
+    window.Neu.events.on("windowClose", () => {
+        loops.forEach(clearTimeout);
+        window.Neu.app.exit();
+    });
+}
 
 function setupGamePlay() {
     canvasClean();

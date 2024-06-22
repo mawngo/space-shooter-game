@@ -1,38 +1,39 @@
 {
-  "name": "asteroids",
-  "version": "2.2.1",
-  "description": "Simple space shooter game",
-  "private": true,
-  "main": "index.js",
-  "scripts": {
-    "postinstall": "neu update",
-    "start": "npm-run-all --parallel serve watch",
-    "build": "webpack --progress && neu build --release",
-    "build:dev": "webpack --mode=development --progress && neu build --release",
-    "build:webpack": "webpack --progress",
-    "bin": "neu update",
-    "serve": "neu run",
-    "watch": "webpack --watch --progress -c webpack.dev.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name" : "asteroids",
+  "version" : "2.2.1",
+  "description" : "Simple space shooter game",
+  "private" : true,
+  "main" : "index.js",
+  "scripts" : {
+    "postinstall" : "neu update",
+    "start" : "npm-run-all --parallel serve watch",
+    "build" : "webpack --progress && neu build --release",
+    "build:dev" : "webpack --mode=development --progress && neu build --release",
+    "build:webpack" : "webpack --progress",
+    "bin" : "neu update",
+    "serve" : "neu run",
+    "watch" : "webpack --watch --progress -c webpack.dev.js",
+    "test" : "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mawngo/space-shooter-game.git"
+  "repository" : {
+    "type" : "git",
+    "url" : "git+https://github.com/mawngo/space-shooter-game.git"
   },
-  "author": "mawngo",
-  "license": "Mit",
-  "bugs": {
-    "url": "https://github.com/mawngo/space-shooter-game/issues"
+  "author" : "mawngo",
+  "license" : "Mit",
+  "bugs" : {
+    "url" : "https://github.com/mawngo/space-shooter-game/issues"
   },
-  "homepage": "https://github.com/mawngo/space-shooter-game#readme",
-  "devDependencies": {
-    "@neutralinojs/neu": "^11.2.0",
-    "npm-run-all": "^4.1.5",
-    "webpack": "^5.58.1",
-    "webpack-cli": "^5.1.4",
-    "webpack-merge": "^5.8.0"
+  "homepage" : "https://github.com/mawngo/space-shooter-game#readme",
+  "devDependencies" : {
+    "@neutralinojs/lib" : "^5.2.0",
+    "@neutralinojs/neu" : "^11.2.0",
+    "npm-run-all" : "^4.1.5",
+    "webpack" : "^5.58.1",
+    "webpack-cli" : "^5.1.4",
+    "webpack-merge" : "^5.8.0"
   },
-  "volta": {
-    "node": "18.20.3"
+  "volta" : {
+    "node" : "18.20.3"
   }
 }
