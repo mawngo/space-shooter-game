@@ -5,6 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
+    "postinstall": "neu update",
     "start": "npm-run-all --parallel serve watch",
     "build": "webpack --progress && neu build --release",
     "build:dev": "webpack --mode=development --progress && neu build --release",
