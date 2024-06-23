@@ -42,7 +42,6 @@ export class Game {
                 item.remove(this.items);
             }
             item.makeAMove();
-            drawImgInBall(item);
         }
     };
 
@@ -178,6 +177,12 @@ export class Game {
         }
     };
 
+     drawItem() {
+        for (const item of this.items) {
+            drawImgInBall(item);
+        }
+    };
+
     shipState() {
         if (this.ship.health <= 0) {
             const highScore = Number(localStorage.getItem("highScore") || "0");
@@ -229,6 +234,7 @@ export class Game {
         this.drawExplosion();
         this.drawAmmo();
         this.drawBall();
+        this.drawItem();
         drawImgInBall(this.spawner, true);
         drawImgInBall(this.ship, true);
         this.displayScore(15, 60);
