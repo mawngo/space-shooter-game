@@ -54,6 +54,6 @@ export class Ship extends Ball {
 
 export class Spawner extends Ball {
     constructor() {
-        super(undefined, undefined, 100, undefined, 0, 0, "planet");
+        super(undefined, undefined, 100, undefined, 0, 0, "center");
     }
 }
