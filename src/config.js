@@ -44,7 +44,7 @@ export function loadConfig() {
             item0: {
                 name: "Blue Ammo",
                 amount: 3,
-                rate: 0.2
+                rate: 0.12
             },
             item1: {
                 name: "Burger",
@@ -54,12 +54,12 @@ export function loadConfig() {
             item2: {
                 name: "Red Ammo",
                 amount: 1,
-                rate: 0.03
+                rate: 0.015
             },
             item3: {
                 name: "Antimatter Bomb",
                 amount: 1,
-                rate: 0.02
+                rate: 0.01
             },
             item4: {
                 name: "Gold",
