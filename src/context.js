@@ -4,7 +4,6 @@ export const canvas = document.getElementById("screen");
 export const ctx = canvas.getContext("2d");
 export const config = window.gameConfig || loadConfig();
 
-const background = document.getElementById("background");
 const imgDir = document.getElementById("img-dir");
 
 canvas.width = window.innerWidth - 10;

@@ -16,6 +16,7 @@ import { Item } from "./object/items";
 
 export class Game {
     constructor() {
+        this.update = true;
         this.loops = [];
         this.level = 0;
         this.score = 0;
@@ -230,9 +231,14 @@ export class Game {
         this.ballState();
         this.shipState();
         this.itemState();
+        this.update = true;
     }
 
     redraw() {
+        if (!this.update) {
+            return;
+        }
+        this.update = false;
         canvasClean();
         this.drawAmmo();
         this.drawSpecialAmmo();
@@ -322,22 +328,20 @@ export class Game {
                     break;
             }
         };
-        document.addEventListener("keydown", this.keydown);
+        document.addEventListener("keydown", this.keydown, { passive: true });
         this.mousedown = evt => {
             const game = this;
             if (evt.button === 0) {
-                evt.preventDefault();
                 game.ship.shoot(game.ammos, game.ship.angle, "ammo0");
             }
             if (evt.button <= 2) {
-                evt.preventDefault();
                 if (game.ship.totalAmmo.length > 0) {
                     const ammo = game.ship.totalAmmo.pop();
                     game.ship.shoot(game.spammos, game.ship.angle, ammo.imgId, 10);
                 }
             }
         };
-        document.addEventListener("mousedown", this.mousedown);
+        document.addEventListener("mousedown", this.mousedown, { passive: true });
         this.contextmenu = e => e.preventDefault();
         document.addEventListener("contextmenu", this.contextmenu);
 
@@ -396,8 +400,8 @@ export class Game {
             }
             game.ship.shoot(game.ammos, game.ship.angle, "ammo0");
         };
-        document.addEventListener("touchstart", this.touchstart);
-        document.addEventListener("touchend", this.touchend);
+        document.addEventListener("touchstart", this.touchstart, { passive: true });
+        document.addEventListener("touchend", this.touchend, { passive: true });
     }
 
     stop() {
