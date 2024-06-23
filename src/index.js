@@ -223,38 +223,56 @@ export class Game {
         this.itemState();
     }
 
+    redraw() {
+        canvasClean();
+        drawBackGround();
+        this.drawExplosion();
+        this.drawAmmo();
+        this.drawBall();
+        drawImgInBall(this.spawner, true);
+        drawImgInBall(this.ship, true);
+        this.displayScore(15, 60);
+    }
+
     play() {
         const setupGamePlay = () => {
-            canvasClean();
-            drawBackGround();
-            this.combineState();
-            this.drawExplosion();
-            this.drawAmmo();
-            this.drawBall();
-            drawImgInBall(this.spawner, true);
-            drawImgInBall(this.ship, true);
-            this.displayScore(15, 60);
             if (this.ship.health > 0) {
-                this.loops.push(setTimeout(setupGamePlay, 20));
+                this.combineState();
+                this.loops.push(setTimeout(setupGamePlay, config.game.tick));
+            } else {
+                this.shipState();
+            }
+        };
+
+        const setupGameDraw = () => {
+            if (this.ship.health > 0) {
+                this.redraw();
+                this.main = requestAnimationFrame(setupGameDraw);
             } else {
                 drawImgInBall(this.ship, false, "explosive1");
             }
         };
 
         const makeGameHarder = () => {
-            this.level++;
-            this.loops.push(setTimeout(makeGameHarder, config.game.timePerLevel));
+            if (this.ship.health > 0) {
+                this.level++;
+                this.loops.push(setTimeout(makeGameHarder, config.game.timePerLevel));
+            }
         };
 
         const spawnBalls = () => {
-            this.spawner.spawn(game.balls, game.level);
-            this.spawner.color = rainbow(Math.random());
-            this.loops.push(setTimeout(spawnBalls, config.game.timePerSpawn));
+            if (this.ship.health > 0) {
+                this.spawner.spawn(game.balls, game.level);
+                this.spawner.color = rainbow(Math.random());
+                this.loops.push(setTimeout(spawnBalls, config.game.timePerSpawn));
+            }
         };
 
         const setupScore = () => {
-            this.score += game.level * config.game.survivalLevelBonus + Math.floor((game.balls.length + game.ammos.length) * config.game.survivalAsteroidBonus);
-            this.loops.push(setTimeout(setupScore, config.game.timePerSurvivalScore));
+            if (this.ship.health > 0) {
+                this.score += game.level * config.game.survivalLevelBonus + Math.floor((game.balls.length + game.ammos.length) * config.game.survivalAsteroidBonus);
+                this.loops.push(setTimeout(setupScore, config.game.timePerSurvivalScore));
+            }
         };
 
         rockGenerator(7);
@@ -263,12 +281,14 @@ export class Game {
         explosiveGenerator(5);
         setupScore();
         setupGamePlay();
+        setupGameDraw();
         makeGameHarder();
-        spawnBalls();
+        setTimeout(spawnBalls, 2000);
     }
 
     stop() {
         this.loops.forEach(clearTimeout);
+        cancelAnimationFrame(this.main);
     }
 }
 

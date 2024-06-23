@@ -8,7 +8,8 @@ export function loadConfig() {
             survivalLevelBonus: 1,
             itemDropMultiplierWhenExploreToChild: 0.2,
             itemDropMultiplierUseSpecialAmmo: 0.05,
-            multiDrop: false
+            multiDrop: false,
+            tick: 20,
         },
         asteroid: {
             spin: 0.3,
