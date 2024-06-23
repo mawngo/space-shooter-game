@@ -250,7 +250,7 @@ export class Game {
         const setupGamePlay = () => {
             if (this.ship.health > 0) {
                 this.combineState();
-                this.loops.push(setTimeout(setupGamePlay, config.game.tick));
+                this.loops.push(setTimeout(setupGamePlay, 1000 / config.game.tick));
             } else {
                 this.shipState();
             }

@@ -10,7 +10,7 @@ export function loadConfig() {
             itemDropMultiplierWhenExploreToChild: 0.2,
             itemDropMultiplierUseSpecialAmmo: 0.05,
             multiDrop: false,
-            tick: 20
+            tick: 58
         },
         asteroid: {
             spin: 0.3,
@@ -22,18 +22,18 @@ export function loadConfig() {
             minSize: 60,
             maxSize: 100,
             minSpeed: 0,
-            maxSpeed: 5
+            maxSpeed: 4
         },
         ship: {
             health: 100,
-            speed: 5,
+            speed: 4,
             spin: 0.3,
             size: 20
         },
         ammo: {
             damage: 10,
             destroyAsteroidRate: 0.6,
-            speed: 10,
+            speed: 8,
             size: 25
         },
         items: {
