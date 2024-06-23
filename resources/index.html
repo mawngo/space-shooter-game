@@ -5,28 +5,26 @@
     <title>Asteroids Game</title>
     <link rel="stylesheet" href="mvp.css">
 </head>
-<body>
-<header>
-    <nav style="justify-content: center">
-        <ul>
-            <li>Home</li>
-            <li><a href="guide.html">Guide</a></li>
-            <li><a href="https://github.com/mawngo/space-shooter-game" target="_blank">GitHub &nearr;</a></li>
-        </ul>
-    </nav>
-    <h1 style="display: flex; justify-content: center; align-items: center; font-size: 4rem">Aster<img
-      alt="Asteroids Game" src="img/center.png" style="height: 3.5rem; padding-top: 1rem">ids</h1>
-    <p>A space shooter game.</p>
-    <br>
-    <p>
-        <a href="game.html"><b>Play the Game</b></a>
-        <a href="guide.html"><i>Read the Guide &nearr;</i></a>
-    </p>
-    <br>
-    <br>
-    <br>
-    <img alt="Asteroids Game" src="icons/appIcon.png" height="70">
-    <h3 id="high"></h3>
+<body style="background-image: url('img/universe_dark.jpg')">
+<header
+  style="display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 100vh; padding-bottom: 0;padding-top: 0">
+    <div></div>
+    <div>
+        <h1 style="display: flex; justify-content: center; align-items: center; font-size: 4rem">Aster<img
+          alt="Asteroids Game" src="img/center.png" style="height: 3.5rem; padding-top: 1rem">ids</h1>
+        <p>A space shooter game.</p>
+    </div>
+
+    <div>
+        <h1><a href="game.html" style="text-decoration: none">Play Game</a></h1>
+        <h2><a href="guide.html" style="text-decoration: none">Guide</a></h2>
+        <h2 id="quit" style="display: none"><a href="#" style="text-decoration: none">Quit</a></h2>
+    </div>
+    <div>
+        <img alt="Asteroids Game" src="icons/appIcon.png" height="70">
+        <h3 id="high"></h3>
+    </div>
+    <div></div>
 </header>
 <script src="__neutralino_globals.js"></script>
 <script src="neu.js"></script>

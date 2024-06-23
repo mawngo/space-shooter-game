@@ -5,18 +5,14 @@
     <title>Asteroids Game</title>
     <link rel="stylesheet" href="mvp.css">
 </head>
-<body>
+<body style="background-image: url('img/universe_dark.jpg')">
 <header style="padding-bottom: 0">
-    <nav style="justify-content: center">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li>Guide</li>
-            <li><a href="https://github.com/mawngo/space-shooter-game" target="_blank">GitHub &nearr;</a></li>
-        </ul>
-    </nav>
+    <nav></nav>
     <h1 style="font-size: 3.5rem">Game Rules</h1>
+    <h2><a href="index.html">Home</a>&nbsp;|&nbsp;<a href="game.html">Play</a></h2>
 </header>
-<main>
+<main style="display: flex; justify-content: space-between">
+    <div style="flex-grow: 1"></div>
     <article>
         <h2 id="1-controls">1. Controls</h2>
         <ul>
@@ -58,6 +54,7 @@
             <li>Asteroids bounce back upon collision and follow the laws of physics :D</li>
         </ul>
     </article>
+    <div style="flex-grow: 1"></div>
 </main>
 <script src="__neutralino_globals.js"></script>
 <script src="neu.js"></script>
