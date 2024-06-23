@@ -31,7 +31,7 @@ export function loadConfig() {
         },
         ammo: {
             damage: 10,
-            destroyAsteroidRate: 0.55,
+            destroyAsteroidRate: 0.6,
             speed: 10,
             size: 25
         },

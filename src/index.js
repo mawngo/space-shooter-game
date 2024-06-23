@@ -296,43 +296,64 @@ export class Game {
         setupGameDraw();
         makeGameHarder();
         setTimeout(spawnBalls, 2000);
+
+
+        this.keydown = evt => {
+            const game = this;
+            switch (evt.key) {
+                case "ArrowRight":
+                    game.ship.moveRight();
+                    break;
+                case "ArrowLeft":
+                    game.ship.moveLeft();
+                    break;
+                case"ArrowUp":
+                    game.ship.moveUp();
+                    break;
+                case "ArrowDown":
+                    game.ship.moveDown();
+                    break;
+                case "a":
+                    if (game.ship.totalAmmo.length > 0) {
+                        const ammo = game.ship.totalAmmo.pop();
+                        game.ship.shoot(game.spammos, game.ship.angle, ammo.imgId, 10);
+                    }
+                    break;
+                case "s":
+                    game.ship.shoot(game.ammos, game.ship.angle, "ammo0");
+                    break;
+            }
+        };
+        document.addEventListener("keydown", this.keydown);
+        this.mousedown = evt => {
+            const game = this;
+            if (evt.button === 0) {
+                evt.preventDefault();
+                game.ship.shoot(game.ammos, game.ship.angle, "ammo0");
+            }
+            if (evt.button <= 2) {
+                evt.preventDefault();
+                if (game.ship.totalAmmo.length > 0) {
+                    const ammo = game.ship.totalAmmo.pop();
+                    game.ship.shoot(game.spammos, game.ship.angle, ammo.imgId, 10);
+                }
+            }
+        };
+        document.addEventListener("mousedown", this.mousedown);
+        this.contextmenu = e => e.preventDefault();
+        document.addEventListener("contextmenu", this.contextmenu);
     }
 
     stop() {
         this.loops.forEach(clearTimeout);
         cancelAnimationFrame(this.main);
+        document.removeEventListener("keydown", this.keydown);
+        document.removeEventListener("mousedown", this.mousedown);
+        document.removeEventListener("contextmenu", this.contextmenu);
     }
 }
 
 window.game = new Game();
 game.play();
 
-window.addEventListener("keydown", evt => {
-    if (!window.game) {
-        return;
-    }
-    const game = window.game;
-    switch (evt.key) {
-        case "ArrowRight":
-            game.ship.moveRight();
-            break;
-        case "ArrowLeft":
-            game.ship.moveLeft();
-            break;
-        case"ArrowUp":
-            game.ship.moveUp();
-            break;
-        case "ArrowDown":
-            game.ship.moveDown();
-            break;
-        case "a":
-            if (game.ship.totalAmmo.length > 0) {
-                const ammo = game.ship.totalAmmo.pop();
-                game.ship.shoot(game.spammos, game.ship.angle, ammo.imgId, 10);
-            }
-            break;
-        case "s":
-            game.ship.shoot(game.ammos, game.ship.angle, "ammo0");
-            break;
-    }
-});
+

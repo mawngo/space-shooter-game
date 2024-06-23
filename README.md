@@ -9,13 +9,13 @@ Một game ngu học.
 ### 1. Điều Khiển
 
 - Di chuyển bằng phím mũi tên
-- S để bắn đạn đểu:
+- S hoặc chuột trái để bắn đạn đểu:
     - Có thể bắn tùy thích
     - Đạn đểu có 50% phá hủy thiên thạch :))
     - Nảy lại khi va chạm
     - Va chạm với đạn đểu sẽ mất máu và điểm
     - Tuân theo các định luật vật lý :))
-- A để bắn đạn xịn vừa nhặt được:
+- A hoặc chuột phải để bắn đạn xịn vừa nhặt được:
     - Số lượng có hạn
     - Effect phụ thuộc vào loại đạn
     - Có 100% tỷ lệ bắn vỡ thiên thạch
