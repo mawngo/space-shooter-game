@@ -1,7 +1,7 @@
 {
     "applicationId" : "mawngo.asteroids",
     "defaultMode" : "window",
-    "version" : "2.5.0",
+    "version" : "2.5.1",
     "resourcesURL" : "https://github.com/mawngo/space-shooter-game/raw/master/releases/resources.neu",
     "port" : 0,
     "url" : "/resources/",
