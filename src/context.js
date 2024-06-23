@@ -89,12 +89,6 @@ export function drawImgInBall(container, shadow = false, imgId = container.imgId
     ctx.restore();
 }
 
-export function drawBackGround() {
-    ctx.beginPath();
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-}
-
-
 //img id only
 export function rockGenerator(maxImg) {
     let innerImg = "";

@@ -4,7 +4,6 @@ import {
     canvasClean,
     config,
     ctx,
-    drawBackGround,
     drawImgInBall,
     explosiveGenerator,
     itemsGenerator,
@@ -235,7 +234,6 @@ export class Game {
 
     redraw() {
         canvasClean();
-        drawBackGround();
         this.drawAmmo();
         this.drawSpecialAmmo();
         this.drawItem();
@@ -342,6 +340,64 @@ export class Game {
         document.addEventListener("mousedown", this.mousedown);
         this.contextmenu = e => e.preventDefault();
         document.addEventListener("contextmenu", this.contextmenu);
+
+
+        this.touchstart = evt => {
+            if (evt.touches.length > 1) {
+                this.multitouch = evt.touches.length;
+                return;
+            }
+            this.touchX = evt.changedTouches[0].screenX;
+            this.touchY = evt.changedTouches[0].screenY;
+        };
+
+        this.touchend = evt => {
+            const game = this;
+            if (this.multitouch) {
+                this.multitouch--;
+                if (this.multitouch === 1 && game.ship.totalAmmo.length > 0) {
+                    const ammo = game.ship.totalAmmo.pop();
+                    game.ship.shoot(game.spammos, game.ship.angle, ammo.imgId, 10);
+                }
+                return;
+            }
+            if (this.touchX === undefined || this.touchY === undefined) {
+                return;
+            }
+            const pageWidth = window.innerWidth || document.body.clientWidth;
+            const threshold = Math.max(1, Math.floor(0.01 * (pageWidth)));
+            const touchendX = evt.changedTouches[0].screenX;
+            const touchendY = evt.changedTouches[0].screenY;
+            const touchstartX = this.touchX;
+            const touchstartY = this.touchY;
+            this.touchY = undefined;
+            this.touchX = undefined;
+            const limit = Math.tan(45 * 1.5 / 180 * Math.PI);
+            let x = touchendX - touchstartX;
+            let y = touchendY - touchstartY;
+            let xy = Math.abs(x / y);
+            let yx = Math.abs(y / x);
+            if (Math.abs(x) > threshold || Math.abs(y) > threshold) {
+                if (yx <= limit) {
+                    if (x < 0) {
+                        game.ship.moveLeft();
+                    } else {
+                        game.ship.moveRight();
+                    }
+                }
+                if (xy <= limit) {
+                    if (y < 0) {
+                        game.ship.moveUp();
+                    } else {
+                        game.ship.moveDown();
+                    }
+                }
+                return;
+            }
+            game.ship.shoot(game.ammos, game.ship.angle, "ammo0");
+        };
+        document.addEventListener("touchstart", this.touchstart);
+        document.addEventListener("touchend", this.touchend);
     }
 
     stop() {
@@ -350,6 +406,8 @@ export class Game {
         document.removeEventListener("keydown", this.keydown);
         document.removeEventListener("mousedown", this.mousedown);
         document.removeEventListener("contextmenu", this.contextmenu);
+        document.removeEventListener("touchstart", this.touchstart);
+        document.removeEventListener("touchend", this.touchend);
     }
 }
 

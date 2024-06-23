@@ -19,6 +19,10 @@ Một game ngu học.
     - Số lượng có hạn
     - Effect phụ thuộc vào loại đạn
     - Có 100% tỷ lệ bắn vỡ thiên thạch
+- Đối với màn hình cảm ứng:
+    - Vuốt để đổi hướng
+    - Chạm để bắn đạn đểu
+    - Chạm bằng 2 ngón để bắn đạn xịn
 
 ### 2. Item
 
