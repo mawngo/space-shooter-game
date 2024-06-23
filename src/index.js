@@ -10,14 +10,14 @@ import {
     itemsGenerator,
     radRate,
     rainbow,
-    rockGenerator,
-    showConfirmBox
+    rockGenerator
 } from "./context";
 import { Ship, Spawner } from "./object/ship";
 import { Item } from "./object/items";
 
 export class Game {
     constructor() {
+        this.loops = [];
         this.level = 0;
         this.score = 0;
         this.items = [];
@@ -188,15 +188,8 @@ export class Game {
             if (highLevel < this.level) {
                 localStorage.setItem("highLevel", this.level);
             }
-            canvasClean();
-            drawBackGround();
-            setTimeout(async () => {
-                if (await showConfirmBox("You lose", "Play again?")) {
-                    window.location.reload();
-                } else {
-                    window.location.href = "index.html";
-                }
-            }, 1000);
+            stop();
+            setTimeout(() => document.getElementById("overlay").classList.add("visible"), 300);
         }
         this.ship.toObj(this.spawner);
         this.ship.toEdge();
@@ -229,63 +222,64 @@ export class Game {
         this.shipState();
         this.itemState();
     }
-}
 
-const game = new Game();
-let loops = [];
-rockGenerator(7);
-ammoGenerator(3);
-itemsGenerator(4);
-explosiveGenerator(5);
-registerCloseHandler();
+    play() {
+        const setupGamePlay = () => {
+            canvasClean();
+            drawBackGround();
+            this.combineState();
+            this.drawExplosion();
+            this.drawAmmo();
+            this.drawBall();
+            drawImgInBall(this.spawner, true);
+            drawImgInBall(this.ship, true);
+            this.displayScore(15, 60);
+            if (this.ship.health > 0) {
+                this.loops.push(setTimeout(setupGamePlay, 20));
+            } else {
+                drawImgInBall(this.ship, false, "explosive1");
+            }
+        };
 
-setupScore();
-setupGamePlay();
-makeGameHarder();
-spawnBalls();
+        const makeGameHarder = () => {
+            this.level++;
+            this.loops.push(setTimeout(makeGameHarder, config.game.timePerLevel));
+        };
 
-function registerCloseHandler() {
-    if (!window.Neu) return;
-    window.Neu.events.on("windowClose", () => {
-        loops.forEach(clearTimeout);
-        window.Neu.app.exit();
-    });
-}
+        const spawnBalls = () => {
+            this.spawner.spawn(game.balls, game.level);
+            this.spawner.color = rainbow(Math.random());
+            this.loops.push(setTimeout(spawnBalls, config.game.timePerSpawn));
+        };
 
-function setupGamePlay() {
-    canvasClean();
-    drawBackGround();
-    game.combineState();
-    game.drawExplosion();
-    game.drawAmmo();
-    game.drawBall();
-    drawImgInBall(game.spawner, true);
-    drawImgInBall(game.ship, true);
-    game.displayScore(15, 60);
-    if (game.ship.health > 0) {
-        loops.push(setTimeout(setupGamePlay, 20));
-    } else {
-        drawImgInBall(game.ship, false, "explosive1");
+        const setupScore = () => {
+            this.score += game.level * config.game.survivalLevelBonus + Math.floor((game.balls.length + game.ammos.length) * config.game.survivalAsteroidBonus);
+            this.loops.push(setTimeout(setupScore, config.game.timePerSurvivalScore));
+        };
+
+        rockGenerator(7);
+        ammoGenerator(3);
+        itemsGenerator(4);
+        explosiveGenerator(5);
+        setupScore();
+        setupGamePlay();
+        makeGameHarder();
+        spawnBalls();
+    }
+
+    stop() {
+        this.loops.forEach(clearTimeout);
     }
 }
 
-function makeGameHarder() {
-    game.level++;
-    loops.push(setTimeout(makeGameHarder, config.game.timePerLevel));
-}
-
-function spawnBalls() {
-    game.spawner.spawn(game.balls, game.level);
-    game.spawner.color = rainbow(Math.random());
-    loops.push(setTimeout(spawnBalls, config.game.timePerSpawn));
-}
-
-function setupScore() {
-    game.score += game.level * config.game.survivalLevelBonus + Math.floor((game.balls.length + game.ammos.length) * config.game.survivalAsteroidBonus);
-    loops.push(setTimeout(setupScore, config.game.timePerSurvivalScore));
-}
+window.game = new Game();
+game.play();
 
 window.addEventListener("keydown", evt => {
+    if (!window.game) {
+        return;
+    }
+    const game = window.game;
     switch (evt.key) {
         case "ArrowRight":
             game.ship.moveRight();

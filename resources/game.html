@@ -12,9 +12,56 @@
             right: 0;
             margin: auto;
         }
+
+        #overlay {
+            position: fixed;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 2;
+            opacity: 0;
+            visibility: hidden;
+            display: none;
+            animation: slideInOut 1.2s ease-in-out;
+        }
+
+        #overlay.visible {
+            opacity: 1;
+            visibility: visible;
+            display: flex;
+        }
+
+        @keyframes slideInOut {
+            0% {
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-200px);
+            }
+
+            100% {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+        }
     </style>
+    <link rel="stylesheet" href="mvp.css">
 </head>
 <body style="background: black">
+<div id="overlay">
+    <header style="text-align: center">
+        <h1 style="font-size: 5rem">You Lose</h1>
+        <h1><a style="text-decoration: none" onclick="window.location.reload()">Play Again</a></h1>
+        <h2><a href="index.html" style="text-decoration: none">Home</a></h2>
+        <h2 id="quit" style="display: none"><a href="#" style="text-decoration: none">Quit</a></h2>
+    </header>
+</div>
 <div id="img-dir">
     <img alt="universe" src="img/universe.jpg" style="display: none" id="background">
     <img alt="ship" src="img/ship.png" id="ship" style="display: none">
