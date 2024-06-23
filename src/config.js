@@ -1,6 +1,7 @@
 export function loadConfig() {
     return {
         game: {
+            spawnerRadius: 110,
             timePerSpawn: 15000,
             timePerLevel: 60000,
             timePerSurvivalScore: 5000,
@@ -9,7 +10,7 @@ export function loadConfig() {
             itemDropMultiplierWhenExploreToChild: 0.2,
             itemDropMultiplierUseSpecialAmmo: 0.05,
             multiDrop: false,
-            tick: 20,
+            tick: 20
         },
         asteroid: {
             spin: 0.3,
