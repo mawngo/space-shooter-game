@@ -69,7 +69,6 @@ export class Game {
                 }
             }
             ammo.makeAMove();
-            drawImgInBall(ammo);
         }
     };
 
@@ -177,7 +176,13 @@ export class Game {
         }
     };
 
-     drawItem() {
+    drawSpecialAmmo() {
+        for (const ammo of this.spammos) {
+            drawImgInBall(ammo);
+        }
+    };
+
+    drawItem() {
         for (const item of this.items) {
             drawImgInBall(item);
         }
@@ -231,10 +236,11 @@ export class Game {
     redraw() {
         canvasClean();
         drawBackGround();
-        this.drawExplosion();
         this.drawAmmo();
-        this.drawBall();
+        this.drawSpecialAmmo();
         this.drawItem();
+        this.drawBall();
+        this.drawExplosion();
         drawImgInBall(this.spawner, true);
         drawImgInBall(this.ship, true);
         this.displayScore(15, 60);
