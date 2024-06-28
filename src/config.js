@@ -18,7 +18,7 @@ export function loadConfig() {
             childrenSizeRatio: 0.65,
             minimalSizeCanSplit: 30,
             minNumberOfChild: 1,
-            maxNumberOfChild: 3,
+            maxNumberOfChild: 2,
             minSize: 60,
             maxSize: 100,
             minSpeed: 0,
@@ -45,7 +45,7 @@ export function loadConfig() {
             item0: {
                 name: "Blue Ammo",
                 amount: 3,
-                rate: 0.12
+                rate: 0.11
             },
             item1: {
                 name: "Burger",
