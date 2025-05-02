@@ -56,16 +56,18 @@ npm run bin
 npm start
 ```
 
-Trên window Neutralino sử dụng EdgeChromium để làm browser. vì vậy bạn cần chạy command sau trên PowerShell (với quyền
+Trên window [Neutralinojs](https://github.com/neutralinojs/neutralinojs) sử dụng EdgeChromium để làm browser. vì vậy bạn
+cần chạy command sau trên PowerShell (với quyền
 admin)
 
 ```shell
 CheckNetIsolation.exe LoopbackExempt -a -n="Microsoft.Win32WebViewHost_cw5n1h2txyewy"
 ```
 
-Câu lệnh trên cho phép neutralino (và các ứng dụng UWP) truy cập vào localhost trên Edge
+Câu lệnh trên cho phép [Neutralinojs](https://github.com/neutralinojs/neutralinojs) (và các ứng dụng UWP) truy cập vào
+localhost trên Edge
 
-### Build project
+### Build Project
 
 Câu lệnh sau sẽ đóng gói ứng dụng ra folder dist.
 
