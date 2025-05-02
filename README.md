@@ -56,20 +56,22 @@ npm run bin
 npm start
 ```
 
-Trên window [Neutralinojs](https://github.com/neutralinojs/neutralinojs) sử dụng EdgeChromium để làm browser. vì vậy bạn
+#### Window
+
+Trên window neutralinojs sử dụng EdgeChromium để làm browser. Vì vậy, bạn
 cần chạy command sau trên PowerShell (với quyền
-admin)
+admin):
 
 ```shell
 CheckNetIsolation.exe LoopbackExempt -a -n="Microsoft.Win32WebViewHost_cw5n1h2txyewy"
 ```
 
-Câu lệnh trên cho phép [Neutralinojs](https://github.com/neutralinojs/neutralinojs) (và các ứng dụng UWP) truy cập vào
-localhost trên Edge
+Câu lệnh trên cho phép [neutralinojs](https://github.com/neutralinojs/neutralinojs) (và các ứng dụng UWP) truy cập vào
+localhost trên Edge.
 
 ### Build Project
 
-Câu lệnh sau sẽ đóng gói ứng dụng ra folder dist.
+Câu lệnh sau sẽ đóng gói ứng dụng với tên `asteroids-release.zip` ra folder `dist`, và cập nhật `resources` files:
 
 ```shell
 npm run build
