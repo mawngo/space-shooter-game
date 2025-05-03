@@ -1,8 +1,11 @@
 {
     "applicationId" : "mawngo.asteroids",
     "defaultMode" : "window",
-    "version" : "2.6.0",
-    "resourcesURL" : "https://github.com/mawngo/space-shooter-game/raw/master/releases/resources.neu",
+    "version" : "2.8.0",
+    "applicationName" : "Asteroids Game",
+    "author" : "Nguyen Toan",
+    "description" : "Simple space shooter game",
+    "copyright" : "Copyright © Nguyen Toan. All rights reserved.",
     "port" : 0,
     "url" : "/resources/",
     "enableServer" : true,
@@ -38,7 +41,6 @@
     },
     "cli" : {
         "binaryName" : "asteroids",
-        "resourcesPath" : "/resources/",
-        "binaryVersion" : "5.2.0"
+        "resourcesPath" : "/resources/"
     }
 }

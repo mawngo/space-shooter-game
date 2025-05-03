@@ -76,3 +76,7 @@ Câu lệnh sau sẽ đóng gói ứng dụng với tên `asteroids-release.zip`
 ```shell
 npm run build
 ```
+
+### Versioning
+
+Sửa version trong file `neutralino.config.js`

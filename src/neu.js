@@ -1,6 +1,7 @@
 import { app as a, events as e, init, os, window as w } from "@neutralinojs/lib";
 
 try {
+    window.localStorage.setItem("version", VERSION);
     init();
 
     window.Neu = {
