@@ -27,7 +27,9 @@ jobs:
       - name: Build Web Release
         run: |
           rm -rf asteroids-web.zip
-          zip -r asteroids-web.zip resources/*
+          cd resources
+          zip -r ../asteroids-web.zip .
+          cd ..
       - name: Publish Release
         uses: softprops/action-gh-release@v2
         with:
