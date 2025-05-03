@@ -39,6 +39,19 @@ Một game ngu học.
 - Thiên thạch có thể vỡ thành nhiều thiên thạch con, Sát thương và điểm số phụ thuộc vào kích thước của thiên thạch
 - Thiên thạch nảy lại khi va chạm, và tuân theo định luật vật lý :D
 
+## Sửa lỗi trắng màn hình trên Windows
+
+Trên window neutralinojs sử dụng EdgeChromium để làm browser. Vì vậy, bạn
+cần chạy command sau trên PowerShell (với quyền
+admin):
+
+```shell
+CheckNetIsolation.exe LoopbackExempt -a -n="Microsoft.Win32WebViewHost_cw5n1h2txyewy"
+```
+
+Câu lệnh trên cho phép [neutralinojs](https://github.com/neutralinojs/neutralinojs) (và các ứng dụng UWP) truy cập vào
+localhost trên Edge.
+
 ## Phát triển game này
 
 ### Clone Project
@@ -55,19 +68,6 @@ npm run bin
 ```shell
 npm start
 ```
-
-#### Window
-
-Trên window neutralinojs sử dụng EdgeChromium để làm browser. Vì vậy, bạn
-cần chạy command sau trên PowerShell (với quyền
-admin):
-
-```shell
-CheckNetIsolation.exe LoopbackExempt -a -n="Microsoft.Win32WebViewHost_cw5n1h2txyewy"
-```
-
-Câu lệnh trên cho phép [neutralinojs](https://github.com/neutralinojs/neutralinojs) (và các ứng dụng UWP) truy cập vào
-localhost trên Edge.
 
 ### Build Project
 
