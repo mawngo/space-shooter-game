@@ -32,7 +32,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           make_latest: true
-          tag_name: v2.7.0
           files: |
             INSTALL.md
             dist/asteroids-release.zip
