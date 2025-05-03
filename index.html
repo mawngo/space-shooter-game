@@ -25,6 +25,7 @@
         <h3 id="high"></h3>
     </div>
     <div></div>
+    <div id="version" style="position: absolute; bottom: 1rem; right: 1rem"></div>
 </header>
 <script src="__neutralino_globals.js"></script>
 <script src="neu.min.js"></script>
@@ -38,6 +39,10 @@
     const highLevel = Number(localStorage.getItem("highLevel") || "0");
     if (highLevel && highScore) {
         document.getElementById("high").innerHTML = `High Score: ${highScore} (Level ${highLevel})`
+    }
+    const version = localStorage.getItem("version");
+    if (version) {
+        document.getElementById("version").innerHTML = `v${version}`
     }
 </script>
 </body>

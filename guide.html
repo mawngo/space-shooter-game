@@ -64,6 +64,7 @@
     </article>
     <div style="flex-grow: 1"></div>
 </main>
+<div id="version" style="float: right; margin: 1rem"></div>
 <script src="__neutralino_globals.js"></script>
 <script src="neu.min.js"></script>
 <script>
@@ -71,6 +72,10 @@
         window.Neu.events.on("windowClose", () => {
             window.Neu.app.exit();
         });
+    }
+    const version = localStorage.getItem("version");
+    if (version) {
+        document.getElementById("version").innerHTML = `v${version}`
     }
 </script>
 </body>
