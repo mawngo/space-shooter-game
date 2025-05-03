@@ -13,7 +13,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, "resources"),
-        filename: "[name].js"
+        filename: "[name].min.js"
     },
     experiments: {
         topLevelAwait: true
