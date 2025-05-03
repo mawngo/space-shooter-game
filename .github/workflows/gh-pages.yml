@@ -3,9 +3,8 @@ name: Deploy to GitHub Pages
 on:
   pull_request:
   push:
-    # run only against tags
-    tags:
-      - "*"
+    branches:
+      - master
 
 jobs:
   build:
@@ -14,8 +13,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
