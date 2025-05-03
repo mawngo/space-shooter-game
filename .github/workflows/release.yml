@@ -4,8 +4,8 @@ on:
   pull_request:
   push:
     # run only against tags
-    branches:
-      - master
+    tags:
+      - "*"
 
 jobs:
   build:
@@ -22,14 +22,18 @@ jobs:
           node-version: '22.14.0'
       - name: Install dependencies
         run: npm ci
-      - name: Build
+      - name: Build App Release
         run: npm run build
-      - name: Release
+      - name: Build Web Release
+        run: |
+          rm -rf asteroids-web.zip
+          zip -r asteroids-web.zip resources/*
+      - name: Publish Release
         uses: softprops/action-gh-release@v2
         with:
           make_latest: true
           tag_name: v2.7.0
           files: |
-            README.md
-            LICENSE
-            dist/astroids/*
+            INSTALL.md
+            dist/asteroids-release.zip
+            asteroids-web.zip
