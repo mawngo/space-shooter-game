@@ -1,7 +1,11 @@
 .idea/
 node_modules/
 dist/
-*.log
-**/neutralino.js
 bin/
+
 .tmp/
+**/neutralino.js
+*.log
+
+resources/game.min.js
+resources/neu.min.js
