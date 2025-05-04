@@ -1,21 +1,28 @@
 import { loadConfig } from "./config";
 
-export const canvas = document.getElementById("screen");
-export const ctx = canvas.getContext("2d");
 export const config = loadConfig(window.gameConfig);
 export const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 export const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+export const width = vw - 6;
+export const height = vh - 6;
+
 const scaleRatio = Math.min(1,
   1 - (1920 - Math.max(vw, 500)) * (0.4 / (1920 - 500)),
   1 - (1080 - Math.max(vh, 900)) * (0.1 / (1080 - 900))
 );
 console.log(`Resolution: ${vw} x ${vh} (${scaleRatio})`);
 
-
 const imgDir = document.getElementById("img-dir");
-
-canvas.width = window.innerWidth - 10;
-canvas.height = window.innerHeight - 10;
+const canvas = document.getElementById("screen");
+export const ctx = canvas.getContext("2d");
+if (window.devicePixelRatio) {
+    const ratio = Math.ceil(window.devicePixelRatio);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    canvas.width = width * ratio;
+    canvas.height = height * ratio;
+    ctx.scale(ratio, ratio);
+}
 
 export function rainbow(h) {
     let r, g, b;

@@ -1,13 +1,14 @@
 import {
-    canvas,
     config,
     drawImgInBall,
     explosiveRadId,
+    height,
     radNum,
     rainbow,
     rockRadId,
     scale,
-    sqrtOf2Sqr
+    sqrtOf2Sqr,
+    width
 } from "../context";
 
 export class Ball {
@@ -15,8 +16,8 @@ export class Ball {
         this.imgId = imgId || rockRadId(7);
         this.spinSpeed = spinSpeed === 0 ? 0 : (spinSpeed || config.asteroid.spin);
         this.isExist = true;
-        this.x = x || canvas.width / 2;
-        this.y = y || canvas.height / 2;
+        this.x = x || width / 2;
+        this.y = y || height / 2;
         this.color = color || rainbow(Math.random());
         this.radius = scale(radius || radNum(config.asteroid.maxSize, config.asteroid.minSize));
         this.xSpeed = scale(xSpeed || radNum(config.asteroid.maxSpeed, config.asteroid.minSpeed));
@@ -54,15 +55,15 @@ export class Ball {
             this.x = this.radius;
             this.xSpeed *= -1;
 
-        } else if (this.x >= (canvas.width - this.radius)) {
-            this.x = canvas.width - this.radius;
+        } else if (this.x >= (width - this.radius)) {
+            this.x = width - this.radius;
             this.xSpeed *= -1;
 
         } else if (this.y <= this.radius) {
             this.y = this.radius;
             this.ySpeed *= -1;
-        } else if (this.y >= (canvas.height - this.radius)) {
-            this.y = canvas.height - this.radius;
+        } else if (this.y >= (height - this.radius)) {
+            this.y = height - this.radius;
             this.ySpeed *= -1;
         }
     };
