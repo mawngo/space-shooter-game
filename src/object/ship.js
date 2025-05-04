@@ -7,7 +7,7 @@ export class Ship extends Ball {
         super(x, y, config.ship.size, color, 0.2, 0.2);
         this.color = color || "white";
         this.imgId = imgId || "ship";
-        this.speed = speed || config.ship.speed;
+        this.speed = scale(speed || config.ship.speed);
         this.health = health || config.ship.health;
         this.spinSpeed = config.ship.spin;
         this.totalAmmo = [];

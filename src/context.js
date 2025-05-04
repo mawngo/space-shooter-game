@@ -8,7 +8,7 @@ export const height = vh - 6;
 
 const scaleRatio = Math.min(1,
   1 - (1920 - Math.max(vw, 500)) * (0.4 / (1920 - 500)),
-  1 - (1080 - Math.max(vh, 900)) * (0.1 / (1080 - 900))
+  1 - (900 - Math.max(vh, 500)) * (0.2 / (900 - 500))
 );
 console.log(`Resolution: ${vw} x ${vh} (${scaleRatio})`);
 
