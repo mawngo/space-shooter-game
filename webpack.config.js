@@ -4,7 +4,7 @@ const webpack = require('webpack');
 module.exports = {
     entry: {
         game: "./src/index.js",
-        neu: "./src/neu.js"
+        init: "./src/init.js"
     },
     plugins: [
         new webpack.DefinePlugin({

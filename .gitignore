@@ -8,4 +8,4 @@ bin/
 *.log
 
 resources/game.min.js
-resources/neu.min.js
+resources/init.min.js
