@@ -1,4 +1,14 @@
-import { canvas, config, drawImgInBall, explosiveRadId, radNum, rainbow, rockRadId, sqrtOf2Sqr } from "../context";
+import {
+    canvas,
+    config,
+    drawImgInBall,
+    explosiveRadId,
+    radNum,
+    rainbow,
+    rockRadId,
+    scale,
+    sqrtOf2Sqr
+} from "../context";
 
 export class Ball {
     constructor(x, y, radius, color, xSpeed, ySpeed, imgId, spinSpeed) {
@@ -8,9 +18,9 @@ export class Ball {
         this.x = x || canvas.width / 2;
         this.y = y || canvas.height / 2;
         this.color = color || rainbow(Math.random());
-        this.radius = radius || radNum(config.asteroid.maxSize, config.asteroid.minSize);
-        this.xSpeed = xSpeed || radNum(config.asteroid.maxSpeed, config.asteroid.minSpeed);
-        this.ySpeed = ySpeed || radNum(config.asteroid.maxSpeed, config.asteroid.minSpeed);
+        this.radius = scale(radius || radNum(config.asteroid.maxSize, config.asteroid.minSize));
+        this.xSpeed = scale(xSpeed || radNum(config.asteroid.maxSpeed, config.asteroid.minSpeed));
+        this.ySpeed = scale(ySpeed || radNum(config.asteroid.maxSpeed, config.asteroid.minSpeed));
         this.angle = 0;
         this.damage = this.radius * config.asteroid.damagePerRadius;
     }

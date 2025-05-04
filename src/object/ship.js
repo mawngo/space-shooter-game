@@ -1,6 +1,6 @@
 import { Ball } from "./ball";
 import { Ammo } from "./items";
-import { config } from "../context";
+import { config, scale } from "../context";
 
 export class Ship extends Ball {
     constructor(x, y, speed, health, color, imgId) {
@@ -15,10 +15,10 @@ export class Ship extends Ball {
 
 
     shoot(ammos, angle = this.angle, imgId, size) {
-        const xSpeed = config.ammo.speed * Math.cos((angle - 90) * Math.PI / 180);
-        const ySpeed = config.ammo.speed * Math.sin((angle - 90) * Math.PI / 180);
-        const x = this.x + (this.radius + config.ammo.size + 1) * Math.cos((angle - 90) * Math.PI / 180);
-        const y = this.y + (this.radius + config.ammo.size + 1) * Math.sin((angle - 90) * Math.PI / 180);
+        const xSpeed = scale(config.ammo.speed) * Math.cos((angle - 90) * Math.PI / 180);
+        const ySpeed = scale(config.ammo.speed) * Math.sin((angle - 90) * Math.PI / 180);
+        const x = this.x + (this.radius + scale(config.ammo.size) + 1) * Math.cos((angle - 90) * Math.PI / 180);
+        const y = this.y + (this.radius + scale(config.ammo.size) + 1) * Math.sin((angle - 90) * Math.PI / 180);
         ammos.push(new Ammo(x, y, xSpeed, ySpeed, imgId, size));
     };
 

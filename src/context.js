@@ -5,7 +5,12 @@ export const ctx = canvas.getContext("2d");
 export const config = loadConfig(window.gameConfig);
 export const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 export const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
-console.log("Resolution " + vw + "x" + vh);
+const scaleRatio = Math.min(1,
+  1 - (1920 - Math.max(vw, 500)) * (0.4 / (1920 - 500)),
+  1 - (1080 - Math.max(vh, 900)) * (0.1 / (1080 - 900))
+);
+console.log(`Resolution: ${vw} x ${vh} (${scaleRatio})`);
+
 
 const imgDir = document.getElementById("img-dir");
 
@@ -138,4 +143,8 @@ export function explosiveGenerator(maxImg) {
                     + i + "\" style=\"display: none\">";
     }
     imgDir.innerHTML += innerImg;
+}
+
+export function scale(size) {
+    return size * scaleRatio;
 }
