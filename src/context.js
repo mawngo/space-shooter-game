@@ -2,7 +2,10 @@ import { loadConfig } from "./config";
 
 export const canvas = document.getElementById("screen");
 export const ctx = canvas.getContext("2d");
-export const config = window.gameConfig || loadConfig();
+export const config = loadConfig(window.gameConfig);
+export const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+export const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+console.log("Resolution " + vw + "x" + vh);
 
 const imgDir = document.getElementById("img-dir");
 

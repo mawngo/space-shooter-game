@@ -1,4 +1,4 @@
-export function loadConfig() {
+export function loadConfig(overrideConfig) {
     return {
         game: {
             spawnerRadius: 110,
@@ -67,6 +67,7 @@ export function loadConfig() {
                 rate: 0.3,
                 score: 30
             }
-        }
+        },
+        ...(overrideConfig || {})
     };
 }

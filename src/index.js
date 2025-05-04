@@ -9,7 +9,8 @@ import {
     itemsGenerator,
     radRate,
     rainbow,
-    rockGenerator
+    rockGenerator, vh,
+    vw
 } from "./context";
 import { Ship, Spawner } from "./object/ship";
 import { Item } from "./object/items";
@@ -206,17 +207,25 @@ export class Game {
         this.ship.makeAMove();
     };
 
-    displayScore(x, y) {
-        ctx.font = "25px Verdana";
+    displayScore() {
+        const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+        let fontSize = Math.ceil(vw / 300 + rem);
+        const expectedElementsHeight = 2.5 + 4.4 + 0.5;
+        if (fontSize * expectedElementsHeight > vh * 0.4) {
+            fontSize = Math.ceil(vh / 200 + rem);
+        }
+        const x = Math.min(Math.ceil(fontSize * 0.6), 20);
+        const y = Math.floor(fontSize * 2.5);
+        ctx.font = `${fontSize}px Verdana`;
         ctx.fillStyle = "white";
-        ctx.fillText("Stage   " + game.level, x, y - 30);
+        ctx.fillText("Stage   " + game.level, x, y - Math.ceil(1.2 * fontSize));
         ctx.fillText("Health  " + Math.floor(this.ship.health), x, y);
-        ctx.fillText("Items   " + this.ship.totalAmmo.length, x, y + 30);
-        ctx.fillText("Score   " + this.score, x, y + 110);
+        ctx.fillText("Items   " + this.ship.totalAmmo.length, x, y + Math.ceil(1.2 * fontSize));
+        ctx.fillText("Score   " + this.score, x, y + Math.ceil(fontSize * 4.4));
 
         const ammo = this.ship.totalAmmo.length ? this.ship.totalAmmo[this.ship.totalAmmo.length - 1].imgId : "";
         const text = config.items.ammos[ammo] || "None";
-        ctx.fillText("Ammo  " + text, x, y + 60);
+        ctx.fillText("Ammo  " + text, x, y + Math.ceil(fontSize * 2.4));
     };
 
     drawExplosion() {
@@ -247,7 +256,7 @@ export class Game {
         this.drawExplosion();
         drawImgInBall(this.spawner, true);
         drawImgInBall(this.ship, true);
-        this.displayScore(15, 60);
+        this.displayScore();
     }
 
     play() {
