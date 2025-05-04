@@ -139,11 +139,3 @@ export function explosiveGenerator(maxImg) {
     }
     imgDir.innerHTML += innerImg;
 }
-
-export async function showConfirmBox(title, message) {
-    if (window.Neu) {
-        const confirm = await window.Neu.os.showMessageBox(title, message, "YES_NO");
-        return confirm === "YES";
-    }
-    return confirm(message);
-}
