@@ -2,9 +2,7 @@
 
 [Play the Game](https://mawngo.github.io/space-shooter-game/) | [Read the Guide](https://mawngo.github.io/space-shooter-game/guide.html) | [Install](INSTALL.md)
 
-## Luật chơi
-
-Một game ngu học.
+![](assets/image.png)
 
 ### 1. Điều Khiển
 
