@@ -26,6 +26,7 @@ jobs:
         run: npm run build
       - name: Build Web Release
         run: |
+          echo "$GITHUB_REF_NAME" >> version.txt
           rm -rf asteroids-web.zip
           cd resources
           zip -r ../asteroids-web.zip .
@@ -38,3 +39,4 @@ jobs:
             INSTALL.md
             dist/asteroids-release.zip
             asteroids-web.zip
+            version.txt
