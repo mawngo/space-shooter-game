@@ -1,7 +1,7 @@
 {
     "applicationId" : "mawngo.asteroids",
     "defaultMode" : "window",
-    "version" : "2.9.0",
+    "version" : "2.9.1",
     "applicationName" : "Asteroids Game",
     "author" : "Nguyen Toan",
     "description" : "Simple space shooter game",
