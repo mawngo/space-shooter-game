@@ -2,9 +2,12 @@ import { app as a, events as e, init, os, window as w } from "@neutralinojs/lib"
 
 window.localStorage.setItem("gameVersion", getParam("gameVersion") || VERSION);
 window.localStorage.setItem("gameControlMode", getParam("gameControlMode"));
-// Pre-send so the container injected script can detect the current version of the app.
 if (window.onGameVersion) {
-    window.onGameVersion(window.localStorage.getItem("gameVersion"));
+    try {
+        window.onGameVersion(window.localStorage.getItem("gameVersion"));
+    } catch (e) {
+        console.error(e);
+    }
 }
 window.addEventListener("load", () => {
     document.dispatchEvent(new CustomEvent("gameVersion", {
@@ -23,7 +26,11 @@ document.addEventListener("gameQuit", () => {
         window.game.stop();
     }
     if (window.onGameQuit) {
-        window.onGameQuit();
+        try {
+            window.onGameQuit();
+        } catch (e) {
+            console.error(e);
+        }
     }
 });
 
