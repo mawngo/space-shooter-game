@@ -78,15 +78,19 @@
 <script src="__neutralino_globals.js"></script>
 <script src="init.min.js"></script>
 <script>
-    if (window.Neu) {
-        window.Neu.events.on("windowClose", () => {
-            window.Neu.app.exit();
-        });
-    }
-    const version = localStorage.getItem("version");
+    const version = localStorage.getItem("gameVersion");
     if (version) {
         document.getElementById("version").innerHTML = `v${version}`
     }
+
+    const gameControlMode = localStorage.getItem("gameControlMode");
+    if (gameControlMode === "touch") {
+        document.querySelectorAll("[data-name=\"keyboard-controls\"]").forEach(e => e.remove());
+    }
+    if (gameControlMode === "keyboard") {
+        document.querySelector("[data-name=\"touch-controls\"]").forEach(e => e.remove());
+    }
+
 </script>
 </body>
 </html>
