@@ -8,33 +8,38 @@ Một game ngu học.
 
 ### 1. Điều Khiển
 
-- Di chuyển bằng phím mũi tên
-- S hoặc chuột trái để bắn đạn đểu:
+#### Bàn phím:
+
+- Di chuyển bằng **các phím mũi tên**
+- **phím s** hoặc **chuột trái** để bắn đạn đểu:
     - Có thể bắn tùy thích
     - Đạn đểu có 50% phá hủy thiên thạch :))
     - Nảy lại khi va chạm
     - Va chạm với đạn đểu sẽ mất máu và điểm
     - Tuân theo các định luật vật lý :))
-- A hoặc chuột phải để bắn đạn xịn vừa nhặt được:
+- **phím a** hoặc **chuột phải** để bắn đạn xịn vừa nhặt được:
     - Số lượng có hạn
     - Effect phụ thuộc vào loại đạn
     - Có 100% tỷ lệ bắn vỡ thiên thạch
-- Đối với màn hình cảm ứng:
-    - Vuốt để đổi hướng
-    - Chạm để bắn đạn đểu
-    - Chạm bằng 2 ngón để bắn đạn xịn
+
+#### Màn hình cảm ứng:
+
+- Vuốt để đổi hướng
+- Chạm để bắn đạn đểu
+- Chạm bằng 2 ngón để bắn đạn xịn
 
 ### 2. Item
 
-- Burger - Hồi máu
-- Tiền - cộng điểm điểm
-- 1 viên đạn (đạn đỏ) - 100 % phá hủy thiên thạch, nảy lại khi chạm tường, và hồi máu khi va chạm với người chơi
-- 3 viên đạn (đạn xanh) - đạn bắn ra 100% phá hủy thiên thạch, không nảy lại khi chạm tường
-- Vòng xoáy (đạn vòng tròn) - Xóa toàn bộ thiên thạch và đạn đang tồn tại
+- **Burger**: Hồi máu
+- **Tiền**: cộng điểm điểm
+- **1 viên đạn** (bắn ra đạn đỏ):Bắn ra đạn đỏ với 100% phá hủy thiên thạch, nảy lại khi chạm tường, và hồi máu khi va
+  chạm với người chơi
+- **3 viên đạn** (bắn ra đạn xanh): Bắn ra đạn xanh với 100% phá hủy thiên thạch, không nảy lại khi chạm tường
+- **Vòng xoáy** (đạn vòng tròn) - Xóa toàn bộ thiên thạch và đạn đang tồn tại
 
 ### 3. Thiên thạch
 
-- Sinh ra từ hành tinh trung tâm, số lượng tăng theo thời gian.
+- Sinh ra từ hành tinh trung tâm, số lượng tăng theo thời gian
 - Va chạm với thiên thạch khiến nó bị phá hủy, và gây sát thương lên người chơi
 - Thiên thạch có thể vỡ thành nhiều thiên thạch con, Sát thương và điểm số phụ thuộc vào kích thước của thiên thạch
 - Thiên thạch nảy lại khi va chạm, và tuân theo định luật vật lý :D
