@@ -51,7 +51,7 @@ try {
 if (window.IntegrationHooks) {
     const hooks = window.IntegrationHooks;
     if (hooks.onGameQuit) {
-        window.onGameQuit = hooks.onGameQuit;
+        window.onGameQuit = () => hooks.onGameQuit();
     }
     if (hooks.onGameVersion) {
         hooks.onGameVersion(window.localStorage.getItem("gameVersion"));
