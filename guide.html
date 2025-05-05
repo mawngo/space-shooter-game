@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Asteroids Game</title>
     <link rel="stylesheet" href="mvp.css">
 </head>
@@ -16,9 +16,21 @@
     <div style="flex-grow: 1"></div>
     <article>
         <h2 id="1-controls">1. Controls</h2>
+        <h3 data-name="keyboard-controls">&nbsp; Keyboard (Recommended):</h3>
+        <ul data-name="keyboard-controls">
+            <li>Change the ship direction using <b>arrow keys</b></li>
+            <li><b>Press s</b> or <b>Left Click</b> to shoot regular bullets</li>
+            <li><b>Press a</b> or <b>Right Click</b> to shoot special bullets collected</li>
+        </ul>
+        <h3 data-name="touch-controls">&nbsp; Touchscreen:</h3>
+        <ul data-name="touch-controls">
+            <li><b>Swipe</b> Up/Down/Left/Right to change the ship direction</li>
+            <li><b>Touch</b> (one finger) to shot regular bullets</li>
+            <li><b>Multitouch</b> (two fingers) to shoot special bullets collected</li>
+        </ul>
+        <h2 id="2-bullets">2. Bullets</h2>
         <ul>
-            <li>Change ship direction using the arrow keys</li>
-            <li>Press S or Left Click to shoot regular bullets:
+            <li>Regular bullets:
                 <ul>
                     <li>Can be fired freely</li>
                     <li>Regular bullets have a 60% chance to destroy asteroids :))</li>
@@ -27,35 +39,32 @@
                     <li>Obeys the laws of physics :))</li>
                 </ul>
             </li>
-            <li>Press A or Right Click to shoot special bullets collected:
+            <li>Special bullets:
                 <ul>
                     <li>Limited quantity</li>
+                    <li>Show current type in Ammo</li>
                     <li>Effects depend on the type of bullet</li>
                     <li>Has a 100% chance of destroying asteroids</li>
                 </ul>
             </li>
-            <li>For touchscreen:
-                <ul>
-                    <li>Swipe Up/Down/Left/Right to change ship direction</li>
-                    <li>Touch (1 finger) to shot regular bullets</li>
-                    <li>Multitouch (2 finger) to shoot special bullets</li>
-                </ul>
-            </li>
-
         </ul>
-        <h2 id="2-items">2. Items</h2>
+
+        <h2 id="3-items">3. Items</h2>
         <ul>
-            <li>Burger - Heals</li>
-            <li>Money - Adds points</li>
-            <li>1 bullet (red bullet) - 100% destroys asteroids, bounces back when hitting walls, and heals upon hitting
+            <li><b>Burger</b>: Heals</li>
+            <li><b>Money</b>: Adds points</li>
+            <li><b>One bullet</b> (shoot a red bullet): 100% destroys asteroids, bounces back when hitting walls, and
+                heals upon
+                hitting
                 the
                 player
             </li>
-            <li>3 bullets (blue bullets) - Bullets shot 100% destroy asteroids, do not bounce back when hitting walls
+            <li><b>Three bullets</b> (shoot blue bullets): Bullets shot 100% destroy asteroids, do not bounce back when
+                hitting walls
             </li>
-            <li>Swirl (circular bullet) - Destroys all existing asteroids and bullets</li>
+            <li><b>Swirl (circular bullet)</b>: Destroys all existing asteroids and bullets</li>
         </ul>
-        <h2 id="3-asteroids">3. Asteroids</h2>
+        <h2 id="4-asteroids">4. Asteroids</h2>
         <ul>
             <li>Spawn from the central planet, quantity increases over time.</li>
             <li>Collision with asteroids destroys them and causes damage to the player</li>
@@ -69,15 +78,19 @@
 <script src="__neutralino_globals.js"></script>
 <script src="init.min.js"></script>
 <script>
-    if (window.Neu) {
-        window.Neu.events.on("windowClose", () => {
-            window.Neu.app.exit();
-        });
-    }
-    const version = localStorage.getItem("version");
+    const version = localStorage.getItem("gameVersion");
     if (version) {
         document.getElementById("version").innerHTML = `v${version}`
     }
+
+    const gameControlMode = localStorage.getItem("gameControlMode");
+    if (gameControlMode === "touch") {
+        document.querySelectorAll("[data-name=\"keyboard-controls\"]").forEach(e => e.remove());
+    }
+    if (gameControlMode === "keyboard") {
+        document.querySelector("[data-name=\"touch-controls\"]").forEach(e => e.remove());
+    }
+
 </script>
 </body>
 </html>

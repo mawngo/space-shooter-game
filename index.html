@@ -31,17 +31,12 @@
 <script src="__neutralino_globals.js"></script>
 <script src="init.min.js"></script>
 <script>
-    if (window.Neu) {
-        window.Neu.events.on("windowClose", () => {
-            window.Neu.app.exit();
-        });
-    }
     const highScore = Number(localStorage.getItem("highScore") || "0");
     const highLevel = Number(localStorage.getItem("highLevel") || "0");
     if (highLevel && highScore) {
         document.getElementById("high").innerHTML = `High Score: ${highScore} (Level ${highLevel})`
     }
-    const version = localStorage.getItem("version");
+    const version = localStorage.getItem("gameVersion");
     if (version) {
         document.getElementById("version").innerHTML = `v${version}`
     }
