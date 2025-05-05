@@ -11,6 +11,7 @@ import {
     width
 } from "../context";
 
+
 export class Ball {
     constructor(x, y, radius, color, xSpeed, ySpeed, imgId, spinSpeed) {
         this.imgId = imgId || rockRadId(7);

@@ -78,11 +78,11 @@
 <script src="__neutralino_globals.js"></script>
 <script src="init.min.js"></script>
 <script>
-    const version = localStorage.getItem("gameVersion");
-    if (version) {
-        document.getElementById("version").innerHTML = `v${version}`
-    }
-
+    document.addEventListener("gameVersion", e => {
+        if (e.detail) {
+            document.getElementById("version").innerHTML = `v${e.detail.gameVersion}`
+        }
+    });
     const gameControlMode = localStorage.getItem("gameControlMode");
     if (gameControlMode === "touch") {
         document.querySelectorAll("[data-name=\"keyboard-controls\"]").forEach(e => e.remove());

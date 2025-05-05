@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Asteroids Game</title>
     <link rel="stylesheet" href="mvp.css">
 </head>
@@ -31,14 +31,15 @@
 <script src="__neutralino_globals.js"></script>
 <script src="init.min.js"></script>
 <script>
+    document.addEventListener("gameVersion", e => {
+        if (e.detail && e.detail.gameVersion) {
+            document.getElementById("version").innerHTML = `v${e.detail.gameVersion}`
+        }
+    });
     const highScore = Number(localStorage.getItem("highScore") || "0");
     const highLevel = Number(localStorage.getItem("highLevel") || "0");
     if (highLevel && highScore) {
         document.getElementById("high").innerHTML = `High Score: ${highScore} (Level ${highLevel})`
-    }
-    const version = localStorage.getItem("gameVersion");
-    if (version) {
-        document.getElementById("version").innerHTML = `v${version}`
     }
 </script>
 </body>

@@ -2,14 +2,31 @@ import { app as a, events as e, init, os, window as w } from "@neutralinojs/lib"
 
 window.localStorage.setItem("gameVersion", getParam("gameVersion") || VERSION);
 window.localStorage.setItem("gameControlMode", getParam("gameControlMode"));
+// Pre-send so the container injected script can detect the current version of the app.
+if (window.onGameVersion) {
+    window.onGameVersion(window.localStorage.getItem("gameVersion"));
+}
+window.addEventListener("load", () => {
+    document.dispatchEvent(new CustomEvent("gameVersion", {
+        detail: { gameVersion: window.localStorage.getItem("gameVersion") },
+        bubbles: true
+    }));
+    document.dispatchEvent(new CustomEvent("gameControlMode", {
+        detail: { gameControlMode: window.localStorage.getItem("gameControlMode") },
+        bubbles: true
+    }));
+});
+
+
 document.addEventListener("gameQuit", () => {
     if (window.game) {
         window.game.stop();
     }
-    if (window.gameQuit) {
-        window.gameQuit();
+    if (window.onGameQuit) {
+        window.onGameQuit();
     }
 });
+
 document.querySelectorAll("a[href]").forEach(a => {
     if (!a.href.includes("?")) {
         a.href = a.href + window.location.search;
@@ -27,8 +44,8 @@ try {
         os: os
     };
 
-    if (!window.gameQuit) {
-        window.gameQuit = () => {
+    if (!window.onGameQuit) {
+        window.onGameQuit = () => {
             window.Neu.app.exit();
         };
     }
@@ -42,7 +59,7 @@ try {
 }
 
 // Setup quit button.
-if (window.gameQuit) {
+if (window.onGameQuit) {
     const quit = document.getElementById("quit");
     if (quit) {
         quit.addEventListener("click", async function() {
