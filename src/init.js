@@ -2,13 +2,6 @@ import { app as a, events as e, init, os, window as w } from "@neutralinojs/lib"
 
 window.localStorage.setItem("gameVersion", getParam("gameVersion") || VERSION);
 window.localStorage.setItem("gameControlMode", getParam("gameControlMode"));
-if (window.onGameVersion) {
-    try {
-        window.onGameVersion(window.localStorage.getItem("gameVersion"));
-    } catch (e) {
-        console.error(e);
-    }
-}
 window.addEventListener("load", () => {
     document.dispatchEvent(new CustomEvent("gameVersion", {
         detail: { gameVersion: window.localStorage.getItem("gameVersion") },
@@ -19,7 +12,6 @@ window.addEventListener("load", () => {
         bubbles: true
     }));
 });
-
 
 document.addEventListener("gameQuit", () => {
     if (window.game) {
@@ -34,14 +26,8 @@ document.addEventListener("gameQuit", () => {
     }
 });
 
-document.querySelectorAll("a[href]").forEach(a => {
-    if (!a.href.includes("?")) {
-        a.href = a.href + window.location.search;
-        return;
-    }
-    a.href = a.href + "&" + window.location.search.substring(1);
-});
-
+// Setup NeutralinoJS if possible.
+window.onGameQuit = () => window.close();
 try {
     init();
     window.Neu = {
@@ -51,30 +37,43 @@ try {
         os: os
     };
 
-    if (!window.onGameQuit) {
-        window.onGameQuit = () => {
-            window.Neu.app.exit();
-        };
-    }
     window.Neu.events.on("windowClose", () => {
         document.dispatchEvent(new CustomEvent("gameQuit"));
         console.log("quit");
     });
+    window.onGameQuit = () => window.Neu.app.exit();
     console.log("Running in desktop");
 } catch (e) {
     // Ignore.
 }
 
-// Setup quit button.
-if (window.onGameQuit) {
-    const quit = document.getElementById("quit");
-    if (quit) {
-        quit.addEventListener("click", async function() {
-            document.dispatchEvent(new CustomEvent("gameQuit", { bubbles: true }));
-        });
-        quit.style.removeProperty("display");
+// Bind hooks.
+if (window.IntegrationHooks) {
+    const hooks = window.IntegrationHooks;
+    if (hooks.onGameQuit) {
+        window.onGameQuit = hooks.onGameQuit;
+    }
+    if (hooks.onGameVersion) {
+        hooks.onGameVersion(window.localStorage.getItem("gameVersion"));
     }
 }
+
+// Setup quit button.
+const quit = document.getElementById("quit");
+if (quit) {
+    quit.addEventListener("click", async function() {
+        document.dispatchEvent(new CustomEvent("gameQuit", { bubbles: true }));
+    });
+}
+
+// Preserve search params.
+document.querySelectorAll("a[href]").forEach(a => {
+    if (!a.href.includes("?")) {
+        a.href = a.href + window.location.search;
+        return;
+    }
+    a.href = a.href + "&" + window.location.search.substring(1);
+});
 
 
 function getParam(name, from = ["search", "window"]) {
