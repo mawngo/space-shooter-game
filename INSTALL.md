@@ -1,5 +1,7 @@
 # Installation Guide
 
+## Desktop
+
 Go to the [Releases](https://github.com/mawngo/space-shooter-game/releases/latest) page and download the
 `asteroids-release.zip` file. Then extract it to any folder you like.
 
@@ -8,7 +10,7 @@ the executable of your flatform, for example `asteroids-windows.exe` for Windows
 
 The `executable` and `resources.neu` file must be in the same folder. Run the executable to start the game.
 
-## Fix blank screen on Windows
+### Fix blank screen on Windows
 
 If you are on Windows, you might get a blank white screen. The reason for this is, accessing localhost from a UWP
 context is disabled by default. Run the following command with administrative privileges on the command prompt to fix
@@ -17,3 +19,7 @@ this:
 ```sh
 CheckNetIsolation.exe LoopbackExempt -a -n="Microsoft.Win32WebViewHost_cw5n1h2txyewy"
 ```
+
+## Android
+
+Go to the [Android Releases](https://github.com/mawngo/space-shooter-game-android/releases/latest) page and download the `apk` file.
