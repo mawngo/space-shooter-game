@@ -27,7 +27,6 @@ document.addEventListener("gameQuit", () => {
 });
 
 // Setup NeutralinoJS if possible.
-window.onGameQuit = () => window.close();
 try {
     init();
     window.Neu = {
@@ -64,6 +63,9 @@ if (quit) {
     quit.addEventListener("click", async function() {
         document.dispatchEvent(new CustomEvent("gameQuit", { bubbles: true }));
     });
+    if (window.onGameQuit) {
+        quit.style.opacity = "1";
+    }
 }
 
 // Preserve search params.
