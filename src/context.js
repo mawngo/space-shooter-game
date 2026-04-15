@@ -7,8 +7,8 @@ export const width = vw - 6;
 export const height = vh - 6;
 
 const scaleRatio = Math.min(1,
-  1 - (1920 - Math.max(vw, 500)) * (0.4 / (1920 - 500)),
-  1 - (900 - Math.max(vh, 500)) * (0.2 / (900 - 500))
+    1 - (1920 - Math.max(vw, 500)) * (0.4 / (1920 - 500)),
+    1 - (900 - Math.max(vh, 500)) * (0.2 / (900 - 500))
 );
 console.log(`Resolution: ${vw} x ${vh} (${scaleRatio})`);
 
@@ -78,8 +78,8 @@ export function radRate(rate) {
 
 export function sqrtOf2Sqr(a, b) {
     return Math.sqrt(
-      (Math.abs(a) * Math.abs(a)) +
-      (Math.abs(b) * Math.abs(b))
+        (Math.abs(a) * Math.abs(a)) +
+        (Math.abs(b) * Math.abs(b))
     );
 }
 

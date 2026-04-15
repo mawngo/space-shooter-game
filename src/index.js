@@ -9,7 +9,8 @@ import {
     itemsGenerator,
     radRate,
     rainbow,
-    rockGenerator, vh,
+    rockGenerator,
+    vh,
     vw
 } from "./context";
 import { Ship, Spawner } from "./object/ship";

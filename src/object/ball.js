@@ -79,17 +79,17 @@ export class Ball {
                 }
                 if (ballMaxDistance >= ballRealDistance) {
                     const thisXSpeedAfter =
-                      ((this.radius - ball.radius) * this.xSpeed
-                       + 2 * ball.radius * ball.xSpeed) / ballMaxDistance;
+                        ((this.radius - ball.radius) * this.xSpeed
+                         + 2 * ball.radius * ball.xSpeed) / ballMaxDistance;
                     const thisYSpeedAfter =
-                      ((this.radius - ball.radius) * this.ySpeed
-                       + 2 * ball.radius * ball.ySpeed) / ballMaxDistance;
+                        ((this.radius - ball.radius) * this.ySpeed
+                         + 2 * ball.radius * ball.ySpeed) / ballMaxDistance;
                     const ballXSpeedAfter =
-                      ((ball.radius - this.radius) * ball.xSpeed
-                       + 2 * this.radius * this.xSpeed) / ballMaxDistance;
+                        ((ball.radius - this.radius) * ball.xSpeed
+                         + 2 * this.radius * this.xSpeed) / ballMaxDistance;
                     const ballYSpeedAfter =
-                      ((ball.radius - this.radius) * ball.ySpeed
-                       + 2 * this.radius * this.ySpeed) / ballMaxDistance;
+                        ((ball.radius - this.radius) * ball.ySpeed
+                         + 2 * this.radius * this.ySpeed) / ballMaxDistance;
                     this.xSpeed = thisXSpeedAfter;
                     this.ySpeed = thisYSpeedAfter;
                     ball.xSpeed = ballXSpeedAfter;
