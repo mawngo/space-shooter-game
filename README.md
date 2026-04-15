@@ -2,7 +2,7 @@
 
 [Play the Game](https://mawngo.github.io/space-shooter-game/) | [Read the Guide](https://mawngo.github.io/space-shooter-game/guide.html) | [Install](INSTALL.md)
 
-![](assets/image.png)
+![](assets/docs/image.png)
 
 ### 1. Điều Khiển
 
