@@ -6,7 +6,7 @@ import {
     ctx,
     drawImgInBall,
     explosiveGenerator,
-    itemsGenerator,
+    itemGenerator,
     radRate,
     rainbow,
     rockGenerator,
@@ -301,10 +301,14 @@ export class Game {
             }
         };
 
-        rockGenerator(7);
-        ammoGenerator(3);
-        itemsGenerator(4);
-        explosiveGenerator(5);
+        const setupAssets = () => {
+            rockGenerator(8);
+            explosiveGenerator(6);
+            ammoGenerator(4);
+            itemGenerator(5);
+        };
+
+        setupAssets();
         setupScore();
         setupGamePlay();
         setupGameDraw();

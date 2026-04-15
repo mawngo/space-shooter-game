@@ -104,11 +104,18 @@ export function drawImgInBall(container, shadow = false, imgId = container.imgId
 }
 
 //img id only
-export function rockGenerator(maxImg) {
+export function rockGenerator(variants) {
     let innerImg = "";
-    for (let i = 0; i < maxImg + 1; i++) {
-        innerImg += "<img alt=\"rock\" src=\"img/rock/rock" + i
-                    + ".png\" id=\"rock" + i + "\" style=\"display: none\">";
+    for (let i = 0; i < variants; i++) {
+        innerImg += `<img alt="rock" src="img/rock/rock${i}.png" style="display: none" id="rock${i}">`;
+    }
+    imgDir.innerHTML += innerImg;
+}
+
+export function explosiveGenerator(variants) {
+    let innerImg = "";
+    for (let i = 0; i < variants; i++) {
+        innerImg += `<img alt="explosive" src="img/explosive/explosive${i}.png" style="display: none" id="explosive${i}">`;
     }
     imgDir.innerHTML += innerImg;
 }
@@ -125,29 +132,18 @@ export function explosiveRadId(maxImg) {
     return id;
 }
 
-export function ammoGenerator(maxImg) {
+export function ammoGenerator(variants) {
     let innerImg = "";
-    for (let i = 0; i < maxImg + 1; i++) {
-        innerImg += "<img alt=\"ammo\" src=\"img/ammo/ammo" + i +
-                    ".png\" id=\"ammo" + i + "\" style=\"display: none\">";
+    for (let i = 0; i < variants; i++) {
+        innerImg += `<img alt="ammo" src="img/ammo/ammo${i}.png" style="display: none" id="ammo${i}">`;
     }
     imgDir.innerHTML += innerImg;
 }
 
-export function itemsGenerator(maxImg) {
+export function itemGenerator(variants) {
     let innerImg = "";
-    for (let i = 0; i < maxImg + 1; i++) {
-        innerImg += "<img alt=\"object\" src=\"img/item/item" + i + ".png\" id=\"item"
-                    + i + "\" style=\"display: none\">";
-    }
-    imgDir.innerHTML += innerImg;
-}
-
-export function explosiveGenerator(maxImg) {
-    let innerImg = "";
-    for (let i = 0; i < maxImg + 1; i++) {
-        innerImg += "<img alt=\"explosive\" src=\"img/explosive/explosive" + i + ".png\" id=\"explosive"
-                    + i + "\" style=\"display: none\">";
+    for (let i = 0; i < variants; i++) {
+        innerImg += `<img alt="object" src="img/item/item${i}.png" style="display: none" id="item${i}">`;
     }
     imgDir.innerHTML += innerImg;
 }
