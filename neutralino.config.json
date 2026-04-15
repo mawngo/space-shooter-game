@@ -1,45 +1,45 @@
 {
-  "applicationId" : "mawngo.asteroids",
-  "defaultMode" : "window",
-  "version" : "2.9.2",
-  "applicationName" : "Asteroids Game",
-  "author" : "Nguyen Toan",
-  "description" : "Simple space shooter game",
-  "copyright" : "Copyright © Nguyen Toan. All rights reserved.",
-  "port" : 0,
-  "url" : "/resources/",
-  "enableServer" : true,
-  "enableNativeAPI" : true,
-  "logging" : {
-    "enabled" : true,
-    "writeToLogFile" : false
+  "applicationId": "mawngo.asteroids",
+  "defaultMode": "window",
+  "version": "2.9.2",
+  "applicationName": "Asteroids Game",
+  "author": "Nguyen Toan",
+  "description": "Simple space shooter game",
+  "copyright": "Copyright © Nguyen Toan. All rights reserved.",
+  "port": 0,
+  "url": "/resources/",
+  "enableServer": true,
+  "enableNativeAPI": true,
+  "logging": {
+    "enabled": true,
+    "writeToLogFile": false
   },
-  "nativeAllowList" : [
+  "nativeAllowList": [
     "window.*",
     "events.*",
     "app.*"
   ],
-  "modes" : {
-    "window" : {
-      "title" : "Asteroids",
-      "width" : 1600,
-      "height" : 900,
-      "minWidth" : 600,
-      "minHeight" : 600,
-      "fullScreen" : false,
-      "alwaysOnTop" : false,
-      "icon" : "/resources/icons/appIcon.png",
-      "enableInspector" : false,
-      "borderless" : false,
-      "maximize" : false,
-      "hidden" : false,
-      "resizable" : true,
-      "exitProcessOnClose" : false,
-      "center" : true
+  "modes": {
+    "window": {
+      "title": "Asteroids",
+      "width": 1600,
+      "height": 900,
+      "minWidth": 600,
+      "minHeight": 600,
+      "fullScreen": false,
+      "alwaysOnTop": false,
+      "icon": "/resources/icons/appIcon.png",
+      "enableInspector": false,
+      "borderless": false,
+      "maximize": false,
+      "hidden": false,
+      "resizable": true,
+      "exitProcessOnClose": false,
+      "center": true
     }
   },
-  "cli" : {
-    "binaryName" : "asteroids",
-    "resourcesPath" : "/resources/"
+  "cli": {
+    "binaryName": "asteroids",
+    "resourcesPath": "/resources/"
   }
 }
