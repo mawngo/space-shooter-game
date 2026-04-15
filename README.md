@@ -59,8 +59,8 @@ localhost trên Edge.
 
 ### Clone Project
 
-- clone project
-- chạy command sau để download các file bin và thư viện của neutralino.js
+- Clone project
+- Chạy command sau để download các file bin và thư viện của neutralino.js
 
 ```shell
 npm run bin
@@ -68,8 +68,16 @@ npm run bin
 
 ### Chạy project
 
+Câu lệnh sau sẽ chạy project ở chế độ desktop và web:
+
 ```shell
-npm start
+npm run dev
+```
+
+Sử dụng câu lệnh sau nếu chỉ muốn chạy project ở chế độ web:
+
+```shell
+npm run dev:web
 ```
 
 ### Build Project
