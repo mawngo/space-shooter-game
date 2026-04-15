@@ -7,5 +7,4 @@ bin/
 **/neutralino.js
 *.log
 
-resources/game.min.js
-resources/init.min.js
+resources/
