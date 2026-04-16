@@ -140,7 +140,7 @@ export function ammoGenerator(variants) {
     imgDir.innerHTML += innerImg;
 }
 
-export function itemGenerator(variants) {
+export function itemsGenerator(variants) {
     let innerImg = "";
     for (let i = 0; i < variants; i++) {
         innerImg += `<img alt="object" src="img/item/item${i}.png" style="display: none" id="item${i}">`;

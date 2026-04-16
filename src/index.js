@@ -6,7 +6,7 @@ import {
     ctx,
     drawImgInBall,
     explosiveGenerator,
-    itemGenerator,
+    itemsGenerator,
     radRate,
     rainbow,
     rockGenerator,
@@ -305,7 +305,7 @@ export class Game {
             rockGenerator(8);
             explosiveGenerator(6);
             ammoGenerator(4);
-            itemGenerator(5);
+            itemsGenerator(5);
         };
 
         setupAssets();
