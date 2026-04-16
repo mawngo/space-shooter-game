@@ -180,7 +180,7 @@ export class ExplosiveBall extends Ball {
 
     drawExplosive(containerArr) {
         if (this.count > 0) {
-            drawImgInBall(this, false);
+            drawImgInBall(this);
             this.count -= 1;
         } else {
             this.remove(containerArr);

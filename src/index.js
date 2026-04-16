@@ -174,7 +174,7 @@ export class Game {
 
     drawAmmo() {
         for (const ammo of this.ammos) {
-            drawImgInBall(ammo, true);
+            drawImgInBall(ammo, { shadow: true });
         }
     };
 
@@ -255,8 +255,8 @@ export class Game {
         this.drawItem();
         this.drawBall();
         this.drawExplosion();
-        drawImgInBall(this.spawner, true);
-        drawImgInBall(this.ship, true);
+        drawImgInBall(this.spawner, { shadow: true });
+        drawImgInBall(this.ship, { shadow: true });
         this.displayScore();
     }
 
@@ -275,7 +275,7 @@ export class Game {
                 this.redraw();
                 this.main = requestAnimationFrame(setupGameDraw);
             } else {
-                drawImgInBall(this.ship, false, "explosive1");
+                drawImgInBall(this.ship, { imgId: "explosive1" });
             }
         };
 

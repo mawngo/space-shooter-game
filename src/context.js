@@ -87,7 +87,7 @@ export function canvasClean() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-export function drawImgInBall(container, shadow = false, imgId = container.imgId) {
+export function drawImgInBall(container, { shadow = false, imgId = container.imgId } = {}) {
     const img = document.getElementById(imgId);
     ctx.beginPath();
     ctx.save();
