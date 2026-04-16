@@ -1,6 +1,6 @@
 import { loadConfig } from "./config";
 
-export const config = loadConfig(window.gameConfig);
+export const config = loadConfig();
 export const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 export const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
 export const width = vw - 6;
