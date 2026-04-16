@@ -1,5 +1,8 @@
 export function loadConfig(overrideConfig) {
     return {
+        debug: {
+            drawBoundingBox: false
+        },
         game: {
             spawnerRadius: 110,
             timePerSpawn: 15000,

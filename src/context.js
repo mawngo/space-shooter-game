@@ -99,8 +99,23 @@ export function drawImgInBall(container, { shadow = false, imgId = container.img
     }
     ctx.translate(container.x, container.y);
     ctx.rotate(container.angle * Math.PI / 180);
-    ctx.drawImage(img, -container.radius - 1, -container.radius - 1, container.radius * 2 + 2, container.radius * 2 + 2);
+
+    // Overdraw make the image slightly larger than the bounding box.
+    const overDrawPx = 1;
+    ctx.drawImage(img,
+        -container.radius - overDrawPx,
+        -container.radius - overDrawPx,
+        (container.radius + overDrawPx) * 2,
+        (container.radius + overDrawPx) * 2);
     ctx.restore();
+
+    if (config.debug.drawBoundingBox) {
+        ctx.beginPath();
+        ctx.save();
+        ctx.arc(container.x, container.y, container.radius + overDrawPx, 0, 2 * Math.PI);
+        ctx.strokeStyle = "white";
+        ctx.stroke();
+    }
 }
 
 //img id only
