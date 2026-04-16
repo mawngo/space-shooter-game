@@ -138,10 +138,10 @@ export class Ball {
         }
     };
 
-    explore(balls) {
+    explode(balls) {
         this.remove(balls);
         const numberOfChild = radNum(config.asteroid.maxNumberOfChild, config.asteroid.minNumberOfChild);
-        if (numberOfChild && this.canExploreToSmaller()) {
+        if (numberOfChild && this.canExplodeToSmaller()) {
             for (let j = 0; j < numberOfChild; j++) {
                 balls.push(new Ball(this.x, this.y, {
                     radius: this.radius * config.asteroid.childrenSizeRatio,
@@ -153,7 +153,7 @@ export class Ball {
         }
     };
 
-    canExploreToSmaller() {
+    canExplodeToSmaller() {
         return this.radius > config.asteroid.minimalSizeCanSplit;
     };
 

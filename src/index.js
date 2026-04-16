@@ -84,8 +84,8 @@ export class Game {
             if (ammo.toArrOfObj(this.balls) >= 0) {
                 const exBall = this.balls[ammo.toArrOfObj(this.balls)];
                 if (radRate(config.ammo.destroyAsteroidRate)) {
-                    if (exBall.canExploreToSmaller()) {
-                        exBall.explore(this.balls);
+                    if (exBall.canExplodeToSmaller()) {
+                        exBall.explode(this.balls);
                         exBall.makeExplosive(this.explosive);
                         ammo.remove(this.ammos);
                         this.score += 5;
@@ -106,7 +106,7 @@ export class Game {
             ball.toEdge();
             ball.toObj(this.spawner);
             if (ball.toObj(this.ship)) {
-                ball.explore(this.balls);
+                ball.explode(this.balls);
                 this.ship.health -= ball.damage;
                 this.score -= 10;
                 ball.makeExplosive(this.explosive);
@@ -115,8 +115,8 @@ export class Game {
                 if (radRate(config.ammo.destroyAsteroidRate)) {
                     this.ammos[ball.toArrOfObj(this.ammos)].remove(this.ammos);
                     ball.makeExplosive(this.explosive);
-                    if (ball.canExploreToSmaller()) {
-                        ball.explore(this.balls);
+                    if (ball.canExplodeToSmaller()) {
+                        ball.explode(this.balls);
                         this.score += 5;
                         this.spawnItemFrom(ball, config.game.itemDropMultiplierWhenExploreToChild);
                     } else {
@@ -129,7 +129,7 @@ export class Game {
             if (ball.toArrOfObj(this.spammos) >= 0) {
                 if (radRate(config.ammo.destroyAsteroidRate)) {
                     ball.remove(this.balls);
-                } else if (ball.canExploreToSmaller()) ball.explore(this.balls); else {
+                } else if (ball.canExplodeToSmaller()) ball.explode(this.balls); else {
                     ball.remove(this.balls);
                 }
                 this.spawnItemFrom(ball, config.game.itemDropMultiplierUseSpecialAmmo);
