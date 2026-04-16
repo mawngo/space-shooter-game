@@ -13,12 +13,12 @@ import {
 
 
 export class Ball {
-    constructor(x, y, radius, color, xSpeed, ySpeed, imgId, spinSpeed) {
+    constructor(x, y, { radius, color, xSpeed, ySpeed, imgId, spinSpeed } = {}) {
+        this.x = x;
+        this.y = y;
         this.imgId = imgId || rockRadId(7);
         this.spinSpeed = spinSpeed === 0 ? 0 : (spinSpeed || config.asteroid.spin);
         this.isExist = true;
-        this.x = x || width / 2;
-        this.y = y || height / 2;
         this.color = color || rainbow(Math.random());
         this.radius = scale(radius || radNum(config.asteroid.maxSize, config.asteroid.minSize));
         this.xSpeed = scale(xSpeed || radNum(config.asteroid.maxSpeed, config.asteroid.minSpeed));
@@ -142,7 +142,11 @@ export class Ball {
         const numberOfChild = radNum(config.asteroid.maxNumberOfChild, config.asteroid.minNumberOfChild);
         if (numberOfChild && this.canExploreToSmaller()) {
             for (let j = 0; j < numberOfChild; j++) {
-                balls.push(new Ball(this.x, this.y, this.radius * config.asteroid.childrenSizeRatio, this.color, undefined, undefined, this.imgId));
+                balls.push(new Ball(this.x, this.y, {
+                    radius: this.radius * config.asteroid.childrenSizeRatio,
+                    color: this.color,
+                    imgId: this.imgId
+                }));
             }
         }
     };
@@ -153,7 +157,9 @@ export class Ball {
 
     spawn(balls, n = 1) {
         for (let i = 0; i < n; i++) {
-            balls.push(new Ball(this.x, this.y, undefined, this.color));
+            balls.push(new Ball(this.x, this.y, {
+                color: this.color
+            }));
         }
     };
 
@@ -173,7 +179,12 @@ export class Ball {
 
 export class ExplosiveBall extends Ball {
     constructor(x, y, radius, imgId, time) {
-        super(x, y, radius, "yellow", 0.2, 0.2);
+        super(x, y, {
+            radius: radius,
+            color: "yellow",
+            xSpeed: 0.2,
+            ySpeed: 0.2,
+        });
         this.imgId = imgId || explosiveRadId(4);
         this.count = time * 50 || 50;
     }

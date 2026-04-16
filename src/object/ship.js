@@ -1,10 +1,15 @@
 import { Ball } from "./ball";
 import { Ammo } from "./items";
-import { config, scale } from "../context";
+import { config, height, scale, width } from "../context";
 
 export class Ship extends Ball {
     constructor(x, y, speed, health, color, imgId) {
-        super(x, y, config.ship.size, color, 0.2, 0.2);
+        super(x, y, {
+            radius: config.ship.size,
+            color: color,
+            xSpeed: 0.2,
+            ySpeed: 0.2
+        });
         this.color = color || "white";
         this.imgId = imgId || "ship";
         this.speed = scale(speed || config.ship.speed);
@@ -54,6 +59,11 @@ export class Ship extends Ball {
 
 export class Spawner extends Ball {
     constructor() {
-        super(undefined, undefined, config.game.spawnerRadius, undefined, 0, 0, "center");
+        super(width / 2, height / 2, {
+            radius: config.game.spawnerRadius, undefined,
+            xSpeed: 0,
+            ySpeed: 0,
+            imgId: "center"
+        });
     }
 }

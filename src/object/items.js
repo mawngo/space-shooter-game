@@ -3,7 +3,12 @@ import { config } from "../context";
 
 export class Ammo extends Ball {
     constructor(x, y, xSpeed, ySpeed, imgId, size) {
-        super(x, y, size || config.ammo.size, "green", xSpeed, ySpeed);
+        super(x, y, {
+            radius: size || config.ammo.size,
+            color: "green",
+            xSpeed: xSpeed,
+            ySpeed: ySpeed
+        });
         this.imgId = imgId || "ammo0";
         this.damage = config.ammo.damage;
     }
@@ -11,7 +16,12 @@ export class Ammo extends Ball {
 
 export class Item extends Ball {
     constructor(x, y, imgId, size = 25) {
-        super(x, y, size, "blue", 0.5, 0.5);
+        super(x, y, {
+            radius: size,
+            color: "blue",
+            xSpeed: 0.5,
+            ySpeed: 0.5
+        });
         this.imgId = imgId || "item0";
     }
 
