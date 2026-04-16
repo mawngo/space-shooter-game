@@ -101,7 +101,7 @@ export function drawImgInBall(container, { shadow = false, imgId = container.img
     ctx.rotate(container.angle * Math.PI / 180);
 
     // Overdraw make the image slightly larger than the bounding box.
-    const overDrawPx = 1;
+    const overDrawPx = container.overdrawRadius;
     ctx.drawImage(img,
         -container.radius - overDrawPx,
         -container.radius - overDrawPx,
@@ -112,7 +112,7 @@ export function drawImgInBall(container, { shadow = false, imgId = container.img
     if (config.debug.drawBoundingBox) {
         ctx.beginPath();
         ctx.save();
-        ctx.arc(container.x, container.y, container.radius + overDrawPx, 0, 2 * Math.PI);
+        ctx.arc(container.x, container.y, container.radius, 0, 2 * Math.PI);
         ctx.strokeStyle = "white";
         ctx.stroke();
     }

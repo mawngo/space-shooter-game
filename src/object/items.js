@@ -7,7 +7,8 @@ export class Ammo extends Ball {
             radius: size || config.ammo.size,
             color: "green",
             xSpeed: xSpeed,
-            ySpeed: ySpeed
+            ySpeed: ySpeed,
+            overdrawRadius: 14
         });
         this.imgId = imgId || "ammo0";
         this.damage = config.ammo.damage;

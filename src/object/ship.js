@@ -8,7 +8,8 @@ export class Ship extends Ball {
             radius: config.ship.size,
             color: color,
             xSpeed: 0.2,
-            ySpeed: 0.2
+            ySpeed: 0.2,
+            overdrawRadius: 2,
         });
         this.color = color || "white";
         this.imgId = imgId || "ship";
@@ -63,7 +64,8 @@ export class Spawner extends Ball {
             radius: config.game.spawnerRadius, undefined,
             xSpeed: 0,
             ySpeed: 0,
-            imgId: "center"
+            imgId: "center",
+            overdrawRadius: 4
         });
     }
 }

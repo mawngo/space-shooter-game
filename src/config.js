@@ -25,7 +25,7 @@ export function loadConfig(overrideConfig = {}) {
                 maxNumberOfChild: 2,
                 minSize: 60,
                 maxSize: 100,
-                minSpeed: 0,
+                minSpeed: 0.3,
                 maxSpeed: 4
             },
             ship: {
@@ -38,7 +38,7 @@ export function loadConfig(overrideConfig = {}) {
                 damage: 10,
                 destroyAsteroidRate: 0.6,
                 speed: 8,
-                size: 25
+                size: 12,
             },
             items: {
                 ammos: {

@@ -13,7 +13,7 @@ import {
 
 
 export class Ball {
-    constructor(x, y, { radius, color, xSpeed, ySpeed, imgId, spinSpeed } = {}) {
+    constructor(x, y, { radius, color, xSpeed, ySpeed, imgId, spinSpeed, overdrawRadius } = {}) {
         this.x = x;
         this.y = y;
         this.imgId = imgId || rockRadId(7);
@@ -21,6 +21,7 @@ export class Ball {
         this.isExist = true;
         this.color = color || rainbow(Math.random());
         this.radius = scale(radius || radNum(config.asteroid.maxSize, config.asteroid.minSize));
+        this.overdrawRadius = scale(overdrawRadius || 0);
         this.xSpeed = scale(xSpeed || radNum(config.asteroid.maxSpeed, config.asteroid.minSpeed));
         this.ySpeed = scale(ySpeed || radNum(config.asteroid.maxSpeed, config.asteroid.minSpeed));
         this.angle = 0;
@@ -145,7 +146,8 @@ export class Ball {
                 balls.push(new Ball(this.x, this.y, {
                     radius: this.radius * config.asteroid.childrenSizeRatio,
                     color: this.color,
-                    imgId: this.imgId
+                    imgId: this.imgId,
+                    overdrawRadius: this.overdrawRadius
                 }));
             }
         }
@@ -158,7 +160,8 @@ export class Ball {
     spawn(balls, n = 1) {
         for (let i = 0; i < n; i++) {
             balls.push(new Ball(this.x, this.y, {
-                color: this.color
+                color: this.color,
+                overdrawRadius: this.overdrawRadius,
             }));
         }
     };
