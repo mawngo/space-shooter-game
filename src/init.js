@@ -2,7 +2,19 @@ import { app as a, events as e, init, os, window as w } from "@neutralinojs/lib"
 
 window.localStorage.setItem("gameVersion", getParam("gameVersion") || VERSION);
 window.localStorage.setItem("gameControlMode", getParam("gameControlMode"));
-window.addEventListener("load", () => {
+
+// Bind hooks.
+if (window.IntegrationHooks) {
+    const hooks = window.IntegrationHooks;
+    if (hooks.onGameQuit) {
+        window.onGameQuit = () => hooks.onGameQuit();
+    }
+    if (hooks.onGameVersion) {
+        hooks.onGameVersion(window.localStorage.getItem("gameVersion"));
+    }
+}
+
+function onWindowLoad() {
     document.dispatchEvent(new CustomEvent("gameVersion", {
         detail: { gameVersion: window.localStorage.getItem("gameVersion") },
         bubbles: true
@@ -11,7 +23,14 @@ window.addEventListener("load", () => {
         detail: { gameControlMode: window.localStorage.getItem("gameControlMode") },
         bubbles: true
     }));
-});
+}
+
+if (document.readyState === "complete") {
+    onWindowLoad();
+} else {
+    // Page is still loading, wait for the event
+    window.addEventListener("load", () => onWindowLoad());
+}
 
 document.addEventListener("gameQuit", () => {
     if (window.game) {
@@ -26,7 +45,7 @@ document.addEventListener("gameQuit", () => {
     }
 });
 
-// Setup NeutralinoJS if possible.
+// Set up NeutralinoJS if possible.
 try {
     init();
     window.Neu = {
@@ -46,18 +65,7 @@ try {
     // Ignore.
 }
 
-// Bind hooks.
-if (window.IntegrationHooks) {
-    const hooks = window.IntegrationHooks;
-    if (hooks.onGameQuit) {
-        window.onGameQuit = () => hooks.onGameQuit();
-    }
-    if (hooks.onGameVersion) {
-        hooks.onGameVersion(window.localStorage.getItem("gameVersion"));
-    }
-}
-
-// Setup quit button.
+// Set up quit button.
 const quit = document.getElementById("quit");
 if (quit) {
     quit.addEventListener("click", async function() {
