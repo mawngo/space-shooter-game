@@ -200,7 +200,7 @@ export class Game {
             if (highLevel < this.level) {
                 localStorage.setItem("highLevel", this.level);
             }
-            stop();
+            this.stop();
             setTimeout(() => document.getElementById("overlay").classList.add("visible"), 300);
         }
         this.ship.toObj(this.spawner);
