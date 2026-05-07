@@ -200,6 +200,7 @@ export class Game {
             if (highLevel < this.level) {
                 localStorage.setItem("highLevel", this.level);
             }
+            drawImgInBall(this.ship, { imgId: "explosive1" });
             this.stop();
             setTimeout(() => document.getElementById("overlay").classList.add("visible"), 300);
         }
@@ -274,8 +275,6 @@ export class Game {
             if (this.ship.health > 0) {
                 this.redraw();
                 this.main = requestAnimationFrame(setupGameDraw);
-            } else {
-                drawImgInBall(this.ship, { imgId: "explosive1" });
             }
         };
 
