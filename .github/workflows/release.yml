@@ -31,6 +31,14 @@ jobs:
           cd resources
           zip -r ../asteroids-web.zip .
           cd ..
+      - name: Build Web Legacy Release
+        run: |
+          export TARGET_BROWSER="legacy"
+          rm -rf asteroids-web-legacy.zip
+          npm run build:web
+          cd resources
+          zip -r ../asteroids-web-legacy.zip .
+          cd ..
       - name: Publish Release
         uses: softprops/action-gh-release@v3
         with:
@@ -39,4 +47,5 @@ jobs:
             INSTALL.md
             dist/asteroids-release.zip
             asteroids-web.zip
+            asteroids-web-legacy.zip
             version.txt
