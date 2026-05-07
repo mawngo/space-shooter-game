@@ -361,6 +361,7 @@ export class Game {
 
 
         this.touchstart = evt => {
+            evt.preventDefault();
             if (evt.touches.length > 1) {
                 this.multitouch = evt.touches.length;
                 return;
@@ -370,6 +371,7 @@ export class Game {
         };
 
         this.touchend = evt => {
+            evt.preventDefault();
             const game = this;
             if (this.multitouch) {
                 this.multitouch--;
@@ -414,8 +416,11 @@ export class Game {
             }
             game.ship.shoot(game.ammos, game.ship.angle, "ammo0");
         };
-        document.addEventListener("touchstart", this.touchstart, { passive: true });
-        document.addEventListener("touchend", this.touchend, { passive: true });
+
+        this.touchmove = evt => { evt.preventDefault(); };
+        document.addEventListener("touchstart", this.touchstart);
+        document.addEventListener("touchend", this.touchend);
+        document.addEventListener("touchmove", this.touchmove);
     }
 
     stop() {
@@ -426,6 +431,7 @@ export class Game {
         document.removeEventListener("contextmenu", this.contextmenu);
         document.removeEventListener("touchstart", this.touchstart);
         document.removeEventListener("touchend", this.touchend);
+        document.removeEventListener("touchmove", this.touchmove);
     }
 }
 
